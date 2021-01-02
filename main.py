@@ -14,6 +14,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from fake_useragent import UserAgent
 
 
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
@@ -21,7 +22,10 @@ driver = webdriver.Chrome()
 options = webdriver.ChromeOptions()
 options.add_argument('--incognito')
 options.add_argument('--headless')
-driver = webdriver.Chrome(chrome_options=options)
+options.add_argument('--ignore-certificate-errors')
+options.add_argument('--ignore-ssl-errors')
+options.add_argument('--log-level=3')
+# driver = webdriver.Chrome(chrome_options=options)
 
 
 def get_user_input():
@@ -55,20 +59,26 @@ def scrape_stock_info(stock):
         stock + '?p=' + stock + '&.tsrc=fin-srch'
 
     # response = requests.get(url)
+    ua = UserAgent()
+    userAgent = ua.random
+    options.add_argument(f'user-agent={userAgent}')
+    driver = webdriver.Chrome(options=options)
     driver.get(url)
+    time.sleep(random.randint(10, 30))
     try:
         target_elem = WebDriverWait(driver, 3).until(
             EC.presence_of_element_located((By.ID, 'fr-val-mod')))
     except TimeoutException:
         logging.debug("Timed out waiting for page to load")
         driver.get(url)
+        time.sleep(random.randint(10, 30))
     finally:
         logging.info('page is ready!')
 
     # time.sleep(3)
-    headers = ({'User-Agent':
-                'Mozilla/5.0 (Windows NT 10.0 Win64 x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
-                })
+    # headers = ({'User-Agent':
+    #             'Mozilla/5.0 (Windows NT 10.0 Win64 x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
+    #             })
     # r = requests.get(url, headers=headers)
     # soup = BeautifulSoup(r.text, 'lxml')
     soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -78,6 +88,7 @@ def scrape_stock_info(stock):
         re['open_price'] = soup.find(
             attrs={'data-test': 'OPEN-value'}).find_next('span').text
     except AttributeError as e:
+        logging.error('open')
         logging.error(e)
         re['open_price'] = 'N/A'
 
@@ -88,6 +99,7 @@ def scrape_stock_info(stock):
         re['fifty_two_wk_low'] = fifty_two_wk_low
         re['fifty_two_wk_hi'] = fifty_two_wk_hi
     except AttributeError as e:
+        logging.error('52 week')
         logging.error(e)
         re['fifty_two_wk_low'] = re['fifty_two_wk_hi'] = 'N/A'
 
@@ -95,6 +107,7 @@ def scrape_stock_info(stock):
         re['volume'] = soup.find(
             attrs={'data-test': 'TD_VOLUME-value'}).find_next('span').text
     except AttributeError as e:
+        logging.error('volume')
         logging.error(e)
         re['volume'] = 'N/A'
 
@@ -103,12 +116,14 @@ def scrape_stock_info(stock):
             attrs={'data-test': 'AVERAGE_VOLUME_3MONTH-value'}).find_next('span').text
     except AttributeError as e:
         logging.error(e)
+        logging.error('avg_volume')
         re['avg_volume'] = 'N/A'
 
     try:
         re['market_cap'] = soup.find(
             attrs={'data-test': 'MARKET_CAP-value'}).find_next('span').text
     except AttributeError as e:
+        logging.error('market_cap')
         logging.error(e)
         re['market_cap'] = 'N/A'
 
@@ -116,6 +131,7 @@ def scrape_stock_info(stock):
         re['PE_ratio'] = soup.find(
             attrs={'data-test': 'PE_RATIO-value'}).find_next('span').text
     except AttributeError as e:
+        logging.error('PE_ratio')
         logging.error(e)
         re['PE_ratio'] = 'N/A'
 
@@ -123,6 +139,7 @@ def scrape_stock_info(stock):
         re['EPS_ratio'] = soup.find(
             attrs={'data-test': 'EPS_RATIO-value'}).find_next('span').text
     except AttributeError as e:
+        logging.error('EPS_ratio')
         logging.error(e)
         re['EPS_ratio'] = 'N/A'
 
@@ -131,11 +148,12 @@ def scrape_stock_info(stock):
         re['target'] = soup.find(
             'div', class_='Fw(b) Fl(end)--m Fz(s) C($primaryColor').text
     except AttributeError as e:
+        logging.error('target')
         logging.error(e)
         re['target'] = 'N/A'
 
-    # driver.close()
-    pprint.pprint(re)
+    driver.close()
+    # pprint.pprint(re)
     return re
 
 # except AttributeError as e:
@@ -151,9 +169,9 @@ def scrape_stock_list(file):
     data = defaultdict(list)
     letter = {'T': 1000000000000, 'K': 1000, 'M': 1000000, 'B': 1000000000}
     df = pd.read_csv(file)
-    for symbol in df['Symbol'].tolist()[:50]:
+    for symbol in df['Symbol'].tolist():
         scraped_data = scrape_stock_info(symbol)
-        time.sleep(random.randint(5, 30))
+        # time.sleep(random.randint(5, 30))
         if scraped_data:
             data[symbol].append(symbol)
             for k, v in scraped_data.items():
