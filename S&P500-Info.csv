@@ -39,7 +39,7 @@
 37,AMGN,Amgen Inc.,reports,Health Care,Biotechnology,"Thousand Oaks, California",1992-01-02,318154,1980
 38,APH,Amphenol Corp,reports,Information Technology,Electronic Components,"Wallingford, Connecticut",2008-09-30,820313,1932
 39,ADI,"Analog Devices, Inc.",reports,Information Technology,Semiconductors,"Norwood, Massachusetts",1999-10-12,6281,1965
-40,ANSS,ANSYS,reports,Information Technology,Application Software,"Canonsburg, Pennsylvania",2017-06-19,1013462,1969
+40,ANSS,"ANSYS, Inc.",reports,Information Technology,Application Software,"Canonsburg, Pennsylvania",2017-06-19,1013462,1969
 41,ANTM,Anthem,reports,Health Care,Managed Health Care,"Indianapolis, Indiana",2002-07-25,1156039,2014 (1946)
 42,AON,Aon plc,reports,Financials,Insurance Brokers,"London, United Kingdom",1996-04-23,315293,1982 (1919)
 43,AOS,A.O. Smith Corp,reports,Industrials,Building Products,"Milwaukee, Wisconsin",2017-07-26,91142,1916
@@ -388,7 +388,7 @@
 386,QCOM,QUALCOMM Inc.,reports,Information Technology,Semiconductors,"San Diego, California",,804328,1985
 387,DGX,Quest Diagnostics,reports,Health Care,Health Care Services,"Secaucus, New Jersey",2002-12-12,1022079,1967
 388,RL,Ralph Lauren Corporation,reports,Consumer Discretionary,"Apparel, Accessories & Luxury Goods","New York, New York",2007-02-02,1037038,1967
-389,RJF,Raymond James Financial Inc.,reports,Financials,Investment Banking & Brokerage,"St. Petersburg, Florida",2017-03-20,720005,1962
+389,RJF,"Raymond James Financial, Inc.",reports,Financials,Investment Banking & Brokerage,"St. Petersburg, Florida",2017-03-20,720005,1962
 390,RTX,Raytheon Technologies,reports,Industrials,Aerospace & Defense,"Waltham, Massachusetts",,101829,1922
 391,O,Realty Income Corporation,reports,Real Estate,Retail REITs,"San Diego, California",2015-04-07,726728,1969
 392,REG,Regency Centers Corporation,reports,Real Estate,Retail REITs,"Jacksonville, Florida",2017-03-02,910606,1963
@@ -398,11 +398,11 @@
 396,RMD,ResMed,reports,Health Care,Health Care Equipment,"San Diego, California",2017-07-26,943819,1989
 397,RHI,Robert Half International,reports,Industrials,Human Resource & Employment Services,"Menlo Park, California",2000-12-05,315213,1948
 398,ROK,Rockwell Automation Inc.,reports,Industrials,Electrical Components & Equipment,"Milwaukee, Wisconsin",,1024478,1903
-399,ROL,Rollins Inc.,reports,Industrials,Environmental & Facilities Services,"Atlanta, Georgia",2018-10-01,84839,1948
+399,ROL,"Rollins, Inc.",reports,Industrials,Environmental & Facilities Services,"Atlanta, Georgia",2018-10-01,84839,1948
 400,ROP,Roper Technologies,reports,Industrials,Industrial Conglomerates,"Sarasota, Florida",2009-12-23,882835,1981
 401,ROST,Ross Stores,reports,Consumer Discretionary,Apparel Retail,"Dublin, California",2009-12-21,745732,1982
 402,RCL,Royal Caribbean Group,reports,Consumer Discretionary,"Hotels, Resorts & Cruise Lines","Miami, Florida",2014-12-05,884887,1997
-403,SPGI,"S&P Global, Inc.",reports,Financials,Financial Exchanges & Data,"New York, New York",,64040,1917
+403,SPGI,S&P Global Inc.,reports,Financials,Financial Exchanges & Data,"New York, New York",,64040,1917
 404,CRM,Salesforce.com,reports,Information Technology,Application Software,"San Francisco, California",2008-09-15,1108524,1999
 405,SBAC,SBA Communications,reports,Real Estate,Specialized REITs,"Boca Raton, Florida",2017-09-01,1034054,1989
 406,SLB,Schlumberger Ltd.,reports,Energy,Oil & Gas Equipment & Services,"Curaçao, Kingdom of the Netherlands",1965-03-31,87347,1926
