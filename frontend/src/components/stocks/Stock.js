@@ -35,22 +35,24 @@ class Stock extends Component {
       fifty_two_hi,
       volume,
       avg_volume,
+      market_cap,
       pe_ratio,
       eps_ratio,
     } = this.props;
     return (
-      <div className="card card-body mb-3">
+      <div className="card card-body mb-3 w-50">
         <h4>
           {symbol} <i className="fas fa-chart-pie"></i>
         </h4>
         <ul className="list-group">
-          <li className="list-group-item">open: {open}</li>
+          <li className="list-group-item">Open Price: {open}</li>
           <li className="list-group-item">52 weeks low: {fifty_two_lo}</li>
           <li className="list-group-item">52 weeks high: {fifty_two_hi}</li>
-          <li className="list-group-item">volume: {volume}</li>
-          <li className="list-group-item">avg_volume: {avg_volume}</li>
-          <li className="list-group-item">pe_ratio: {pe_ratio}</li>
-          <li className="list-group-item">eps_ratio: {eps_ratio}</li>
+          <li className="list-group-item">Volume: {volume}</li>
+          <li className="list-group-item">Average Volume: {avg_volume}</li>
+          <li className="list-group-item">Market Cap: {market_cap}</li>
+          <li className="list-group-item">PE ratio: {pe_ratio}</li>
+          <li className="list-group-item">EPS ratio: {eps_ratio}</li>
         </ul>
       </div>
     );
@@ -64,6 +66,7 @@ Stock.defaultProps = {
   fifty_two_hi: "null",
   volume: "null",
   avg_volume: "null",
+  market_cap: "null",
   pe_ratio: "null",
   eps_ratio: "null",
 };

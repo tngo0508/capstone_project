@@ -35,13 +35,13 @@ class PredictValue extends Component {
     if (symbol === "") {
       // console.log("break");
       this.setState({ errors: { symbol: "Symbol is required." } });
-      console.log(this.state.errors);
+      // console.log(this.state.errors);
       // console.log("break");
       return;
     }
     if (open === "") {
       this.setState({ errors: { open: "Open price is required." } });
-      console.log(this.state.errors);
+      // console.log(this.state.errors);
       return;
     }
     if (fifty_two_lo === "") {
@@ -103,7 +103,7 @@ class PredictValue extends Component {
     return (
       <div className="card m-3">
         <div className="card-header">
-          <span>Stock Features For Machine Learning </span>
+          <span>Stock Features For Prediction </span>
           <i className="fas fa-cogs"></i>
         </div>
         <div className="card-body">

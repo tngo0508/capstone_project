@@ -18,20 +18,25 @@ class StockView(viewsets.ModelViewSet):
     ]
 
 
-@api_view(["POST"])
-def get_stock_info(request):
+@api_view(["GET"])
+def get_stock_info(request, symbol):
     try:
-        scraped_data = defaultdict()
-        serializer = SymbolSerializer(data=request.data)
-        # print(serializer.is_valid())
-        if serializer.is_valid():
-            stock_symbol = serializer.validated_data['symbol']
-            scraped_data = scrape_stock_info(stock_symbol)
-            # print(scraped_data)
-            res = json.dumps(scraped_data)
+        # scraped_data = defaultdict()
+        # # serializer = SymbolSerializer(data=request.data)
+        # serializer = SymbolSerializer(symbol)
+        # # print(serializer.is_valid())
+        # if serializer.is_valid():
+        #     stock_symbol = serializer.validated_data['symbol']
+        #     scraped_data = scrape_stock_info(stock_symbol)
+        #     # print(scraped_data)
+        #     res = json.dumps(scraped_data)
+        #     return Response(res)
+        #     # return JsonResponse(res, safe=False)
+
+        data = scrape_stock_info(symbol)
+        res = json.dumps(data)
+        return Response(res)
         # return Response({'message': 'hello, world'})
-            return Response(res)
-            # return JsonResponse(res, safe=False)
 
     except ValueError as e:
         return Response(e.args[0], status.HTTP_400_BAD_REQUEST)
