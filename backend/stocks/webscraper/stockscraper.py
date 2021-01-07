@@ -15,6 +15,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from fake_useragent import UserAgent
+from sys import platform
 
 
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
@@ -22,11 +23,37 @@ driver = webdriver.Chrome()
 options = webdriver.ChromeOptions()
 options.add_argument('--incognito')
 options.add_argument('--headless')
+options.add_argument("window-size=1400,1500")
 options.add_argument('--disable-gpu')
+options.add_argument("--no-sandbox")
+options.add_argument("start-maximized")
+options.add_argument("enable-automation")
 options.add_argument('--ignore-certificate-errors')
 options.add_argument('--ignore-ssl-errors')
+options.add_argument("--disable-infobars")
+options.add_argument("--disable-dev-shm-usage")
 options.add_argument('--log-level=3')
+options.add_experimental_option('excludeSwitches', ['enable-logging'])
 # driver = webdriver.Chrome(chrome_options=options)
+
+exec_path = ''
+try:
+    curr_dir = os.path.dirname(os.path.realpath(__file__))
+    if platform == 'win32':
+        chrome_exec_file = 'chromedriver.exe'
+        chrome_dir = "win32"
+        exec_path = os.path.join(curr_dir, chrome_dir, chrome_exec_file)
+    elif platform == 'darwin':
+        chrome_exec_file = 'chromedriver'
+        chrome_dir = "linux"
+        exec_path = os.path.join(curr_dir, chrome_dir, chrome_exec_file)
+    else:
+        chrome_exec_file = 'chromedriver'
+        chrome_dir = "mac"
+        exec_path = os.path.join(curr_dir, chrome_dir, chrome_exec_file)
+    logging.info(exec_path)
+except Exception as e:
+    logging.raiseExceptions(e)
 
 
 def get_user_input():
@@ -49,8 +76,11 @@ def create_stock_symbol_table():
     df.to_csv("S&P500-Symbols.csv", columns=['Symbol'])
 
 
-def scrape_stock_info(stock):
-    print(stock)
+def scrape_stock_info(stock, mode='single'):
+    mode_val = {'single', 'list'}
+    if mode not in mode_val:
+        raise ValueError("Must provide mode for scraping stock info")
+    # print(stock)
     if not stock:
         return None
     if stock.find('.'):
@@ -66,9 +96,10 @@ def scrape_stock_info(stock):
     ua = UserAgent()
     userAgent = ua.random
     options.add_argument(f'user-agent={userAgent}')
-    driver = webdriver.Chrome(options=options)
+    driver = webdriver.Chrome(executable_path=exec_path, options=options)
     driver.get(url)
-    time.sleep(random.randint(10, 30))
+    if mode == 'list':
+        time.sleep(random.randint(10, 30))
     try:
         target_elem = WebDriverWait(driver, 3).until(
             EC.presence_of_element_located((By.ID, 'fr-val-mod')))
@@ -205,7 +236,7 @@ def scrape_stock_list(file):
     #     'Symbol', 'open', '52_wk_low', '52_wk_hi', 'volume', 'avg_volume', 'market_cap', 'PE_ratio', 'EPS_ratio'])
 
     # print(stock_df)
-    curr_dir = os.getcwd()
+    curr_dir = os.path.dirname(os.path.realpath(__file__))
     log_time = time.strftime('%y_%m_%d-%H%M%S')
     file_name = 'dataset' + log_time + '.csv'
     path = os.path.join(curr_dir, file_name)

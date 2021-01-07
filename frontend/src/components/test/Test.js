@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 export default class Test extends Component {
   state = {
@@ -17,6 +18,14 @@ export default class Test extends Component {
           postId: json.postId,
         })
       );
+
+    // fetch("http://localhost:8000/api/getstock/")
+    //   .then((response) => response.json())
+    //   .then((json) => console.log(json));
+
+    axios
+      .post("http://localhost:8000/api/getstock/", { symbol: "AMZN" })
+      .then((res) => console.log(res));
   }
 
   componentDidUpdate() {

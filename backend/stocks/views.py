@@ -27,7 +27,7 @@ def get_stock_info(request):
         if serializer.is_valid():
             stock_symbol = serializer.validated_data['symbol']
             scraped_data = scrape_stock_info(stock_symbol)
-            print(scraped_data)
+            # print(scraped_data)
             res = json.dumps(scraped_data)
         # return Response({'message': 'hello, world'})
             return Response(res)
