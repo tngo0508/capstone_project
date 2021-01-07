@@ -6,3 +6,7 @@ class StockSerializer(serializers.ModelSerializer):
     class Meta:
         model = Stock
         fields = '__all__'
+
+
+class SymbolSerializer(serializers.Serializer):
+    symbol = serializers.CharField()

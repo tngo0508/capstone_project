@@ -22,6 +22,7 @@ driver = webdriver.Chrome()
 options = webdriver.ChromeOptions()
 options.add_argument('--incognito')
 options.add_argument('--headless')
+options.add_argument('--disable-gpu')
 options.add_argument('--ignore-certificate-errors')
 options.add_argument('--ignore-ssl-errors')
 options.add_argument('--log-level=3')
@@ -49,6 +50,9 @@ def create_stock_symbol_table():
 
 
 def scrape_stock_info(stock):
+    print(stock)
+    if not stock:
+        return None
     if stock.find('.'):
         stock = stock.replace('.', '-')
     logging.info(stock)
@@ -214,6 +218,6 @@ def scrape_stock_list(file):
 # scrape_stock_info('amzn')
 # scrape_stock_info('goog')
 # scrape_stock_info('bf.b')
-scrape_stock_list('S&P500-Symbols.csv')
+# scrape_stock_list('S&P500-Symbols.csv')
 
 driver.quit()
