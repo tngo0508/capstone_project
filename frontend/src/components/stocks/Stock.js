@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import Spinner from "../layout/Spinners";
 
 // const stockItems = [
 //   {
@@ -39,47 +40,51 @@ class Stock extends Component {
       pe_ratio,
       eps_ratio,
     } = this.props;
-    return (
-      <div className="card card-body mb-3 w-50">
-        <h4>
-          {symbol} <i className="fas fa-chart-pie"></i>
-        </h4>
-        <ul className="list-group">
-          <li className="list-group-item">Open Price: {open}</li>
-          <li className="list-group-item">52 weeks low: {fifty_two_lo}</li>
-          <li className="list-group-item">52 weeks high: {fifty_two_hi}</li>
-          <li className="list-group-item">Volume: {volume}</li>
-          <li className="list-group-item">Average Volume: {avg_volume}</li>
-          <li className="list-group-item">Market Cap: {market_cap}</li>
-          <li className="list-group-item">PE ratio: {pe_ratio}</li>
-          <li className="list-group-item">EPS ratio: {eps_ratio}</li>
-        </ul>
-      </div>
-    );
+    if (
+      symbol &&
+      open &&
+      fifty_two_lo &&
+      fifty_two_hi &&
+      volume &&
+      avg_volume &&
+      market_cap &&
+      pe_ratio &&
+      eps_ratio &&
+      eps_ratio
+    ) {
+      return (
+        <div className="card card-body mb-3 w-50">
+          <h4>
+            {symbol} <i className="fas fa-chart-pie"></i>
+          </h4>
+          <ul className="list-group">
+            <li className="list-group-item">Open Price: {open}</li>
+            <li className="list-group-item">52 weeks low: {fifty_two_lo}</li>
+            <li className="list-group-item">52 weeks high: {fifty_two_hi}</li>
+            <li className="list-group-item">Volume: {volume}</li>
+            <li className="list-group-item">Average Volume: {avg_volume}</li>
+            <li className="list-group-item">Market Cap: {market_cap}</li>
+            <li className="list-group-item">PE ratio: {pe_ratio}</li>
+            <li className="list-group-item">EPS ratio: {eps_ratio}</li>
+          </ul>
+        </div>
+      );
+    } else {
+      // return <div>spinner</div>;
+      return <Spinner />;
+    }
   }
 }
 
-Stock.defaultProps = {
-  symbol: "Your stock",
-  open: "null",
-  fifty_two_lo: "null",
-  fifty_two_hi: "null",
-  volume: "null",
-  avg_volume: "null",
-  market_cap: "null",
-  pe_ratio: "null",
-  eps_ratio: "null",
-};
-
 Stock.propTypes = {
-  symbol: PropTypes.string.isRequired,
-  open: PropTypes.string.isRequired,
-  fifty_two_lo: PropTypes.string.isRequired,
-  fifty_two_hi: PropTypes.string.isRequired,
-  volume: PropTypes.string.isRequired,
-  avg_volume: PropTypes.string.isRequired,
-  pe_ratio: PropTypes.string.isRequired,
-  eps_ratio: PropTypes.string.isRequired,
+  symbol: PropTypes.string,
+  open: PropTypes.string,
+  fifty_two_lo: PropTypes.string,
+  fifty_two_hi: PropTypes.string,
+  volume: PropTypes.string,
+  avg_volume: PropTypes.string,
+  pe_ratio: PropTypes.string,
+  eps_ratio: PropTypes.string,
 };
 
 export default Stock;
