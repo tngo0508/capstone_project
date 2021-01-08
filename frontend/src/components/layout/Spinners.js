@@ -1,10 +1,10 @@
 import React from "react";
-import finding from "./finding.gif";
+import loading from "./loading.gif";
 
 function Spinner() {
   return (
     <div>
-      <img src={finding} alt="Gathering Info..." />
+      <img src={loading} alt="Gathering Info..." />
     </div>
   );
 }

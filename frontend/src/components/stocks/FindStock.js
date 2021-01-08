@@ -45,7 +45,7 @@ class FindStock extends Component {
       // console.log(this.state.errors);
       return;
     }
-    this.setState({ symbol_stock: symbol, hasData: true });
+    this.setState({ symbol_stock: symbol, hasData: true, data: {} });
 
     // console.log(symbol);
     // Send request to django endpoint
