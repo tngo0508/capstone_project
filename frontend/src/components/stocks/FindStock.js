@@ -29,7 +29,7 @@ class FindStock extends Component {
   // uncomment below for controlled component
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
-  async onSubmit(e) {
+  onSubmit = async (e) => {
     e.preventDefault();
     const { symbol } = this.state;
 
@@ -60,7 +60,7 @@ class FindStock extends Component {
       errors: {},
       // data: {},
     });
-  }
+  };
 
   render() {
     // uncomment below for controlled component
@@ -74,7 +74,7 @@ class FindStock extends Component {
         <div className="card mb-3 w-50">
           <div className="card-header">
             <span>Stock Information </span>
-            <i className="fas fa-chart-pie"></i>
+            <i className="fas fa-info-circle"></i>
           </div>
           <div className="card-body">
             <form onSubmit={this.onSubmit}>
