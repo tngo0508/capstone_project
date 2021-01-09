@@ -82,7 +82,7 @@ class FindStock extends Component {
                 <TextInputGroup
                   label="Symbol"
                   name="symbol"
-                  placeholder="e.g. AMZN, TLSA, MSFT"
+                  placeholder="e.g., AMZN, TLSA, MSFT"
                   type="text"
                   value={symbol}
                   onChange={this.onChange}

@@ -60,7 +60,7 @@ def get_user_input():
     return input("Enter Stock: ")
 
 
-def create_stock_symbol_table():
+def create_stock_symbol_table(mode='sp500'):
     # try:
     #     file = 'constituents-financials_csv.csv'
     #     df = pd.read_csv(file)
@@ -68,12 +68,20 @@ def create_stock_symbol_table():
     # except FileNotFoundError as e:
     #     print(e)
 
-    table = pd.read_html(
-        'https://en.wikipedia.org/wiki/List_of_S%26P_500_companies')
-    df = table[0]
-    # print(df)
-    df.to_csv('S&P500-Info.csv')
-    df.to_csv("S&P500-Symbols.csv", columns=['Symbol'])
+    if mode == 'sp500':
+        table = pd.read_html(
+            'https://en.wikipedia.org/wiki/List_of_S%26P_500_companies')
+        df = table[0]
+        # print(df)
+        df.to_csv('S&P500-Info.csv')
+        df.to_csv("S&P500-Symbols.csv", columns=['Symbol'])
+    elif mode == 'nasdaq100':
+        table = pd.read_html(
+            'https://en.wikipedia.org/wiki/NASDAQ-100#Components')
+        df = table[3]
+        df = df.rename(columns={'Ticker': 'Symbol'})
+        df.to_csv('NASDAQ100-Info.csv')
+        df.to_csv("NASDAQ100-Symbols.csv", columns=['Symbol'])
 
 
 def scrape_stock_info(stock, mode='single'):
@@ -243,12 +251,13 @@ def scrape_stock_list(file):
     stock_df.to_csv(path, index=False)
 
 
-# create_stock_symbol_table()
-# stock = get_user_input()
-# scrape_stock_info(stock)
-# scrape_stock_info('amzn')
-# scrape_stock_info('goog')
-# scrape_stock_info('bf.b')
-# scrape_stock_list('S&P500-Symbols.csv')
-
-driver.quit()
+if __name__ == "__main__":
+    # create_stock_symbol_table('nasdaq100')
+    # stock = get_user_input()
+    # scrape_stock_info(stock)
+    # scrape_stock_info('amzn')
+    # scrape_stock_info('goog')
+    # scrape_stock_info('bf.b')
+    # scrape_stock_list('S&P500-Symbols.csv')
+    scrape_stock_list('NASDAQ100-Symbols.csv')
+    driver.quit()

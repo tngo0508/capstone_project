@@ -113,7 +113,7 @@ class PredictValue extends Component {
                 <TextInputGroup
                   label="Symbol"
                   name="symbol"
-                  placeholder="e.g. AMZN, TLSA, MFST"
+                  placeholder="e.g., AMZN, TLSA, MFST"
                   type="text"
                   value={symbol}
                   onChange={this.onChange}
@@ -126,7 +126,7 @@ class PredictValue extends Component {
                   label="Open Price"
                   name="open"
                   value={open}
-                  placeholder="e.g. 3,218.51"
+                  placeholder="e.g., 3,218.51"
                   type="text"
                   onChange={this.onChange}
                   error={errors.open}
@@ -138,7 +138,7 @@ class PredictValue extends Component {
                   label="52 weeks low"
                   name="fifty_two_lo"
                   value={fifty_two_lo}
-                  placeholder="e.g. 1,626.03"
+                  placeholder="e.g., 1,626.03"
                   type="text"
                   onChange={this.onChange}
                   error={errors.fifty_two_lo}
@@ -150,7 +150,7 @@ class PredictValue extends Component {
                   label="52 weeks high"
                   name="fifty_two_hi"
                   value={fifty_two_hi}
-                  placeholder="e.g. 3,552.25"
+                  placeholder="e.g., 3,552.25"
                   type="text"
                   onChange={this.onChange}
                   error={errors.fifty_two_hi}
@@ -162,7 +162,7 @@ class PredictValue extends Component {
                   label="Volume"
                   name="volume"
                   value={volume}
-                  placeholder="e.g. 4,394,815"
+                  placeholder="e.g., 4,394,815"
                   type="text"
                   onChange={this.onChange}
                   error={errors.volume}
@@ -174,7 +174,7 @@ class PredictValue extends Component {
                   label="Average Volume"
                   name="avg_volume"
                   value={avg_volume}
-                  placeholder="e.g. 4,401,834"
+                  placeholder="e.g., 4,401,834"
                   type="text"
                   onChange={this.onChange}
                   error={errors.volume}
@@ -186,7 +186,7 @@ class PredictValue extends Component {
                   label="Market Cap"
                   name="market_cap"
                   value={market_cap}
-                  placeholder="e.g. 1.575T, 1.45B, 1.3M"
+                  placeholder="e.g., 1.575T, 1.45B, 1.3M"
                   type="text"
                   onChange={this.onChange}
                   error={errors.market_cap}
@@ -198,7 +198,7 @@ class PredictValue extends Component {
                   label="PE ratio (TTM)"
                   name="pe_ratio"
                   value={pe_ratio}
-                  placeholder="e.g. 91.76"
+                  placeholder="e.g., 91.76"
                   type="text"
                   onChange={this.onChange}
                   error={errors.pe_ratio}
@@ -210,7 +210,7 @@ class PredictValue extends Component {
                   label="EPS Ratio (TTM)"
                   name="eps_ratio"
                   value={eps_ratio}
-                  placeholder="e.g. 34.20"
+                  placeholder="e.g., 34.20"
                   type="text"
                   onChange={this.onChange}
                   error={errors.eps_ratio}
