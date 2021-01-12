@@ -68,7 +68,7 @@ class Stock extends Component {
         //   </ul>
         // </div>
 
-        <div className="card card-body">
+        <div className="card card-body w-50">
           <h4>
             {symbol} <i className="fas fa-chart-pie"></i>
           </h4>

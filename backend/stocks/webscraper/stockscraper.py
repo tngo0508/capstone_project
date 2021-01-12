@@ -253,11 +253,12 @@ def scrape_stock_list(file):
 
 if __name__ == "__main__":
     # create_stock_symbol_table('nasdaq100')
+    create_stock_symbol_table('sp500')
     # stock = get_user_input()
     # scrape_stock_info(stock)
     # scrape_stock_info('amzn')
     # scrape_stock_info('goog')
     # scrape_stock_info('bf.b')
     # scrape_stock_list('S&P500-Symbols.csv')
-    scrape_stock_list('NASDAQ100-Symbols.csv')
+    # scrape_stock_list('NASDAQ100-Symbols.csv')
     driver.quit()
