@@ -19,8 +19,9 @@ from sys import platform
 
 
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
-driver = webdriver.Chrome()
+# driver = webdriver.Chrome()
 options = webdriver.ChromeOptions()
+options.headless = True
 options.add_argument('--incognito')
 options.add_argument('--headless')
 options.add_argument("window-size=1400,1500")
@@ -34,7 +35,7 @@ options.add_argument("--disable-infobars")
 options.add_argument("--disable-dev-shm-usage")
 options.add_argument('--log-level=3')
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
-# driver = webdriver.Chrome(chrome_options=options)
+driver = webdriver.Chrome(chrome_options=options)
 
 exec_path = ''
 try:
@@ -197,6 +198,7 @@ def scrape_stock_info(stock, mode='single'):
 
     driver.close()
     # pprint.pprint(re)
+
     return re
 
 # except AttributeError as e:
@@ -253,7 +255,7 @@ def scrape_stock_list(file):
 
 if __name__ == "__main__":
     # create_stock_symbol_table('nasdaq100')
-    create_stock_symbol_table('sp500')
+    # create_stock_symbol_table('sp500')
     # stock = get_user_input()
     # scrape_stock_info(stock)
     # scrape_stock_info('amzn')
