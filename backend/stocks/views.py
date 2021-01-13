@@ -49,9 +49,7 @@ def get_stock_info(request, symbol):
 def predict_stock(request):
     # return Response({'message': 'hello, world'})
     try:
-        print(request.data)
         curr_dir = os.path.dirname(os.path.realpath(__file__))
-        print(curr_dir)
         model_file_path = os.path.join(
             curr_dir, 'webscraper', 'stock_prediction_model_knn.pkl')
         model = joblib.load(model_file_path)
@@ -61,8 +59,7 @@ def predict_stock(request):
         scalers = joblib.load(scaler_file_path)
         X = scalers.transform(stock_info)
         y_pred = model.predict(X)
-        print(y_pred)
-        res = json.dumps(y_pred)
+        res = json.dumps({'fair_value': y_pred[0]})
         return Response(res)
 
     except ValueError as e:
