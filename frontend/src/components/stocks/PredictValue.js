@@ -38,32 +38,112 @@ class PredictValue extends Component {
       // console.log(this.state.errors);
       return;
     }
+    if (open.match(/[a-zA-Z]{1,}/g)) {
+      this.setState({
+        errors: {
+          open:
+            "Please enter a correct number (use comma for thousand separator and dot for decimal separator)",
+        },
+      });
+      return;
+    }
+
     if (fifty_two_lo === "") {
       this.setState({ errors: { fifty_two_lo: "52 week low is required." } });
       return;
     }
+    if (fifty_two_lo.match(/[a-zA-Z]{1,}/g)) {
+      this.setState({
+        errors: {
+          fifty_two_lo:
+            "Please enter a correct number (use comma for thousand separator and dot for decimal separator)",
+        },
+      });
+      return;
+    }
+
     if (fifty_two_hi === "") {
       this.setState({ errors: { fifty_two_hi: "52 week high is required." } });
       return;
     }
+    if (fifty_two_hi.match(/[a-zA-Z]{1,}/g)) {
+      this.setState({
+        errors: {
+          fifty_two_hi:
+            "Please enter a correct number (use comma for thousand separator and dot for decimal separator)",
+        },
+      });
+      return;
+    }
+
     if (volume === "") {
       this.setState({ errors: { volume: "Volume is required." } });
+      return;
+    }
+    if (volume.match(/[a-zA-Z]{1,}/g)) {
+      this.setState({
+        errors: {
+          volume:
+            "Please enter a correct number (use comma for thousand separator and dot for decimal separator)",
+        },
+      });
       return;
     }
     if (avg_volume === "") {
       this.setState({ errors: { avg_volume: "Average Volume is required." } });
       return;
     }
+    if (avg_volume.match(/[a-zA-Z]{1,}/g)) {
+      this.setState({
+        errors: {
+          avg_volume:
+            "Please enter a correct number (use comma for thousand separator and dot for decimal separator)",
+        },
+      });
+      return;
+    }
     if (market_cap === "") {
       this.setState({ errors: { market_cap: "Market Cap is required." } });
       return;
     }
+    // if (
+    //   market_cap.match(
+    //     /(\d{1,3},{1})*\d{1,}[.]?\d*([ACDEFGHIGLNOPQRSUVWXYZ]|[a-z])?/g
+    //   )
+    // ) {
+    //   this.setState({
+    //     errors: {
+    //       market_cap:
+    //         "Please use T (trillions), B (Billions), M (Millions), and K (Thousands) in",
+    //     },
+    //   });
+    //   return;
+    // }
+
     if (pe_ratio === "") {
       this.setState({ errors: { pe_ratio: "PE ratio is required." } });
       return;
     }
+    if (pe_ratio.match(/[a-zA-Z]{1,}/g)) {
+      this.setState({
+        errors: {
+          pe_ratio:
+            "Please enter a correct number (use comma for thousand separator and dot for decimal separator)",
+        },
+      });
+      return;
+    }
     if (eps_ratio === "") {
       this.setState({ errors: { eps_ratio: "EPS ratio is required." } });
+      return;
+    }
+    if (eps_ratio.match(/[a-zA-Z]{1,}/g)) {
+      this.setState({
+        errors: {
+          eps_ratio:
+            "Please enter a correct number (use comma for thousand separator and dot for decimal separator)",
+        },
+      });
       return;
     }
 
@@ -133,7 +213,7 @@ class PredictValue extends Component {
         <div className="card-body">
           <form onSubmit={this.onSubmit}>
             <div className="form-row">
-              <div className="form-group col-md-auto">
+              <div className="form-group col-md-3">
                 <TextInputGroup
                   label="Open Price"
                   name="open"
@@ -145,7 +225,7 @@ class PredictValue extends Component {
                   maxLength="10"
                 />
               </div>
-              <div className="form-group col-md-auto">
+              <div className="form-group col-md-3">
                 <TextInputGroup
                   label="52 weeks low"
                   name="fifty_two_lo"
@@ -157,7 +237,7 @@ class PredictValue extends Component {
                   maxLength="10"
                 />
               </div>
-              <div className="form-group col-md-auto">
+              <div className="form-group col-md-3">
                 <TextInputGroup
                   label="52 weeks high"
                   name="fifty_two_hi"
@@ -169,7 +249,7 @@ class PredictValue extends Component {
                   maxLength="10"
                 />
               </div>
-              <div className="form-group col-md-auto">
+              <div className="form-group col-md-3">
                 <TextInputGroup
                   label="Volume"
                   name="volume"
@@ -181,7 +261,7 @@ class PredictValue extends Component {
                   maxLength="10"
                 />
               </div>
-              <div className="form-group col-md-auto">
+              <div className="form-group col-md-3">
                 <TextInputGroup
                   label="Average Volume"
                   name="avg_volume"
@@ -189,11 +269,11 @@ class PredictValue extends Component {
                   placeholder="e.g., 4,401,834"
                   type="text"
                   onChange={this.onChange}
-                  error={errors.volume}
+                  error={errors.avg_volume}
                   maxLength="10"
                 />
               </div>
-              <div className="form-group col-md-auto">
+              <div className="form-group col-md-3">
                 <TextInputGroup
                   label="Market Cap"
                   name="market_cap"
@@ -205,7 +285,7 @@ class PredictValue extends Component {
                   maxLength="10"
                 />
               </div>
-              <div className="form-group col-md-auto">
+              <div className="form-group col-md-3">
                 <TextInputGroup
                   label="PE ratio (TTM)"
                   name="pe_ratio"
@@ -217,7 +297,7 @@ class PredictValue extends Component {
                   maxLength="10"
                 />
               </div>
-              <div className="form-group col-md-auto">
+              <div className="form-group col-md-3">
                 <TextInputGroup
                   label="EPS Ratio (TTM)"
                   name="eps_ratio"
@@ -230,11 +310,15 @@ class PredictValue extends Component {
                 />
               </div>
 
-              <input
-                type="submit"
-                value="Predict"
-                className="btn btn-block btn-dark"
-              />
+              <div className="container">
+                <div className="text-right">
+                  <input
+                    type="submit"
+                    value="Predict"
+                    className="btn btn-lg btn-dark"
+                  />
+                </div>
+              </div>
             </div>
           </form>
         </div>
