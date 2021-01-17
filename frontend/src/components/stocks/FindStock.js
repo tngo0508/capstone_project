@@ -70,7 +70,7 @@ class FindStock extends Component {
     // const { symbol } = this.props;
 
     return (
-      <div className="container">
+      <div className="container" align="center">
         <div className="card mb-3 w-50">
           <div className="card-header">
             <span>Stock Information </span>
@@ -98,7 +98,6 @@ class FindStock extends Component {
             </form>
           </div>
         </div>
-
         {hasData && (
           <Stock
             symbol={symbol_stock}

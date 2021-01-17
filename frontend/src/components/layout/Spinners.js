@@ -4,7 +4,16 @@ import loading from "./loading.gif";
 function Spinner() {
   return (
     <div>
-      <img src={loading} alt="Gathering Info..." />
+      <div className="container w-50">
+        <div className="alert alert-info text-center">
+          Please wait a few seconds...
+        </div>
+      </div>
+      <img
+        src={loading}
+        alt="Gathering Info..."
+        class="rounded mx-auto d-block"
+      />
     </div>
   );
 }

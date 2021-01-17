@@ -1,9 +1,10 @@
+import axios from "axios";
 import React, { Component } from "react";
+import TextFairValue from "../layout/TextFairValue";
 import TextInputGroup from "../layout/TextInputGroup";
 
 class PredictValue extends Component {
   state = {
-    symbol: "",
     open: "",
     fifty_two_lo: "",
     fifty_two_hi: "",
@@ -12,16 +13,16 @@ class PredictValue extends Component {
     market_cap: "",
     pe_ratio: "",
     eps_ratio: "",
+    fair_value: "",
     errors: {},
   };
 
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
-  onSubmit = (e) => {
+  onSubmit = async (e) => {
     // console.log("submit");
     e.preventDefault();
     const {
-      symbol,
       open,
       fifty_two_lo,
       fifty_two_hi,
@@ -32,13 +33,6 @@ class PredictValue extends Component {
       eps_ratio,
     } = this.state;
 
-    if (symbol === "") {
-      // console.log("break");
-      this.setState({ errors: { symbol: "Symbol is required." } });
-      // console.log(this.state.errors);
-      // console.log("break");
-      return;
-    }
     if (open === "") {
       this.setState({ errors: { open: "Open price is required." } });
       // console.log(this.state.errors);
@@ -74,7 +68,37 @@ class PredictValue extends Component {
     }
 
     this.setState({
-      symbol: "",
+      open,
+      fifty_two_lo,
+      fifty_two_hi,
+      volume,
+      avg_volume,
+      market_cap,
+      pe_ratio,
+      eps_ratio,
+    });
+
+    const res = await axios({
+      method: "post",
+      url: "http://localhost:8000/api/predict/",
+      data: {
+        open,
+        fifty_two_lo,
+        fifty_two_hi,
+        volume,
+        avg_volume,
+        market_cap,
+        pe_ratio,
+        eps_ratio,
+      },
+    });
+
+    const data = await JSON.parse(res.data);
+    this.setState({ fair_value: data });
+    // console.log(this.state.fair_value);
+
+    // clear state after submitting form
+    this.setState({
       open: "",
       fifty_two_lo: "",
       fifty_two_hi: "",
@@ -89,7 +113,6 @@ class PredictValue extends Component {
 
   render() {
     const {
-      symbol,
       open,
       fifty_two_lo,
       fifty_two_hi,
@@ -98,6 +121,7 @@ class PredictValue extends Component {
       market_cap,
       pe_ratio,
       eps_ratio,
+      fair_value,
       errors,
     } = this.state;
     return (
@@ -109,18 +133,6 @@ class PredictValue extends Component {
         <div className="card-body">
           <form onSubmit={this.onSubmit}>
             <div className="form-row">
-              <div className="form-group col-md-auto">
-                <TextInputGroup
-                  label="Symbol"
-                  name="symbol"
-                  placeholder="e.g., AMZN, TLSA, MFST"
-                  type="text"
-                  value={symbol}
-                  onChange={this.onChange}
-                  error={errors.symbol}
-                  maxLength="4"
-                />
-              </div>
               <div className="form-group col-md-auto">
                 <TextInputGroup
                   label="Open Price"
@@ -226,6 +238,7 @@ class PredictValue extends Component {
             </div>
           </form>
         </div>
+        {fair_value && <TextFairValue val={fair_value.fair_value} />}
       </div>
     );
   }

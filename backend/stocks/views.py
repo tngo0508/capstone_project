@@ -53,6 +53,21 @@ def predict_stock(request):
         model_file_path = os.path.join(
             curr_dir, 'webscraper', 'stock_prediction_model_knn.pkl')
         model = joblib.load(model_file_path)
+
+        # print(request.data)
+        data = request.data
+        # Check and change data format before using with prediction model
+        letter = {'T': 1000000000000, 'K': 1000, 'M': 1000000, 'B': 1000000000}
+        for k, v in data.items():
+            if data[k].find(','):
+                data[k] = v.replace(',', '')
+                if k == 'market_cap' and data[k][-1].isalpha():
+                    data[k] = str(float(data[k][:-1]) * letter[data[k][-1]])
+                elif v == 'N/A':
+                    data[k] = None
+                # else:
+                #     data[k] = float(data[k])
+
         stock_info = np.array(list(request.data.values())).reshape(1, -1)
         scaler_file_path = os.path.join(
             curr_dir, 'webscraper', 'train_scaler.pkl')
