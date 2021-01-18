@@ -106,19 +106,19 @@ class PredictValue extends Component {
       this.setState({ errors: { market_cap: "Market Cap is required." } });
       return;
     }
-    // if (
-    //   market_cap.match(
-    //     /(\d{1,3},{1})*\d{1,}[.]?\d*([ACDEFGHIGLNOPQRSUVWXYZ]|[a-z])?/g
-    //   )
-    // ) {
-    //   this.setState({
-    //     errors: {
-    //       market_cap:
-    //         "Please use T (trillions), B (Billions), M (Millions), and K (Thousands) in",
-    //     },
-    //   });
-    //   return;
-    // }
+    if (
+      market_cap.match(
+        /^(\d{1,3},{1})*\d{1,}[.]?\d*([ACDEFGHIGLNOPQRSUVWXYZ]|[a-z])?$/g
+      )
+    ) {
+      this.setState({
+        errors: {
+          market_cap:
+            "Please use T (trillions), B (Billions), M (Millions), and K (Thousands) for market cap",
+        },
+      });
+      return;
+    }
 
     if (pe_ratio === "") {
       this.setState({ errors: { pe_ratio: "PE ratio is required." } });
