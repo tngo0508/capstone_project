@@ -205,7 +205,7 @@ class PredictValue extends Component {
       errors,
     } = this.state;
     return (
-      <div className="card m-auto">
+      <div className="card m-auto shadow p-3 mb-5 bg-white rounded">
         <div className="card-header">
           <span>Stock Features For Prediction </span>
           <i className="fas fa-cogs"></i>

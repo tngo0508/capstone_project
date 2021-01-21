@@ -23,7 +23,7 @@ class DailyStock extends Component {
           type: "area",
           height: 350,
           zoom: {
-            enabled: false,
+            autoScaleYaxis: true,
           },
         },
         dataLabels: {
@@ -32,7 +32,6 @@ class DailyStock extends Component {
         stroke: {
           curve: "straight",
         },
-
         title: {
           text: "Company ABC Daily Stocks",
           align: "left",
@@ -90,7 +89,7 @@ class DailyStock extends Component {
   }
 
   componentDidMount() {
-    console.log("dailystock");
+    // console.log("dailystock");
     this.fetchStock();
   }
 

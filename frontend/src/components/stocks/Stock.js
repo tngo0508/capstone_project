@@ -30,7 +30,7 @@ class Stock extends Component {
       return (
         <div className="row">
           <div className="col-5">
-            <div className="card card-body">
+            <div className="card card-body shadow p-3 mb-5 bg-white rounded">
               <h4>
                 {symbol} <i className="fas fa-chart-pie"></i>
               </h4>
@@ -85,7 +85,7 @@ class Stock extends Component {
             </div>
           </div>
           <div className="col-7">
-            <div className="card-body">
+            <div className="card card-body shadow p-3 mb-5 bg-white rounded">
               <DailyStocks stockName={symbol} />
             </div>
           </div>

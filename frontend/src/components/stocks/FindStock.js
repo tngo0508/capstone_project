@@ -54,7 +54,7 @@ class FindStock extends Component {
 
     return (
       <div className="container-fluid" align="center">
-        <div className="card mb-3 w-50">
+        <div className="card mb-3 w-50 border border-info">
           <div className="card-header">
             <span>Stock Information </span>
             <i className="fas fa-info-circle"></i>
