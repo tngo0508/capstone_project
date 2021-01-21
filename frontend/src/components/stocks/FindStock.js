@@ -14,31 +14,14 @@ class FindStock extends Component {
     data: {},
     symbol_stock: "",
     hasData: false,
+    displayGraph: false,
   };
-  // uncontrolled component
-  // constructor(props) {
-  //   super(props);
-  //   this.symbolInput = React.createRef();
-  // }
 
-  // use below for uncontrolled component
-  // static defaultProps = {
-  //   symbol: "AMZN",
-  // };
-
-  // uncomment below for controlled component
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
   onSubmit = async (e) => {
     e.preventDefault();
     const { symbol } = this.state;
-
-    // uncontrolled component
-    // const stock = {
-    //   symbol: this.symbolInput.current.value,
-    // };
-
-    // console.log(stock);
 
     if (symbol === "") {
       this.setState({ errors: { symbol: "Symbol is required." } });
@@ -56,7 +39,7 @@ class FindStock extends Component {
 
     // clear state after submitting form
     this.setState({
-      symbol: "",
+      // symbol: "",
       errors: {},
       // data: {},
     });
@@ -70,7 +53,7 @@ class FindStock extends Component {
     // const { symbol } = this.props;
 
     return (
-      <div className="container" align="center">
+      <div className="container-fluid" align="center">
         <div className="card mb-3 w-50">
           <div className="card-header">
             <span>Stock Information </span>
