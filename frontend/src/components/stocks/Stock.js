@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Spinner from "../layout/Spinners";
 import DailyStocks from "../stocks/DailyStocks";
+import StockProfile from "./StockProfile";
 
 class Stock extends Component {
   render() {
@@ -87,6 +88,11 @@ class Stock extends Component {
           <div className="col-7">
             <div className="card card-body shadow p-3 mb-5 bg-white rounded">
               <DailyStocks stockName={symbol} />
+            </div>
+          </div>
+          <div className="col">
+            <div className="card card-body shadow p-3 mb-5 bg-white rounded">
+              <StockProfile symbol={symbol} />
             </div>
           </div>
         </div>

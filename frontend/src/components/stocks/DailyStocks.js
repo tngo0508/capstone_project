@@ -94,19 +94,24 @@ class DailyStock extends Component {
   }
 
   fetchStock() {
-    console.log(this.state.stockName);
+    // console.log(this.state.stockName);
     const API_KEY = "VH65CPTN371HAJQL";
     let API_CALL = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${this.state.stockName}&outputsize=compact&apikey=${API_KEY}`;
-    console.log(API_CALL);
+    // console.log(API_CALL);
     let stockChartXValuesFunction = [];
     let stockChartYValuesFunction = [];
 
     fetch(API_CALL)
       .then((response) => {
+        // console.log(response);
         return response.json();
       })
       .then((data) => {
-        //console.log(data);
+        // console.log(data);
+        if (data["Error Message"]) {
+          return { stockChartXValuesFunction, stockChartYValuesFunction };
+        }
+
         const stockTimeSeries = Object.keys(data)[1];
 
         Object.keys(data[stockTimeSeries]).map((date) => {
