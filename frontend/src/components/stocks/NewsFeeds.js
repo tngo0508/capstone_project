@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import ShowMoreText from "react-show-more-text";
 
 class NewsFeeds extends Component {
   constructor(props) {
@@ -56,7 +57,7 @@ class NewsFeeds extends Component {
                     className="img-fluid"
                     alt="thumbnail"
                     src={res.thumbnail}
-                    style={{ height: "auto", width: 450 }}
+                    style={{ height: "auto", width: 400 }}
                   ></img>
                 ) : null}
               </div>
@@ -65,14 +66,14 @@ class NewsFeeds extends Component {
                   <h5 className="card-title">
                     {res.title ? <strong>{res.title}</strong> : null}
                   </h5>
-                  <p className="card-text">
-                    {res.summary ? (
-                      <small className="mb-0">
-                        <span className="font-italic">Summary:</span>{" "}
-                        {res.summary}
-                      </small>
-                    ) : null}
-                  </p>
+
+                  {res.summary ? (
+                    <small className="mb-0">
+                      <span className="font-italic">Summary:</span>{" "}
+                      <ShowMoreText>{res.summary}</ShowMoreText>
+                    </small>
+                  ) : null}
+                  <br />
                   <p className="card-text">
                     {res.author_name ? (
                       <small className="text-muted">
