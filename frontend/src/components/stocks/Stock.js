@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Spinner from "../layout/Spinners";
 import DailyStocks from "../stocks/DailyStocks";
 import StockProfile from "./StockProfile";
+import NewsFeeds from "./NewsFeeds";
 
 class Stock extends Component {
   render() {
@@ -90,9 +91,14 @@ class Stock extends Component {
               <DailyStocks stockName={symbol} />
             </div>
           </div>
-          <div className="col">
+          <div className="col-12">
             <div className="card card-body shadow p-3 mb-5 bg-white rounded">
               <StockProfile symbol={symbol} />
+            </div>
+          </div>
+          <div className="col">
+            <div className="card card-body shadow p-3 mb-5 bg-white rounded">
+              <NewsFeeds symbol={symbol} />
             </div>
           </div>
         </div>

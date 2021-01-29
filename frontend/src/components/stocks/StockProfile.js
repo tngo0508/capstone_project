@@ -54,6 +54,7 @@ class StockProfile extends Component {
           <h5>
             Summary <i className="fas fa-clipboard-list"></i>
           </h5>
+          <hr />
           {profile.summaryProfile.longBusinessSummary}
           <hr />
           <div className="row">
