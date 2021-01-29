@@ -49,6 +49,7 @@ class NewsFeeds extends Component {
       // console.log(news);
       const listItems = news.Content.result.map((res) => (
         <React.Fragment key={res.id}>
+          <hr />
           <div className="card mb-3 bg-light border-light">
             <div className="row no-gutters">
               <div className="col-auto">
@@ -57,14 +58,20 @@ class NewsFeeds extends Component {
                     className="img-fluid"
                     alt="thumbnail"
                     src={res.thumbnail}
-                    style={{ height: "auto", width: 400 }}
+                    style={{ height: "auto", width: 500 }}
                   ></img>
                 ) : null}
               </div>
               <div className="col">
                 <div className="card-body px-2">
                   <h5 className="card-title">
-                    {res.title ? <strong>{res.title}</strong> : null}
+                    {res.title ? (
+                      <strong>
+                        <a href={res.url} className="text-dark">
+                          {res.title}
+                        </a>
+                      </strong>
+                    ) : null}
                   </h5>
 
                   {res.summary ? (
