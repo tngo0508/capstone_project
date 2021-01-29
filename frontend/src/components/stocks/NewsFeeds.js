@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import ShowMoreText from "react-show-more-text";
+import he from "he";
 
 class NewsFeeds extends Component {
   constructor(props) {
@@ -68,7 +69,7 @@ class NewsFeeds extends Component {
                     {res.title ? (
                       <strong>
                         <a href={res.url} className="text-dark">
-                          {res.title}
+                          {he.decode(res.title)}
                         </a>
                       </strong>
                     ) : null}
@@ -77,7 +78,7 @@ class NewsFeeds extends Component {
                   {res.summary ? (
                     <small className="mb-0">
                       <span className="font-italic">Summary:</span>{" "}
-                      <ShowMoreText>{res.summary}</ShowMoreText>
+                      <ShowMoreText>{he.decode(res.summary)}</ShowMoreText>
                     </small>
                   ) : null}
                   <br />
