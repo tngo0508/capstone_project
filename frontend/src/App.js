@@ -21,7 +21,7 @@ class App extends Component {
       <Router>
         <Particles
           style={{ position: "absolute" }}
-          height="70%"
+          height="75%"
           width="100%"
           params={{
             particles: {

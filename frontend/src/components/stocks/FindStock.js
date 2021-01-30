@@ -66,7 +66,12 @@ class FindStock extends Component {
         <MDBView>
           <MDBMask className="gradient" />
           <MDBContainer
-            style={{ height: "100%", width: "100%", paddingTop: "5rem" }}
+            style={{
+              height: "100%",
+              width: "100%",
+              paddingTop: "10rem",
+              paddingBottom: "10rem",
+            }}
             className="d-flex justify-content-center align-items-center"
           >
             <MDBRow>

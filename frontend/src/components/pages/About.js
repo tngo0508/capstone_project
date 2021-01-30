@@ -2,7 +2,15 @@ import React from "react";
 
 export default function About() {
   return (
-    <div>
+    <div
+      className="container"
+      style={{
+        height: "100%",
+        width: "100%",
+        paddingTop: "10rem",
+        paddingBottom: "10rem",
+      }}
+    >
       <h1 className="display-4">ABout My App</h1>
       <p className="lead">
         Welcome to BVA, this is my capstone project for master's degree at CSUF{" "}

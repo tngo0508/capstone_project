@@ -218,125 +218,135 @@ class PredictValue extends Component {
     } = this.state;
 
     return (
-      <div className="card m-auto shadow p-3 mb-5 bg-white rounded">
-        <div className="card-header">
-          <span>Stock Features For Prediction </span>
-          <i className="fas fa-cogs"></i>
-        </div>
-        <div className="card-body">
-          <form onSubmit={this.onSubmit}>
-            <div className="form-row">
-              <div className="form-group col-md-3">
-                <TextInputGroup
-                  label="Open Price"
-                  name="open"
-                  value={open}
-                  placeholder="e.g., 3,218.51"
-                  type="text"
-                  onChange={this.onChange}
-                  error={errors.open}
-                  maxLength="10"
-                />
-              </div>
-              <div className="form-group col-md-3">
-                <TextInputGroup
-                  label="52 weeks low"
-                  name="fifty_two_lo"
-                  value={fifty_two_lo}
-                  placeholder="e.g., 1,626.03"
-                  type="text"
-                  onChange={this.onChange}
-                  error={errors.fifty_two_lo}
-                  maxLength="10"
-                />
-              </div>
-              <div className="form-group col-md-3">
-                <TextInputGroup
-                  label="52 weeks high"
-                  name="fifty_two_hi"
-                  value={fifty_two_hi}
-                  placeholder="e.g., 3,552.25"
-                  type="text"
-                  onChange={this.onChange}
-                  error={errors.fifty_two_hi}
-                  maxLength="10"
-                />
-              </div>
-              <div className="form-group col-md-3">
-                <TextInputGroup
-                  label="Volume"
-                  name="volume"
-                  value={volume}
-                  placeholder="e.g., 4,394,815"
-                  type="text"
-                  onChange={this.onChange}
-                  error={errors.volume}
-                  maxLength="10"
-                />
-              </div>
-              <div className="form-group col-md-3">
-                <TextInputGroup
-                  label="Average Volume"
-                  name="avg_volume"
-                  value={avg_volume}
-                  placeholder="e.g., 4,401,834"
-                  type="text"
-                  onChange={this.onChange}
-                  error={errors.avg_volume}
-                  maxLength="10"
-                />
-              </div>
-              <div className="form-group col-md-3">
-                <TextInputGroup
-                  label="Market Cap"
-                  name="market_cap"
-                  value={market_cap}
-                  placeholder="e.g., 1.575T, 1.45B, 1.3M"
-                  type="text"
-                  onChange={this.onChange}
-                  error={errors.market_cap}
-                  maxLength="10"
-                />
-              </div>
-              <div className="form-group col-md-3">
-                <TextInputGroup
-                  label="PE ratio (TTM)"
-                  name="pe_ratio"
-                  value={pe_ratio}
-                  placeholder="e.g., 91.76"
-                  type="text"
-                  onChange={this.onChange}
-                  error={errors.pe_ratio}
-                  maxLength="10"
-                />
-              </div>
-              <div className="form-group col-md-3">
-                <TextInputGroup
-                  label="EPS Ratio (TTM)"
-                  name="eps_ratio"
-                  value={eps_ratio}
-                  placeholder="e.g., 34.20"
-                  type="text"
-                  onChange={this.onChange}
-                  error={errors.eps_ratio}
-                  maxLength="10"
-                />
-              </div>
-
-              <div className="container">
-                <div className="text-right">
-                  <input
-                    type="submit"
-                    value="Predict"
-                    className="btn btn-lg btn-dark"
+      <div
+        className="container"
+        style={{
+          height: "100%",
+          width: "100%",
+          paddingTop: "10rem",
+          paddingBottom: "10rem",
+        }}
+      >
+        <div className="card m-auto shadow p-3 mb-5 bg-white rounded">
+          <div className="card-header">
+            <span>Stock Features For Prediction </span>
+            <i className="fas fa-cogs"></i>
+          </div>
+          <div className="card-body">
+            <form onSubmit={this.onSubmit}>
+              <div className="form-row">
+                <div className="form-group col-md-3">
+                  <TextInputGroup
+                    label="Open Price"
+                    name="open"
+                    value={open}
+                    placeholder="e.g., 3,218.51"
+                    type="text"
+                    onChange={this.onChange}
+                    error={errors.open}
+                    maxLength="10"
                   />
                 </div>
+                <div className="form-group col-md-3">
+                  <TextInputGroup
+                    label="52 weeks low"
+                    name="fifty_two_lo"
+                    value={fifty_two_lo}
+                    placeholder="e.g., 1,626.03"
+                    type="text"
+                    onChange={this.onChange}
+                    error={errors.fifty_two_lo}
+                    maxLength="10"
+                  />
+                </div>
+                <div className="form-group col-md-3">
+                  <TextInputGroup
+                    label="52 weeks high"
+                    name="fifty_two_hi"
+                    value={fifty_two_hi}
+                    placeholder="e.g., 3,552.25"
+                    type="text"
+                    onChange={this.onChange}
+                    error={errors.fifty_two_hi}
+                    maxLength="10"
+                  />
+                </div>
+                <div className="form-group col-md-3">
+                  <TextInputGroup
+                    label="Volume"
+                    name="volume"
+                    value={volume}
+                    placeholder="e.g., 4,394,815"
+                    type="text"
+                    onChange={this.onChange}
+                    error={errors.volume}
+                    maxLength="10"
+                  />
+                </div>
+                <div className="form-group col-md-3">
+                  <TextInputGroup
+                    label="Average Volume"
+                    name="avg_volume"
+                    value={avg_volume}
+                    placeholder="e.g., 4,401,834"
+                    type="text"
+                    onChange={this.onChange}
+                    error={errors.avg_volume}
+                    maxLength="10"
+                  />
+                </div>
+                <div className="form-group col-md-3">
+                  <TextInputGroup
+                    label="Market Cap"
+                    name="market_cap"
+                    value={market_cap}
+                    placeholder="e.g., 1.575T, 1.45B, 1.3M"
+                    type="text"
+                    onChange={this.onChange}
+                    error={errors.market_cap}
+                    maxLength="10"
+                  />
+                </div>
+                <div className="form-group col-md-3">
+                  <TextInputGroup
+                    label="PE ratio (TTM)"
+                    name="pe_ratio"
+                    value={pe_ratio}
+                    placeholder="e.g., 91.76"
+                    type="text"
+                    onChange={this.onChange}
+                    error={errors.pe_ratio}
+                    maxLength="10"
+                  />
+                </div>
+                <div className="form-group col-md-3">
+                  <TextInputGroup
+                    label="EPS Ratio (TTM)"
+                    name="eps_ratio"
+                    value={eps_ratio}
+                    placeholder="e.g., 34.20"
+                    type="text"
+                    onChange={this.onChange}
+                    error={errors.eps_ratio}
+                    maxLength="10"
+                  />
+                </div>
+
+                <div className="container">
+                  <div className="text-right">
+                    <input
+                      type="submit"
+                      value="Predict"
+                      className="btn btn-lg btn-dark"
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
+          {fair_value && <TextFairValue val={fair_value.fair_value} />}
+          {server_error && <div className=" alert-danger">{server_error}</div>}
         </div>
-        {fair_value && <TextFairValue val={fair_value.fair_value} />}
-        {server_error && <div className=" alert-danger">{server_error}</div>}
       </div>
     );
   }
