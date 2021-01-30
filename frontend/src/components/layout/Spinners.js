@@ -5,7 +5,7 @@ function Spinner() {
   return (
     <div>
       <div className="container w-50">
-        <div className="alert alert-info text-center">
+        <div className="alert alert-info text-center" color="info">
           Please wait a few seconds...
         </div>
       </div>

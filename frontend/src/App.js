@@ -8,7 +8,11 @@ import PredictValue from "./components/stocks/PredictValue";
 import NotFound from "./components/pages/NotFound";
 import Test from "./components/test/Test";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "bootstrap-css-only/css/bootstrap.min.css";
+import "mdbreact/dist/css/mdb.css";
 import "./App.css";
+import Footer from "./components/layout/Footer";
 
 class App extends Component {
   render() {
@@ -26,6 +30,7 @@ class App extends Component {
               <Route component={NotFound} />
             </Switch>
           </div>
+          <Footer />
         </div>
       </Router>
     );

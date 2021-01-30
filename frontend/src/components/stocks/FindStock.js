@@ -2,6 +2,23 @@ import axios from "axios";
 import React, { Component } from "react";
 import TextInputGroup from "../layout/TextInputGroup";
 import Stock from "./Stock";
+import {
+  MDBNavbar,
+  MDBNavbarBrand,
+  MDBNavbarNav,
+  MDBNavItem,
+  MDBNavLink,
+  MDBNavbarToggler,
+  MDBCollapse,
+  MDBMask,
+  MDBRow,
+  MDBCol,
+  MDBBtn,
+  MDBView,
+  MDBContainer,
+  MDBFormInline,
+  MDBAnimation,
+} from "mdbreact";
 
 class FindStock extends Component {
   constructor(props) {
@@ -54,6 +71,40 @@ class FindStock extends Component {
 
     return (
       <div className="container">
+        <MDBView>
+          <MDBMask className="gradient" />
+          <MDBContainer
+            style={{ height: "100%", width: "100%", paddingTop: "10rem" }}
+            className="d-flex justify-content-center align-items-center"
+          >
+            <MDBRow>
+              <MDBCol md="6" className="text-center text-md-left mt-xl-5 mb-5">
+                <MDBAnimation type="fadeInLeft" delay=".3s">
+                  <h1 className="h1-responsive font-weight-bold mt-sm-5">
+                    All you need is to invest in a good company
+                  </h1>
+                  <hr />
+                  <h6 className="mb-4">
+                    The application provides you financial information and
+                    related news about your stock. It monitors daily trading of
+                    the stock and allows you to generate financial report.
+                  </h6>
+                </MDBAnimation>
+              </MDBCol>
+
+              <MDBCol md="6" xl="5" className="mt-xl-5">
+                <MDBAnimation type="fadeInRight" delay=".3s">
+                  <img
+                    src="https://mdbootstrap.com/img/Mockups/Transparent/Small/admin-new.png"
+                    alt=""
+                    className="img-fluid"
+                  />
+                </MDBAnimation>
+              </MDBCol>
+            </MDBRow>
+          </MDBContainer>
+        </MDBView>
+
         <div className="card m-5 w-50">
           <div className="card-header">
             <span>Stock Information </span>
@@ -65,7 +116,7 @@ class FindStock extends Component {
                 <TextInputGroup
                   label="Symbol"
                   name="symbol"
-                  placeholder="e.g., AMZN, TLSA, MSFT"
+                  placeholder="e.g., AMZN, TSLA, MSFT, AAPL"
                   type="text"
                   value={symbol}
                   onChange={this.onChange}
@@ -81,6 +132,7 @@ class FindStock extends Component {
             </form>
           </div>
         </div>
+
         {hasData && (
           <Stock
             symbol={symbol_stock}
