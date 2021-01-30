@@ -13,11 +13,32 @@ import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import "./App.css";
 import Footer from "./components/layout/Footer";
+import Particles from "react-particles-js";
 
 class App extends Component {
   render() {
     return (
       <Router>
+        <Particles
+          style={{ position: "absolute" }}
+          height="70%"
+          width="100%"
+          params={{
+            particles: {
+              color: {
+                value: "#40E0D0",
+              },
+              line_linked: {
+                color: {
+                  value: "#00CED1",
+                },
+              },
+              size: {
+                value: 4,
+              },
+            },
+          }}
+        />
         <div className="App">
           <Header branding="Brand Value Analysis" />
 

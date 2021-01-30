@@ -4,6 +4,10 @@ import TextFairValue from "../layout/TextFairValue";
 import TextInputGroup from "../layout/TextInputGroup";
 
 class PredictValue extends Component {
+  constructor(props) {
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
   state = {
     open: "",
     fifty_two_lo: "",
@@ -15,6 +19,7 @@ class PredictValue extends Component {
     eps_ratio: "",
     fair_value: "",
     errors: {},
+    server_error: "",
   };
 
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
@@ -171,11 +176,17 @@ class PredictValue extends Component {
         pe_ratio,
         eps_ratio,
       },
+    }).catch((err) => {
+      console.log(err);
+      this.setState({ server_error: "backend server has issues" });
     });
 
-    const data = await JSON.parse(res.data);
-    this.setState({ fair_value: data });
-    // console.log(this.state.fair_value);
+    if (res) {
+      const data = await JSON.parse(res.data);
+      this.setState({ fair_value: data });
+      this.setState({ server_error: "" });
+      // console.log(this.state.fair_value);
+    }
 
     // clear state after submitting form
     this.setState({
@@ -203,7 +214,9 @@ class PredictValue extends Component {
       eps_ratio,
       fair_value,
       errors,
+      server_error,
     } = this.state;
+
     return (
       <div className="card m-auto shadow p-3 mb-5 bg-white rounded">
         <div className="card-header">
@@ -323,6 +336,7 @@ class PredictValue extends Component {
           </form>
         </div>
         {fair_value && <TextFairValue val={fair_value.fair_value} />}
+        {server_error && <div className=" alert-danger">{server_error}</div>}
       </div>
     );
   }

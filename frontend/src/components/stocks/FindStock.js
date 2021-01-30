@@ -3,22 +3,14 @@ import React, { Component } from "react";
 import TextInputGroup from "../layout/TextInputGroup";
 import Stock from "./Stock";
 import {
-  MDBNavbar,
-  MDBNavbarBrand,
-  MDBNavbarNav,
-  MDBNavItem,
-  MDBNavLink,
-  MDBNavbarToggler,
-  MDBCollapse,
   MDBMask,
   MDBRow,
   MDBCol,
-  MDBBtn,
   MDBView,
   MDBContainer,
-  MDBFormInline,
   MDBAnimation,
 } from "mdbreact";
+import images from "../../img/admin-new.png";
 
 class FindStock extends Component {
   constructor(props) {
@@ -123,11 +115,7 @@ class FindStock extends Component {
 
               <MDBCol md="6" xl="5" className="mt-xl-5">
                 <MDBAnimation type="fadeInRight" delay=".3s">
-                  <img
-                    src="https://mdbootstrap.com/img/Mockups/Transparent/Small/admin-new.png"
-                    alt=""
-                    className="img-fluid"
-                  />
+                  <img src={images} alt="tech" className="img-fluid" />
                 </MDBAnimation>
               </MDBCol>
             </MDBRow>
