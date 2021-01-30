@@ -74,7 +74,7 @@ class FindStock extends Component {
         <MDBView>
           <MDBMask className="gradient" />
           <MDBContainer
-            style={{ height: "100%", width: "100%", paddingTop: "10rem" }}
+            style={{ height: "100%", width: "100%", paddingTop: "5rem" }}
             className="d-flex justify-content-center align-items-center"
           >
             <MDBRow>
@@ -87,8 +87,37 @@ class FindStock extends Component {
                   <h6 className="mb-4">
                     The application provides you financial information and
                     related news about your stock. It monitors daily trading of
-                    the stock and allows you to generate financial report.
+                    the stock and generates financial report as needed.
                   </h6>
+                </MDBAnimation>
+                <MDBAnimation type="fadeInLeft" delay=".3s">
+                  <div className="card m-0">
+                    <div className="card-header">
+                      <span>Stock Information </span>
+                      <i className="fas fa-info-circle"></i>
+                    </div>
+                    <div className="card-body">
+                      <form onSubmit={this.onSubmit}>
+                        <div className="form-group">
+                          <TextInputGroup
+                            label="Symbol"
+                            name="symbol"
+                            placeholder="e.g., AMZN, TSLA, MSFT, AAPL"
+                            type="text"
+                            value={symbol}
+                            onChange={this.onChange}
+                            error={errors.symbol}
+                            maxLength="4"
+                          />
+                        </div>
+                        <input
+                          type="submit"
+                          value="Find info"
+                          className="btn btn-block btn-dark"
+                        />
+                      </form>
+                    </div>
+                  </div>
                 </MDBAnimation>
               </MDBCol>
 
@@ -104,34 +133,6 @@ class FindStock extends Component {
             </MDBRow>
           </MDBContainer>
         </MDBView>
-
-        <div className="card m-5 w-50">
-          <div className="card-header">
-            <span>Stock Information </span>
-            <i className="fas fa-info-circle"></i>
-          </div>
-          <div className="card-body">
-            <form onSubmit={this.onSubmit}>
-              <div className="form-group">
-                <TextInputGroup
-                  label="Symbol"
-                  name="symbol"
-                  placeholder="e.g., AMZN, TSLA, MSFT, AAPL"
-                  type="text"
-                  value={symbol}
-                  onChange={this.onChange}
-                  error={errors.symbol}
-                  maxLength="4"
-                />
-              </div>
-              <input
-                type="submit"
-                value="Find info"
-                className="btn btn-block btn-dark"
-              />
-            </form>
-          </div>
-        </div>
 
         {hasData && (
           <Stock
