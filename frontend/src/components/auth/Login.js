@@ -3,7 +3,7 @@ import { Form, Button, Container, Alert } from "react-bootstrap";
 import { useAuth } from "../../context/AuthContext";
 import classnames from "classnames";
 import { Link, useHistory } from "react-router-dom";
-import Particles from "react-particles-js";
+import DeerParticles from "../layout/DeerParticles";
 import { MDBRow, MDBCard, MDBCardBody, MDBModalFooter } from "mdbreact";
 
 export default function Login() {
@@ -15,77 +15,6 @@ export default function Login() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const history = useHistory();
-  const options = {
-    fps_limit: 28,
-    particles: {
-      color: {
-        value: "#2e3033",
-      },
-      collisions: {
-        enable: false,
-      },
-      number: {
-        value: 200,
-        density: {
-          enable: false,
-        },
-      },
-      line_linked: {
-        enable: true,
-        distance: 30,
-        opacity: 0.4,
-        color: {
-          value: "#2e3033",
-        },
-      },
-      move: {
-        speed: 1,
-      },
-      opacity: {
-        anim: {
-          enable: true,
-          opacity_min: 0.05,
-          speed: 1,
-          sync: false,
-        },
-        value: 1,
-      },
-    },
-    polygon: {
-      enable: true,
-      scale: 0.4,
-      type: "inline",
-      move: {
-        radius: 10,
-      },
-      url: "deer.svg",
-      inline: {
-        arrangement: "equidistant",
-      },
-      draw: {
-        enable: true,
-        stroke: {
-          color: "rgba(255, 255, 255, .2)",
-          width: 1,
-        },
-      },
-    },
-    retina_detect: false,
-    interactivity: {
-      events: {
-        onhover: {
-          enable: true,
-          mode: "bubble",
-        },
-      },
-      modes: {
-        bubble: {
-          size: 6,
-          distance: 40,
-        },
-      },
-    },
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -118,7 +47,7 @@ export default function Login() {
   return (
     <>
       <div className="container justify-content-center" align="center">
-        <Particles params={options} />
+        <DeerParticles />
         <h3>Welcom to BrandValueAnalysis</h3>
       </div>
       <Container

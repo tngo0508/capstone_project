@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import { Card, Alert } from "react-bootstrap";
 import { useAuth } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
+import DeerParticles from "../layout/DeerParticles";
 
 export default function Profile() {
   const [error, setError] = useState("");
   const { currentUser } = useAuth();
   return (
     <>
+      <div className="container justify-content-center" align="center">
+        <DeerParticles />
+      </div>
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Profile</h2>
