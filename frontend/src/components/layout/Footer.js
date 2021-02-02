@@ -13,7 +13,7 @@ class Footer extends Component {
   render() {
     return (
       <>
-        <MDBFooter color="default-color" className="font-small pt-4 mt-4">
+        <MDBFooter color="stylish-color" className="font-small pt-4 mt-4">
           <MDBContainer>
             <MDBContainer fluid className="text-center text-md-left">
               <MDBRow>
@@ -38,13 +38,13 @@ class Footer extends Component {
                   <h5 className="title">Quick Links</h5>
                   <ul>
                     <li className="list-unstyled">
-                      <Link to="/">Stock Info</Link>
+                      <Link to="/">Home</Link>
                     </li>
                     <li className="list-unstyled">
-                      <Link to="/predict">Predict</Link>
+                      <Link to="/signup">Sign Up</Link>
                     </li>
                     <li className="list-unstyled">
-                      <Link to="/about">About</Link>
+                      <Link to="/login">Log In</Link>
                     </li>
                   </ul>
                 </MDBCol>

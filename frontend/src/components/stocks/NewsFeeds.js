@@ -59,7 +59,7 @@ class NewsFeeds extends Component {
                     className="img-fluid"
                     alt="thumbnail"
                     src={res.thumbnail}
-                    style={{ height: "auto", width: 500 }}
+                    style={{ height: "auto", width: 400 }}
                   ></img>
                 ) : null}
               </div>
