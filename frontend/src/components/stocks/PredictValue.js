@@ -229,7 +229,7 @@ class PredictValue extends Component {
       >
         <div className="card m-auto shadow p-3 mb-5 bg-white rounded">
           <div className="card-header">
-            <span>Stock Features For Prediction </span>
+            <span>Metrics To Evaluate Stock </span>
             <i className="fas fa-cogs"></i>
           </div>
           <div className="card-body">
@@ -336,7 +336,7 @@ class PredictValue extends Component {
                   <div className="text-right">
                     <input
                       type="submit"
-                      value="Predict"
+                      value="Estimate"
                       className="btn btn-lg btn-dark"
                     />
                   </div>

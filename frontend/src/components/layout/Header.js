@@ -75,11 +75,18 @@ export default function Header(props) {
             </MDBNavLink>
           </MDBNavItem>
           {currentUser ? (
-            <MDBNavItem>
-              <MDBNavLink to="/findstock">
-                <MDBIcon icon="search-dollar" /> Find Stock
-              </MDBNavLink>
-            </MDBNavItem>
+            <>
+              <MDBNavItem>
+                <MDBNavLink to="/findstock">
+                  <MDBIcon icon="search-dollar" /> Stock
+                </MDBNavLink>
+              </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink to="/predict">
+                  <MDBIcon icon="dollar-sign" /> Evaluation
+                </MDBNavLink>
+              </MDBNavItem>
+            </>
           ) : (
             <>
               <MDBNavItem>

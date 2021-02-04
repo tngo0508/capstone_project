@@ -14,7 +14,7 @@ const TextFairValue = ({ val }) => {
       <div className="container text-center">
         <div className="alert alert-light">
           <h3>
-            Base on our prediction, the stock is
+            Base on our evaluation, the stock is
             <span>&nbsp;</span>
             {msg}
           </h3>
