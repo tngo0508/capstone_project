@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useAuth } from "../../context/AuthContext";
 import {
@@ -15,8 +15,9 @@ import {
   MDBDropdownMenu,
   MDBDropdownItem,
 } from "mdbreact";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Alert } from "react-bootstrap";
+import { auth } from "../auth/firebase";
 
 export default function Header(props) {
   const { branding } = props;
@@ -41,6 +42,25 @@ export default function Header(props) {
     }
   }
 
+  useEffect(() => {
+    // console.log("header");
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        // console.log(user);
+        console.log("user sign in");
+      } else {
+        console.log("no user is signed in");
+      }
+    });
+
+    // if (newUser != currentUser) {
+    //   console.log(currentUser);
+    //   console.log(newUser);
+    //   onLogoutClick();
+    // }
+    return unsubscribe;
+  });
+
   return (
     <MDBNavbar color="unique-color-dark" dark expand="md">
       <MDBNavbarBrand>
@@ -54,21 +74,31 @@ export default function Header(props) {
               <MDBIcon icon="home" /> Home
             </MDBNavLink>
           </MDBNavItem>
-          <MDBNavItem>
-            <MDBNavLink to="/Signup">
-              <MDBIcon icon="user-plus" /> Sign Up
-            </MDBNavLink>
-          </MDBNavItem>
-          <MDBNavItem>
-            <MDBNavLink to="/login">
-              <MDBIcon icon="sign-in-alt" /> Log In
-            </MDBNavLink>
-          </MDBNavItem>
-          <MDBNavItem>
-            <MDBNavLink to="/about">
-              <MDBIcon icon="question" /> About
-            </MDBNavLink>
-          </MDBNavItem>
+          {currentUser ? (
+            <MDBNavItem>
+              <MDBNavLink to="/findstock">
+                <MDBIcon icon="search-dollar" /> Find Stock
+              </MDBNavLink>
+            </MDBNavItem>
+          ) : (
+            <>
+              <MDBNavItem>
+                <MDBNavLink to="/Signup">
+                  <MDBIcon icon="user-plus" /> Sign Up
+                </MDBNavLink>
+              </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink to="/login">
+                  <MDBIcon icon="sign-in-alt" /> Log In
+                </MDBNavLink>
+              </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink to="/about">
+                  <MDBIcon icon="question" /> About
+                </MDBNavLink>
+              </MDBNavItem>
+            </>
+          )}
         </MDBNavbarNav>
         {currentUser ? (
           <MDBNavbarNav right>
@@ -79,20 +109,23 @@ export default function Header(props) {
                 </MDBDropdownToggle>
                 <MDBDropdownMenu className="dropdown-default">
                   <MDBDropdownItem>
-                    <MDBNavLink className="black-text" to="/profile">
-                      <strong>Profile</strong>
+                    <MDBNavLink className="black-text" to="/user">
+                      <strong>My Account</strong>
                     </MDBNavLink>
                   </MDBDropdownItem>
-                  <MDBDropdownItem>
+                  {/* <MDBDropdownItem>
                     <MDBNavLink className="black-text" to="/">
                       <strong>Find Stock</strong>
                     </MDBNavLink>
-                  </MDBDropdownItem>
-                  <hr />
+                  </MDBDropdownItem> */}
+                  <MDBDropdownItem divider />
                   <MDBDropdownItem>
-                    <MDBNavLink className="black-text" to="#">
-                      <strong onClick={onLogoutClick}>Log Out</strong>{" "}
-                      <MDBIcon icon="sign-out-alt" />
+                    <MDBNavLink
+                      onClick={onLogoutClick}
+                      className="black-text"
+                      to="#"
+                    >
+                      <strong>Log Out</strong> <MDBIcon icon="sign-out-alt" />
                     </MDBNavLink>
                     {error && <Alert variant="danger">{error}</Alert>}
                   </MDBDropdownItem>

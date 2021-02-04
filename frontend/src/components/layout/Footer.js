@@ -1,12 +1,5 @@
 import React, { Component } from "react";
-import {
-  MDBCol,
-  MDBContainer,
-  MDBRow,
-  MDBFooter,
-  MDBTypography,
-  MDBBox,
-} from "mdbreact";
+import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
 import { Link } from "react-router-dom";
 
 class Footer extends Component {
@@ -19,20 +12,13 @@ class Footer extends Component {
               <MDBRow>
                 <MDBCol md="6">
                   <h5 className="title">Invest In Your Future Now</h5>
-                  <MDBTypography blockquote>
-                    <MDBBox color="white" tag="p" mb={0}>
-                      An investment in knowledge pays the best interest.
-                    </MDBBox>
-                    <MDBBox
-                      color="white"
-                      tag="footer"
-                      mb={3}
-                      className="blockquote-footer"
-                    >
-                      Benjamin Franklin{" "}
-                      <cite title="Title">The Way to Wealth</cite>
-                    </MDBBox>
-                  </MDBTypography>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Maxime, ab quidem. Architecto suscipit doloribus quod
+                    aperiam, quisquam excepturi voluptate saepe. Laudantium, ex
+                    minus. Non omnis minus consequatur blanditiis iste
+                    recusandae.
+                  </p>
                 </MDBCol>
                 <MDBCol md="6" className="text-md-right">
                   <h5 className="title">Quick Links</h5>

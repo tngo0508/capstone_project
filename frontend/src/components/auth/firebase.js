@@ -11,4 +11,5 @@ const app = firebase.initializeApp({
 });
 
 export const auth = app.auth();
+export const session = firebase.auth.Auth.Persistence.SESSION;
 export default app;

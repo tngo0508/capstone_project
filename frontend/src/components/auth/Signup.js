@@ -4,7 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import classnames from "classnames";
 import Particles from "react-particles-js";
 import { Link, useHistory } from "react-router-dom";
-import { MDBRow, MDBCard, MDBAnimation } from "mdbreact";
+import { MDBRow, MDBCard, MDBAnimation, MDBIcon } from "mdbreact";
 
 export default function Signup() {
   const emailRef = useRef();
@@ -110,6 +110,7 @@ export default function Signup() {
       setConfirmedPasswordError("");
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
+      history.push("/");
     } catch {
       if (emailRef.current.value === "") {
         setEmailError("Please enter email");
@@ -147,7 +148,7 @@ export default function Signup() {
               <div className="header pt-3 blue-gradient">
                 <MDBRow className="d-flex justify-content-center">
                   <h3 className="white-text mb-3 pt-3 font-weight-bold">
-                    Sign Up
+                    <MDBIcon icon="users" /> Sign Up
                   </h3>
                 </MDBRow>
               </div>
@@ -190,7 +191,7 @@ export default function Signup() {
                       ref={passwordConfirmRef}
                       required
                       className={classnames("", {
-                        "is-invalid": confirmedPasswordError || error,
+                        "is-invalid": confirmedPasswordError,
                       })}
                     ></Form.Control>
                     {(error || confirmedPasswordError) && (

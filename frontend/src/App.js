@@ -9,7 +9,7 @@ import NotFound from "./components/pages/NotFound";
 import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
 import Test from "./components/test/Test";
-import Profile from "./components/users/Profile";
+import User from "./components/users/User";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
@@ -18,8 +18,16 @@ import "./App.css";
 import Footer from "./components/layout/Footer";
 import AuthProvider from "./context/AuthContext";
 import PrivateRoute from "./components/auth/PrivateRoute";
+import ForgotPassword from "./components/users/ForgotPassword";
+import UpdateUser from "./components/users/UpdateUser";
+import TokenExpired from "./components/layout/TokenExpired";
+import HomePage from "./components/layout/HomePage";
 
 class App extends Component {
+  componentDidUpdate() {
+    console.log("app");
+  }
+
   render() {
     return (
       <Router>
@@ -29,12 +37,24 @@ class App extends Component {
 
             <div className="container">
               <Switch>
-                <Route exact path="/" component={FindStock} />
+                <Route exact path="/" component={HomePage} />
                 <Route exact path="/about" component={About} />
                 <Route exact path="/signup" component={Signup} />
                 <Route exact path="/login" component={Login} />
+                <PrivateRoute exact path="/findstock" component={FindStock} />
                 <PrivateRoute exact path="/predict" component={PredictValue} />
-                <PrivateRoute exact path="/profile" component={Profile} />
+                <PrivateRoute exact path="/user" component={User} />
+                <PrivateRoute
+                  exact
+                  path="/update-user"
+                  component={UpdateUser}
+                />
+                <Route
+                  exact
+                  path="/forgot-password"
+                  component={ForgotPassword}
+                />
+                <Route exact path="/token-expired" component={TokenExpired} />
                 <Route exact path="/test" component={Test} />
                 <Route component={NotFound} />
               </Switch>

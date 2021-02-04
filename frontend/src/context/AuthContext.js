@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { auth } from "../components/auth/firebase";
+import { auth, session } from "../components/auth/firebase";
 
 const AuthContext = React.createContext();
 
@@ -23,20 +23,36 @@ export default function AuthProvider({ children }) {
     return auth.signOut();
   }
 
+  function resetPassword(email) {
+    return auth.sendPasswordResetEmail(email);
+  }
+
+  function updateEmail(email, password) {
+    return currentUser.updateEmail(email);
+  }
+
+  function updatePassword(password) {
+    return currentUser.updatePassword(password);
+  }
+
   useEffect(() => {
+    // console.log("Auth Context");
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
       setLoading(false);
     });
 
     return unsubscribe;
-  }, []); // only run once
+  });
 
   const value = {
     currentUser,
     signup,
     login,
     logout,
+    resetPassword,
+    updateEmail,
+    updatePassword,
   };
 
   return (

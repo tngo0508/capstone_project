@@ -4,11 +4,6 @@ import loading from "./loading.gif";
 function Spinner() {
   return (
     <div>
-      <div className="container w-50">
-        <div className="alert alert-info text-center" color="info">
-          Please wait a few seconds...
-        </div>
-      </div>
       <img
         src={loading}
         alt="Gathering Info..."
