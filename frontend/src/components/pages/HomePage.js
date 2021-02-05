@@ -104,10 +104,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      <section id="info" class="py-3">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6 align-self-center">
+      <section id="info" className="py-3">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6 align-self-center">
               <h1>Sign Up Today</h1>
               <p>
                 Everything is free. What are you waiting for? Join us to learn
@@ -115,12 +115,12 @@ export default function HomePage() {
                 confidence to build your dreams, on your terms. Don't leave
                 without becoming an BVA member!
               </p>
-              <Link to="/signup" class="btn btn-dark btn-lg">
+              <Link to="/signup" className="btn btn-dark btn-lg">
                 Get Started
               </Link>
             </div>
-            <div class="col-md-6">
-              <img src={img} alt="" class="img-fluid" />
+            <div className="col-md-6">
+              <img src={img} alt="snapshot" className="img-fluid" />
             </div>
           </div>
         </div>

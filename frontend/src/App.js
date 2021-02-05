@@ -21,9 +21,9 @@ import PrivateRoute from "./components/auth/PrivateRoute";
 import ForgotPassword from "./components/users/ForgotPassword";
 import UpdateUser from "./components/users/UpdateUser";
 import TokenExpired from "./components/layout/TokenExpired";
-import HomePage from "./components/layout/HomePage";
+import HomePage from "./components/pages/HomePage";
 import PrivacyPolicy from "./components/layout/PrivacyPolicy";
-import TermsOfUse from "./components/layout/TermsOfUse";
+import TermsOfUse from "./components/pages/TermsOfUse";
 
 class App extends Component {
   componentDidUpdate() {
