@@ -1,28 +1,46 @@
-import React, { useState } from "react";
-import { Card, Alert } from "react-bootstrap";
+import React from "react";
+import { Card, Container, Table } from "react-bootstrap";
 import { useAuth } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
 import DeerParticles from "../layout/DeerParticles";
 
 export default function User() {
-  const [error, setError] = useState("");
   const { currentUser } = useAuth();
+  const edit_email_btn = [
+    {
+      email: (
+        <Link to="/update-user" className="btn btn-primary">
+          Edit
+        </Link>
+      ),
+    },
+  ];
 
   return (
     <>
       <div className="container justify-content-center" align="center">
         <DeerParticles />
+        <Container className="d-flex align-items-center justify-content-center">
+          <Card>
+            <Card.Title className="m-3">My Account</Card.Title>
+            <Card.Body>
+              <Table hover>
+                <tbody>
+                  <tr>
+                    <td>Email</td>
+                    <td colSpan="3">{currentUser.email}</td>
+                    <td>
+                      <Link to="/update-user" className="btn btn-sm btn-dark">
+                        Edit
+                      </Link>
+                    </td>
+                  </tr>
+                </tbody>
+              </Table>
+            </Card.Body>
+          </Card>
+        </Container>
       </div>
-      <Card>
-        <Card.Body>
-          <h2 className="text-center mb-4">My Account</h2>
-          {error && <Alert variant="danger">{error}</Alert>}
-          <strong>Email: </strong> {currentUser.email}
-          <Link to="/update-user" className="btn btn-primary w-100">
-            Edit
-          </Link>
-        </Card.Body>
-      </Card>
     </>
   );
 }

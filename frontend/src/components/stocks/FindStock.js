@@ -24,6 +24,7 @@ class FindStock extends Component {
     symbol_stock: "",
     hasData: false,
     displayGraph: false,
+    loading: false,
   };
 
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
@@ -31,6 +32,7 @@ class FindStock extends Component {
   onSubmit = async (e) => {
     e.preventDefault();
     const { symbol } = this.state;
+    this.setState({ loading: true });
 
     if (symbol === "") {
       this.setState({ errors: { symbol: "Symbol is required." } });
@@ -51,12 +53,13 @@ class FindStock extends Component {
       // symbol: "",
       errors: {},
       // data: {},
+      loading: false,
     });
   };
 
   render() {
     // uncomment below for controlled component
-    const { symbol, errors, data, symbol_stock, hasData } = this.state;
+    const { symbol, errors, data, symbol_stock, hasData, loading } = this.state;
 
     // uncomment below for uncontrolled component
     // const { symbol } = this.props;
@@ -108,6 +111,7 @@ class FindStock extends Component {
                           />
                         </div>
                         <input
+                          disabled={loading}
                           type="submit"
                           value="Find info"
                           className="btn btn-block btn-dark"

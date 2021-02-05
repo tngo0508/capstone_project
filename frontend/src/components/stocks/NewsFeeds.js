@@ -35,7 +35,7 @@ class NewsFeeds extends Component {
         console.error(error);
       });
 
-    console.log(this.state.news);
+    // console.log(this.state.news);
   };
 
   componentDidMount() {

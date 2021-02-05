@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useAuth } from "../../context/AuthContext";
 import {
@@ -17,7 +17,7 @@ import {
 } from "mdbreact";
 import { useHistory } from "react-router-dom";
 import { Alert } from "react-bootstrap";
-import { auth } from "../auth/firebase";
+// import { auth } from "../auth/firebase";
 
 export default function Header(props) {
   const { branding } = props;
@@ -42,24 +42,24 @@ export default function Header(props) {
     }
   }
 
-  useEffect(() => {
-    // console.log("header");
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        // console.log(user);
-        console.log("user sign in");
-      } else {
-        console.log("no user is signed in");
-      }
-    });
+  // useEffect(() => {
+  //   // console.log("header");
+  //   const unsubscribe = auth.onAuthStateChanged((user) => {
+  //     if (user) {
+  //       // console.log(user);
+  //       console.log("user sign in");
+  //     } else {
+  //       console.log("no user is signed in");
+  //     }
+  //   });
 
-    // if (newUser != currentUser) {
-    //   console.log(currentUser);
-    //   console.log(newUser);
-    //   onLogoutClick();
-    // }
-    return unsubscribe;
-  });
+  //   // if (newUser != currentUser) {
+  //   //   console.log(currentUser);
+  //   //   console.log(newUser);
+  //   //   onLogoutClick();
+  //   // }
+  //   return unsubscribe;
+  // });
 
   return (
     <MDBNavbar color="unique-color-dark" dark expand="md">

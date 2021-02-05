@@ -22,6 +22,8 @@ import ForgotPassword from "./components/users/ForgotPassword";
 import UpdateUser from "./components/users/UpdateUser";
 import TokenExpired from "./components/layout/TokenExpired";
 import HomePage from "./components/layout/HomePage";
+import PrivacyPolicy from "./components/layout/PrivacyPolicy";
+import TermsOfUse from "./components/layout/TermsOfUse";
 
 class App extends Component {
   componentDidUpdate() {
@@ -35,30 +37,42 @@ class App extends Component {
           <AuthProvider>
             <Header branding="Brand Value Analysis" />
 
-            <div className="container">
-              <Switch>
-                <Route exact path="/" component={HomePage} />
-                <Route exact path="/about" component={About} />
-                <Route exact path="/signup" component={Signup} />
-                <Route exact path="/login" component={Login} />
-                <PrivateRoute exact path="/findstock" component={FindStock} />
-                <PrivateRoute exact path="/predict" component={PredictValue} />
-                <PrivateRoute exact path="/user" component={User} />
-                <PrivateRoute
-                  exact
-                  path="/update-user"
-                  component={UpdateUser}
-                />
-                <Route
-                  exact
-                  path="/forgot-password"
-                  component={ForgotPassword}
-                />
-                <Route exact path="/token-expired" component={TokenExpired} />
-                <Route exact path="/test" component={Test} />
-                <Route component={NotFound} />
-              </Switch>
-            </div>
+            <Switch>
+              <Route exact path="/" component={HomePage} />
+              <>
+                <div className="container">
+                  <Route exact path="/about" component={About} />
+                  <Route exact path="/signup" component={Signup} />
+                  <Route exact path="/login" component={Login} />
+                  <PrivateRoute exact path="/findstock" component={FindStock} />
+                  <PrivateRoute
+                    exact
+                    path="/predict"
+                    component={PredictValue}
+                  />
+                  <PrivateRoute exact path="/user" component={User} />
+                  <PrivateRoute
+                    exact
+                    path="/update-user"
+                    component={UpdateUser}
+                  />
+                  <Route
+                    exact
+                    path="/forgot-password"
+                    component={ForgotPassword}
+                  />
+                  <Route exact path="/privacy" component={PrivacyPolicy} />
+                  <Route exact path="/term" component={TermsOfUse} />
+                  <PrivateRoute
+                    exact
+                    path="/token-expired"
+                    component={TokenExpired}
+                  />
+                  <Route exact path="/test" component={Test} />
+                </div>
+              </>
+              <Route component={NotFound} />
+            </Switch>
           </AuthProvider>
           <Footer />
         </div>
