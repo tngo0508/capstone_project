@@ -165,7 +165,7 @@ class PredictValue extends Component {
 
     const res = await axios({
       method: "post",
-      url: "http://localhost:8000/api/predict/",
+      url: "/api/predict/",
       data: {
         open,
         fifty_two_lo,

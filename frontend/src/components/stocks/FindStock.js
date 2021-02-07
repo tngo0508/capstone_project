@@ -46,7 +46,7 @@ class FindStock extends Component {
 
     // console.log(symbol);
     // Send request to django endpoint
-    const res = await axios("http://localhost:8000/api/getstock/" + symbol);
+    const res = await axios(`api/getstock/${symbol}/`);
     const data = await JSON.parse(res.data);
     // console.log(data);
     this.setState({ data: data });
