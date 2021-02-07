@@ -35,7 +35,6 @@ options.add_argument("--disable-infobars")
 options.add_argument("--disable-dev-shm-usage")
 options.add_argument('--log-level=3')
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
-driver = webdriver.Chrome(chrome_options=options)
 
 exec_path = ''
 try:
@@ -44,7 +43,7 @@ try:
         chrome_exec_file = 'chromedriver.exe'
         chrome_dir = "win32"
         exec_path = os.path.join(curr_dir, chrome_dir, chrome_exec_file)
-    elif platform == 'darwin':
+    elif platform == 'linux':
         chrome_exec_file = 'chromedriver'
         chrome_dir = "linux"
         exec_path = os.path.join(curr_dir, chrome_dir, chrome_exec_file)
@@ -55,6 +54,8 @@ try:
     logging.info(exec_path)
 except Exception as e:
     logging.raiseExceptions(e)
+
+driver = webdriver.Chrome(executable_path=exec_path, chrome_options=options)
 
 
 def get_user_input():
