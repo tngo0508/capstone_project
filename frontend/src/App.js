@@ -24,6 +24,7 @@ import TokenExpired from "./components/layout/TokenExpired";
 import HomePage from "./components/pages/HomePage";
 import PrivacyPolicy from "./components/layout/PrivacyPolicy";
 import TermsOfUse from "./components/pages/TermsOfUse";
+import Reports from "./components/insights/Reports";
 
 class App extends Component {
   componentDidUpdate() {
@@ -45,6 +46,7 @@ class App extends Component {
                   <Route exact path="/signup" component={Signup} />
                   <Route exact path="/login" component={Login} />
                   <PrivateRoute exact path="/findstock" component={FindStock} />
+                  <PrivateRoute exact path="/reports" component={Reports} />
                   <PrivateRoute
                     exact
                     path="/predict"

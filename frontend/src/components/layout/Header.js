@@ -86,6 +86,11 @@ export default function Header(props) {
                   <MDBIcon icon="dollar-sign" /> Evaluation
                 </MDBNavLink>
               </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink to="/reports">
+                  <MDBIcon icon="lightbulb" /> Insight
+                </MDBNavLink>
+              </MDBNavItem>
             </>
           ) : (
             <>

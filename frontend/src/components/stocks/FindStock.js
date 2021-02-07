@@ -35,7 +35,10 @@ class FindStock extends Component {
     this.setState({ loading: true });
 
     if (symbol === "") {
-      this.setState({ errors: { symbol: "Symbol is required." } });
+      this.setState({
+        errors: { symbol: "Symbol is required." },
+        loading: false,
+      });
       // console.log(this.state.errors);
       return;
     }

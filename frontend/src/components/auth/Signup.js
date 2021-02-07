@@ -5,6 +5,7 @@ import classnames from "classnames";
 import Particles from "react-particles-js";
 import { Link, useHistory } from "react-router-dom";
 import { MDBRow, MDBCard, MDBAnimation, MDBIcon } from "mdbreact";
+import Deer from "../../img/deer.svg";
 
 export default function Signup() {
   const emailRef = useRef();
@@ -60,7 +61,7 @@ export default function Signup() {
       move: {
         radius: 10,
       },
-      url: "deer.svg",
+      url: Deer,
       inline: {
         arrangement: "equidistant",
       },

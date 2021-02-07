@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
 import { Link } from "react-router-dom";
-import DeerParticles from "./DeerParticles";
 
 class Footer extends Component {
   render() {

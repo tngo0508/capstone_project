@@ -6,15 +6,6 @@ import DeerParticles from "../layout/DeerParticles";
 
 export default function User() {
   const { currentUser } = useAuth();
-  const edit_email_btn = [
-    {
-      email: (
-        <Link to="/update-user" className="btn btn-primary">
-          Edit
-        </Link>
-      ),
-    },
-  ];
 
   return (
     <>

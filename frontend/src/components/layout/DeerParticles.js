@@ -1,5 +1,6 @@
 import React from "react";
 import Particles from "react-particles-js";
+import Deer from "../../img/deer.svg";
 
 export default function DeerParticles() {
   const options = {
@@ -45,7 +46,7 @@ export default function DeerParticles() {
       move: {
         radius: 10,
       },
-      url: "deer.svg",
+      url: Deer,
       inline: {
         arrangement: "equidistant",
       },
