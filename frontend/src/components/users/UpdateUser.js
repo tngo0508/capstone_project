@@ -50,10 +50,10 @@ export default function UpdateUser() {
       .then(() => {
         setTokenExpired(false);
         history.push("/user");
-        window.location.reload(false);
+        window.location.reload();
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         // setTokenExpired(true);
         setError("Failed to update your account");
       })

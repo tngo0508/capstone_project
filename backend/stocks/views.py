@@ -37,8 +37,9 @@ def get_stock_info(request, symbol):
         #     # return JsonResponse(res, safe=False)
 
         data = scrape_stock_info(symbol)
-        res = json.dumps(data)
-        return Response(res)
+        # res = json.dumps(data)
+        # return Response(res)
+        return Response(data)
         # return Response({'message': 'hello, world'})
 
     except ValueError as e:
@@ -74,7 +75,8 @@ def predict_stock(request):
         scalers = joblib.load(scaler_file_path)
         X = scalers.transform(stock_info)
         y_pred = model.predict(X)
-        res = json.dumps({'fair_value': y_pred[0]})
+        # res = json.dumps({'fair_value': y_pred[0]})
+        res = {"fair_value": y_pred[0]}
         return Response(res)
 
     except ValueError as e:

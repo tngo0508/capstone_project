@@ -53,6 +53,7 @@ class Reports extends Component {
         //   })
         // );
         // console.log(response.data.finance.result.reports.publishedOn);
+        // console.log(response.data);
         this.setState({
           data: {
             columns: [
@@ -91,7 +92,7 @@ class Reports extends Component {
         console.error(error);
       });
 
-    console.log(this.state.data);
+    // console.log(this.state.data);
 
     this.setState({
       symbol: "",
