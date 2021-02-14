@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
 import { Link } from "react-router-dom";
+import favicon from "../../img/favicon-32x32-footer.png";
 
 class Footer extends Component {
   render() {
@@ -57,7 +58,11 @@ class Footer extends Component {
           <div className="footer-copyright text-center py-3">
             <MDBContainer fluid>
               &copy; {new Date().getFullYear()}
-              <Link to="/"> BrandValueAnalysis </Link>
+              <Link to="/">
+                {" "}
+                <img src={favicon} alt="icon" />
+                randValueAnalysis{" "}
+              </Link>
             </MDBContainer>
           </div>
         </MDBFooter>

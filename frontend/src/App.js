@@ -38,7 +38,7 @@ class App extends Component {
       <Router>
         <div className="App">
           <AuthProvider>
-            <Header branding="Brand Value Analysis" />
+            <Header branding="rand Value Analysis" />
 
             <Switch>
               <Route exact path="/" component={HomePage} />
