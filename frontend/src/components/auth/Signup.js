@@ -111,7 +111,7 @@ export default function Signup() {
       setConfirmedPasswordError("");
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
-      history.push("/");
+      history.push("/login");
     } catch {
       if (emailRef.current.value === "") {
         setEmailError("Please enter email");

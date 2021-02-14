@@ -7,12 +7,14 @@ import DeerParticles from "../layout/DeerParticles";
 import { MDBRow, MDBCard, MDBCardBody, MDBIcon } from "mdbreact";
 import TokenExpired from "../layout/TokenExpired";
 
-export default function UpdateUser() {
-  const emailRef = useRef();
-  const { currentUser, updateEmail } = useAuth();
+export default function UpdatePassword() {
+  const passwordRef = useRef();
+  const passwordConfirmRef = useRef();
+  const { updatePassword } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState("");
-  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmedPasswordError, setConfirmedPasswordError] = useState("");
   const [isTokenExpired, setTokenExpired] = useState(false);
   const history = useHistory();
   // const promises = [];
@@ -22,13 +24,19 @@ export default function UpdateUser() {
 
     // validation check
     setError("");
-    setEmailError("");
+    setPasswordError("");
+    setConfirmedPasswordError("");
+
+    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+      return setConfirmedPasswordError("Password do not match");
+      // return setError("Password do not match");
+    }
 
     const promises = [];
     setLoading(true);
     setError("");
-    if (emailRef.current.value !== currentUser.email) {
-      promises.push(updateEmail(emailRef.current.value));
+    if (passwordRef.current.value) {
+      promises.push(updatePassword(passwordRef.current.value));
     }
 
     //check if all promises run successfully or not
@@ -41,7 +49,7 @@ export default function UpdateUser() {
       .catch((err) => {
         // console.log(err);
         setTokenExpired(true);
-        setError("Failed to update your account");
+        setError("Failed to update your password");
       })
       .finally(() => {
         // console.log("doesn't change anything");
@@ -55,7 +63,7 @@ export default function UpdateUser() {
     <>
       <div className="container justify-content-center" align="center">
         <DeerParticles />
-        <h3>Update your email below</h3>
+        <h3>Update your account information here</h3>
       </div>
       <Container
         className="d-flex align-items-center justify-content-center"
@@ -63,10 +71,10 @@ export default function UpdateUser() {
       >
         <div className="w-100" style={{ maxWidth: "400px" }}>
           <MDBCard>
-            <div className="header pt-3 peach-gradient">
+            <div className="header pt-3 purple-gradient">
               <MDBRow className="d-flex justify-content-center">
                 <h3 className="white-text mb-3 pt-3 font-weight-bold">
-                  <MDBIcon icon="edit" /> Update Email
+                  <MDBIcon icon="edit" /> Update Password
                 </h3>
               </MDBRow>
             </div>
@@ -75,25 +83,42 @@ export default function UpdateUser() {
 
               <Form noValidate onSubmit={handleSubmit}>
                 <div className="grey-text my-3">
-                  <Form.Group id="email">
-                    <Form.Label>Email</Form.Label>
+                  <Form.Group id="password">
+                    <Form.Label>Password</Form.Label>
                     <Form.Control
-                      type="email"
-                      ref={emailRef}
-                      required
-                      autoFocus={true}
-                      defaultValue={currentUser.email}
+                      type="password"
+                      ref={passwordRef}
+                      placeholder="Please enter the new password"
                       className={classnames("", {
-                        "is-invalid": emailError,
+                        "is-invalid": passwordError,
                       })}
                     ></Form.Control>
-                    {(error || emailError) && (
-                      <div className="invalid-feedback">{emailError}</div>
+                    {(error || passwordError) && (
+                      <div className="invalid-feedback">{passwordError}</div>
                     )}
                   </Form.Group>
-
+                  <Form.Group id="password-confirm">
+                    <Form.Label>Password Confirmation</Form.Label>
+                    <Form.Control
+                      type="password"
+                      ref={passwordConfirmRef}
+                      placeholder="Please enter the confirmed password"
+                      className={classnames("", {
+                        "is-invalid": confirmedPasswordError,
+                      })}
+                    ></Form.Control>
+                    {(error || confirmedPasswordError) && (
+                      <div className="invalid-feedback">
+                        {confirmedPasswordError}
+                      </div>
+                    )}
+                  </Form.Group>
                   <div className="d-flex justify-content-end">
-                    <Button disabled={loading} variant="orange" type="Submit">
+                    <Button
+                      disabled={loading}
+                      variant="secondary"
+                      type="Submit"
+                    >
                       Update
                     </Button>
                     <Link className="btn btn-light" to="/user">

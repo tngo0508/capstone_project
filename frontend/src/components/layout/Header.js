@@ -91,6 +91,11 @@ export default function Header(props) {
                   <MDBIcon icon="lightbulb" /> Insight
                 </MDBNavLink>
               </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink to="/sectors">
+                  <MDBIcon icon="chart-pie" /> Performance
+                </MDBNavLink>
+              </MDBNavItem>
             </>
           ) : (
             <>

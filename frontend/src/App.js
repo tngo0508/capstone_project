@@ -20,11 +20,13 @@ import AuthProvider from "./context/AuthContext";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import ForgotPassword from "./components/users/ForgotPassword";
 import UpdateUser from "./components/users/UpdateUser";
+import UpdatePassword from "./components/users/UpdatePassword";
 import TokenExpired from "./components/layout/TokenExpired";
 import HomePage from "./components/pages/HomePage";
 import PrivacyPolicy from "./components/layout/PrivacyPolicy";
 import TermsOfUse from "./components/pages/TermsOfUse";
 import Reports from "./components/insights/Reports";
+import Sector from "./components/sectors/Sector";
 
 class App extends Component {
   componentDidUpdate() {
@@ -47,6 +49,7 @@ class App extends Component {
                   <Route exact path="/login" component={Login} />
                   <PrivateRoute exact path="/findstock" component={FindStock} />
                   <PrivateRoute exact path="/reports" component={Reports} />
+                  <PrivateRoute exact path="/sectors" component={Sector} />
                   <PrivateRoute
                     exact
                     path="/predict"
@@ -57,6 +60,11 @@ class App extends Component {
                     exact
                     path="/update-user"
                     component={UpdateUser}
+                  />
+                  <PrivateRoute
+                    exact
+                    path="/update-password"
+                    component={UpdatePassword}
                   />
                   <Route
                     exact

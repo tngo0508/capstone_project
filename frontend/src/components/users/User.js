@@ -26,6 +26,18 @@ export default function User() {
                       </Link>
                     </td>
                   </tr>
+                  <tr>
+                    <td>Password</td>
+                    <td colSpan="3">**************</td>
+                    <td>
+                      <Link
+                        to="/update-password"
+                        className="btn btn-sm btn-dark"
+                      >
+                        Edit
+                      </Link>
+                    </td>
+                  </tr>
                 </tbody>
               </Table>
             </Card.Body>
