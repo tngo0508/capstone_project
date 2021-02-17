@@ -7,6 +7,7 @@ import TextInputGroup from "../layout/TextInputGroup";
 import _ from "lodash";
 import DeerParticles from "../layout/DeerParticles";
 import { MDBJumbotron, MDBContainer } from "mdbreact";
+import { MDBTypography, MDBBox } from "mdbreact";
 
 export default function Porfolio() {
   const [stocks, setstocks] = useState({});
@@ -87,7 +88,7 @@ export default function Porfolio() {
         .doc(id)
         .delete()
         .then(() => {
-          console.log("Document successfully deleted!");
+          // console.log("Document successfully deleted!");
         })
         .catch((err) => console.error("Error removing document: ", err));
     }
@@ -97,11 +98,46 @@ export default function Porfolio() {
     <div className="m-5">
       <MDBJumbotron fluid>
         <MDBContainer>
-          <h2 className="display-4">Welcome, {currentUser.email}</h2>
+          <h1 className="display-5">Welcome, {currentUser.email}</h1>
           <p className="lead">
-            Please use the <strong>Investment Management</strong> below to add,
-            edit or update your investment.
+            Please use the <strong>Investment Management</strong> box and follow
+            the instructions below to manage your investment.
           </p>
+          <MDBTypography blockquote bqColor="success">
+            <>
+              <MDBBox tag="p" mb={0} className="bq-title">
+                <>To add a new investment</>
+              </MDBBox>
+              <p>
+                Start typing the company name and the fund on the two fields.
+                Then, click on the <strong>ADD/UPDATE</strong> button.
+              </p>
+            </>
+          </MDBTypography>
+          <MDBTypography blockquote bqColor="warning">
+            <>
+              <MDBBox tag="p" mb={0} className="bq-title">
+                <>To edit an investment</>
+              </MDBBox>
+              <p>
+                Start typing the name of the company that you want to update and
+                the amount of new fund. Then, click on the{" "}
+                <strong>ADD/UPDATE</strong> button.
+              </p>
+            </>
+          </MDBTypography>
+          <MDBTypography blockquote bqColor="danger">
+            <>
+              <MDBBox tag="p" mb={0} className="bq-title">
+                <>To delete/remove an investment from the list</>
+              </MDBBox>
+              <p>
+                Look through the list of investment on the right side. Choose
+                the brand/company that you want to remove from your list. Then,
+                click <strong>DELETE</strong> button
+              </p>
+            </>
+          </MDBTypography>
         </MDBContainer>
       </MDBJumbotron>
       <div className="row">
@@ -147,11 +183,13 @@ export default function Porfolio() {
             </div>
             <div className="card-body">
               {_.isEmpty(stocks) ? (
-                <p>
-                  Currently, you don't have any investments. Please use the{" "}
-                  <strong>Investment Management</strong> on the left to add new
-                  investment to your list.
-                </p>
+                <MDBTypography note noteColor="info" noteTitle="Note: ">
+                  <>
+                    Currently, you don't have any investments. Please use the{" "}
+                    <strong>Investment Management</strong> on the left to add
+                    new investment to your list.
+                  </>
+                </MDBTypography>
               ) : (
                 Object.keys(stocks).map((key, idx) => (
                   <React.Fragment key={idx}>
