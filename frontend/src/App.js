@@ -27,12 +27,9 @@ import PrivacyPolicy from "./components/layout/PrivacyPolicy";
 import TermsOfUse from "./components/pages/TermsOfUse";
 import Reports from "./components/insights/Reports";
 import Sector from "./components/sectors/Sector";
+import Porfolio from "./components/porfolio/Porfolio";
 
 class App extends Component {
-  componentDidUpdate() {
-    console.log("app");
-  }
-
   render() {
     return (
       <Router>
@@ -50,6 +47,7 @@ class App extends Component {
                   <PrivateRoute exact path="/findstock" component={FindStock} />
                   <PrivateRoute exact path="/reports" component={Reports} />
                   <PrivateRoute exact path="/sectors" component={Sector} />
+                  <PrivateRoute exact path="/porfolio" component={Porfolio} />
                   <PrivateRoute
                     exact
                     path="/predict"

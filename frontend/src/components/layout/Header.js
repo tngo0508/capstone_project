@@ -98,6 +98,11 @@ export default function Header(props) {
                   <MDBIcon icon="chart-pie" /> Performance
                 </MDBNavLink>
               </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink to="/porfolio">
+                  <MDBIcon icon="folder-open" /> Porfolio
+                </MDBNavLink>
+              </MDBNavItem>
             </>
           ) : (
             <>
