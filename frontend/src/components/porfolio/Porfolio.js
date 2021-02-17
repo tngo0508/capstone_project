@@ -8,6 +8,8 @@ import _ from "lodash";
 import DeerParticles from "../layout/DeerParticles";
 import { MDBJumbotron, MDBContainer } from "mdbreact";
 import { MDBTypography, MDBBox } from "mdbreact";
+import Chart from "react-apexcharts";
+import RandomColor from "randomcolor";
 
 export default function Porfolio() {
   const [stocks, setstocks] = useState({});
@@ -16,9 +18,63 @@ export default function Porfolio() {
   const [symbolName, setSymbolName] = useState("");
   const [fund, setFund] = useState(0);
   const [error, setError] = useState({});
+  const [series, setSeries] = useState([]);
+  const [labels, setLabels] = useState([]);
+  const [colors, setColors] = useState([]);
+  const [donut, setDonut] = useState(false);
   const id = currentUser.uid;
 
   const ref = db.collection("porfolio").doc(id);
+
+  // console.log(series);
+
+  const state = {
+    series: series,
+    options: {
+      chart: {
+        width: 380,
+        type: "donut",
+      },
+      labels: labels,
+      plotOptions: {
+        pie: {
+          donut: {
+            labels: {
+              show: true,
+              total: {
+                show: true,
+                label: "Total Investment",
+                formatter: () => "$" + getTotal(),
+              },
+            },
+          },
+        },
+      },
+
+      dataLabels: {
+        enabled: true,
+      },
+      colors: colors,
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200,
+            },
+            legend: {
+              show: true,
+            },
+          },
+        },
+      ],
+      legend: {
+        position: "right",
+        offsetY: 0,
+        height: 230,
+      },
+    },
+  };
 
   useEffect(() => {
     const ref = db.collection("porfolio").doc(id);
@@ -28,7 +84,17 @@ export default function Porfolio() {
       ref.onSnapshot((doc) => {
         // console.log(doc.exists);
         if (doc.exists) {
-          setstocks(doc.data());
+          const data = doc.data();
+          setstocks(data);
+          const funds = Object.values(data).map((item) => parseFloat(item));
+          // console.log(funds);
+          setSeries(funds);
+          const labels = Object.keys(data);
+          setLabels(labels);
+          const colors = funds.map((key) => RandomColor());
+          setColors(colors);
+
+          setDonut(true);
         }
         setLoading(false);
       });
@@ -64,6 +130,12 @@ export default function Porfolio() {
       return;
     }
 
+    if (fund === 0) {
+      setError({ fund: "Fund has to be larger than 0." });
+      setLoading(false);
+      return;
+    }
+
     if (stocks) {
       stocks[symbolName] = parseFloat(fund, 10).toFixed(2);
       ref.set(stocks).catch((err) => console.error(err));
@@ -89,6 +161,7 @@ export default function Porfolio() {
         .delete()
         .then(() => {
           // console.log("Document successfully deleted!");
+          setDonut(false);
         })
         .catch((err) => console.error("Error removing document: ", err));
     }
@@ -223,6 +296,29 @@ export default function Porfolio() {
           </div>
         </div>
       </div>
+      {donut && (
+        <div className="row mt-5">
+          <div className="col-sm-6">
+            <div className="chart-wrap">
+              <div className="card">
+                <div className="card-header">
+                  Your Porfolio <MDBIcon icon="chart-pie" />
+                </div>
+                <div className="card-body">
+                  <div id="chart">
+                    <Chart
+                      options={state.options}
+                      series={state.series}
+                      type="donut"
+                      width={450}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       <DeerParticles />
     </div>
   );

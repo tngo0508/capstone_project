@@ -95,7 +95,7 @@ export default function Header(props) {
               </MDBNavItem>
               <MDBNavItem>
                 <MDBNavLink to="/sectors">
-                  <MDBIcon icon="chart-pie" /> Performance
+                  <MDBIcon icon="chart-line" /> Performance
                 </MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
