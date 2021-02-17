@@ -28,11 +28,11 @@ export default function Porfolio() {
 
   // console.log(series);
 
-  const state = {
+  const statePieChart = {
     series: series,
     options: {
       chart: {
-        width: 380,
+        width: 500,
         type: "donut",
       },
       labels: labels,
@@ -76,6 +76,66 @@ export default function Porfolio() {
     },
   };
 
+  const stateColChart = {
+    series: [
+      {
+        data: series,
+      },
+    ],
+    options: {
+      chart: {
+        height: 350,
+        type: "bar",
+        events: {
+          click: function (chart, w, e) {
+            // console.log(chart, w, e)
+          },
+        },
+      },
+      colors: colors,
+      plotOptions: {
+        bar: {
+          borderRadius: 6,
+          columnWidth: "45%",
+          distributed: true,
+        },
+      },
+      dataLabels: {
+        enabled: true,
+      },
+      legend: {
+        show: false,
+      },
+      xaxis: {
+        categories: [...labels],
+        labels: {
+          style: {
+            colors: colors,
+            fontSize: "12px",
+          },
+        },
+      },
+    },
+  };
+
+  const stateRadarChart = {
+    series: [
+      {
+        name: "Investment",
+        data: series,
+      },
+    ],
+    options: {
+      chart: {
+        height: 350,
+        type: "radar",
+      },
+
+      xaxis: {
+        categories: labels,
+      },
+    },
+  };
   useEffect(() => {
     const ref = db.collection("porfolio").doc(id);
     // console.log(ref);
@@ -91,7 +151,11 @@ export default function Porfolio() {
           setSeries(funds);
           const labels = Object.keys(data);
           setLabels(labels);
-          const colors = funds.map((key) => RandomColor());
+          const colors = funds.map((key) =>
+            RandomColor({
+              luminosity: "dark",
+            })
+          );
           setColors(colors);
 
           setDonut(true);
@@ -114,7 +178,7 @@ export default function Porfolio() {
       const total = Object.values(stocks).reduce(
         (a, b) => parseFloat(a) + parseFloat(b)
       );
-      return total;
+      return parseFloat(total).toFixed(2);
     }
     return 0;
   };
@@ -307,10 +371,44 @@ export default function Porfolio() {
                 <div className="card-body">
                   <div id="chart">
                     <Chart
-                      options={state.options}
-                      series={state.series}
+                      options={statePieChart.options}
+                      series={statePieChart.series}
                       type="donut"
                       width={450}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-sm-6">
+            <div className="card">
+              <div className="card-header">
+                Investment Radar <MDBIcon icon="satellite-dish" />
+              </div>
+              <div className="card-body">
+                <Chart
+                  options={stateRadarChart.options}
+                  series={stateRadarChart.series}
+                  type="radar"
+                  height={450}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="col mt-5">
+            <div className="chart-wrap">
+              <div className="card">
+                <div className="card-header">
+                  Investment Distribution <MDBIcon icon="chart-bar" />
+                </div>
+                <div className="card-body">
+                  <div id="chart">
+                    <Chart
+                      options={stateColChart.options}
+                      series={stateColChart.series}
+                      type="bar"
+                      height={350}
                     />
                   </div>
                 </div>
