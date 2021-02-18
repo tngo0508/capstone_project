@@ -27,9 +27,7 @@ export default function Porfolio() {
 
   const ref = db.collection("porfolio").doc(id);
 
-  // console.log(series);
-
-  let statePieChart = {
+  const statePieChart = {
     series: series,
     options: {
       id: "porfolio",
@@ -82,6 +80,7 @@ export default function Porfolio() {
     series: [
       {
         data: series,
+        name: "Investment",
       },
     ],
     options: {
@@ -139,6 +138,17 @@ export default function Porfolio() {
     },
   };
 
+  const sort_dsc_by_value = (obj) => {
+    const sort_arr = [];
+    for (let key in obj) {
+      sort_arr.push([key, Number(parseFloat(obj[key]))]);
+    }
+    sort_arr.sort((a, b) => a[1] - b[1]);
+    let res = {};
+    sort_arr.map((item) => (res[item[0]] = item[1]));
+    return res;
+  };
+
   useEffect(() => {
     const ref = db.collection("porfolio").doc(id);
     // console.log(ref);
@@ -148,11 +158,14 @@ export default function Porfolio() {
         // console.log(doc.exists);
         if (doc.exists) {
           const data = doc.data();
-          setstocks(data);
-          const funds = Object.values(data).map((item) => parseFloat(item));
+          const sorted_data = sort_dsc_by_value(data);
+          setstocks(sorted_data);
+          const funds = Object.values(sorted_data).map((item) =>
+            Number(parseFloat(item))
+          );
           // console.log(funds);
           setSeries(funds);
-          const labels = Object.keys(data);
+          const labels = Object.keys(sorted_data);
           setLabels(labels);
           const colors = funds.map((key) =>
             RandomColor({
@@ -195,6 +208,7 @@ export default function Porfolio() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     setDonut(false);
     if (symbolName === "") {
       setError({ symbol: "This field is required." });
@@ -209,8 +223,12 @@ export default function Porfolio() {
     }
 
     if (stocks) {
-      stocks[symbolName] = parseFloat(fund, 10).toFixed(2);
-      ref.set(stocks).catch((err) => console.error(err));
+      stocks[symbolName] = Number(parseFloat(fund, 10).toFixed(2));
+      const new_stocks = sort_dsc_by_value(stocks);
+      setstocks(new_stocks);
+
+      console.log(stocks);
+      ref.set(new_stocks).catch((err) => console.error(err));
     } else {
       const newStock = {};
       newStock[symbolName] = fund;
@@ -222,10 +240,12 @@ export default function Porfolio() {
     setSymbolName("");
     setFund(0);
     setError("");
+    setLoading(false);
   };
 
   const deleteStock = (key) => {
     delete stocks[key];
+    setstocks(sort_dsc_by_value(stocks));
     // console.log(stocks);
     ref.set(stocks).catch((err) => console.error(err));
     if (_.isEmpty(stocks)) {
@@ -247,8 +267,9 @@ export default function Porfolio() {
           <h1 className="display-5">Welcome, {currentUser.email}.</h1>
           <p className="lead">
             Please use the <strong>Investment Management</strong> box to manage
-            your investment. Click on <strong>INSTRUCTION</strong> button to
-            learn about different actions.
+            and plan your investment strategy. Click on{" "}
+            <strong>INSTRUCTION</strong> button to learn about different
+            actions.
           </p>
           <>
             <MDBBtn
@@ -390,7 +411,7 @@ export default function Porfolio() {
             <div className="chart-wrap">
               <div className="card">
                 <div className="card-header">
-                  Your Porfolio <MDBIcon icon="chart-pie" />
+                  Porfolio Plan <MDBIcon icon="chart-pie" />
                 </div>
                 <div className="card-body">
                   <div id="chart">
