@@ -7,7 +7,7 @@ import TextInputGroup from "../layout/TextInputGroup";
 import _ from "lodash";
 import DeerParticles from "../layout/DeerParticles";
 import { MDBJumbotron, MDBContainer } from "mdbreact";
-import { MDBTypography, MDBBox } from "mdbreact";
+import { MDBTypography, MDBBox, MDBBtn, MDBCollapse } from "mdbreact";
 import Chart from "react-apexcharts";
 import RandomColor from "randomcolor";
 
@@ -22,15 +22,17 @@ export default function Porfolio() {
   const [labels, setLabels] = useState([]);
   const [colors, setColors] = useState([]);
   const [donut, setDonut] = useState(false);
+  const [collapse, setCollapse] = useState(false);
   const id = currentUser.uid;
 
   const ref = db.collection("porfolio").doc(id);
 
   // console.log(series);
 
-  const statePieChart = {
+  let statePieChart = {
     series: series,
     options: {
+      id: "porfolio",
       chart: {
         width: 500,
         type: "donut",
@@ -54,7 +56,7 @@ export default function Porfolio() {
       dataLabels: {
         enabled: true,
       },
-      colors: colors,
+      // colors: colors,
       responsive: [
         {
           breakpoint: 480,
@@ -92,7 +94,7 @@ export default function Porfolio() {
           },
         },
       },
-      colors: colors,
+      // colors: colors,
       plotOptions: {
         bar: {
           borderRadius: 6,
@@ -136,6 +138,7 @@ export default function Porfolio() {
       },
     },
   };
+
   useEffect(() => {
     const ref = db.collection("porfolio").doc(id);
     // console.log(ref);
@@ -157,7 +160,6 @@ export default function Porfolio() {
             })
           );
           setColors(colors);
-
           setDonut(true);
         }
         setLoading(false);
@@ -166,11 +168,16 @@ export default function Porfolio() {
 
     getStocksFromDB();
     return () => getStocksFromDB();
-  }, [id]);
+  }, [id, donut]);
 
   if (loading) {
     return <Spinner />;
   }
+
+  const toggleCollapse = (collapseID) => {
+    setCollapse(collapse !== collapseID ? collapseID : "");
+    // console.log(collapse);
+  };
 
   const getTotal = () => {
     if (!_.isEmpty(stocks)) {
@@ -188,6 +195,7 @@ export default function Porfolio() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    setDonut(false);
     if (symbolName === "") {
       setError({ symbol: "This field is required." });
       setLoading(false);
@@ -209,6 +217,7 @@ export default function Porfolio() {
       ref.set(newStock).catch((err) => console.error(err));
     }
 
+    setDonut(true);
     // clear state after submitting form
     setSymbolName("");
     setFund(0);
@@ -235,46 +244,61 @@ export default function Porfolio() {
     <div className="m-5">
       <MDBJumbotron fluid>
         <MDBContainer>
-          <h1 className="display-5">Welcome, {currentUser.email}</h1>
+          <h1 className="display-5">Welcome, {currentUser.email}.</h1>
           <p className="lead">
-            Please use the <strong>Investment Management</strong> box and follow
-            the instructions below to manage your investment.
+            Please use the <strong>Investment Management</strong> box to manage
+            your investment. Click on <strong>INSTRUCTION</strong> button to
+            learn about different actions.
           </p>
-          <MDBTypography blockquote bqColor="success">
-            <>
-              <MDBBox tag="p" mb={0} className="bq-title">
-                <>To add a new investment</>
-              </MDBBox>
-              <p>
-                Start typing the company name and the fund on the two fields.
-                Then, click on the <strong>ADD/UPDATE</strong> button.
-              </p>
-            </>
-          </MDBTypography>
-          <MDBTypography blockquote bqColor="warning">
-            <>
-              <MDBBox tag="p" mb={0} className="bq-title">
-                <>To edit an investment</>
-              </MDBBox>
-              <p>
-                Start typing the name of the company that you want to update and
-                the amount of new fund. Then, click on the{" "}
-                <strong>ADD/UPDATE</strong> button.
-              </p>
-            </>
-          </MDBTypography>
-          <MDBTypography blockquote bqColor="danger">
-            <>
-              <MDBBox tag="p" mb={0} className="bq-title">
-                <>To delete/remove an investment from the list</>
-              </MDBBox>
-              <p>
-                Look through the list of investment on the right side. Choose
-                the brand/company that you want to remove from your list. Then,
-                click <strong>DELETE</strong> button
-              </p>
-            </>
-          </MDBTypography>
+          <>
+            <MDBBtn
+              color="info"
+              onClick={() => toggleCollapse("basicCollapse")}
+              style={{ marginBottom: "1rem" }}
+            >
+              Instruction
+            </MDBBtn>
+            <MDBCollapse id="basicCollapse" isOpen={collapse}>
+              <>
+                <MDBTypography blockquote bqColor="success">
+                  <>
+                    <MDBBox tag="p" mb={0} className="bq-title">
+                      <>To add a new investment</>
+                    </MDBBox>
+                    <p>
+                      Start typing the company name and the fund on the two
+                      fields. Then, click on the <strong>ADD/UPDATE</strong>{" "}
+                      button.
+                    </p>
+                  </>
+                </MDBTypography>
+                <MDBTypography blockquote bqColor="warning">
+                  <>
+                    <MDBBox tag="p" mb={0} className="bq-title">
+                      <>To edit an investment</>
+                    </MDBBox>
+                    <p>
+                      Start typing the name of the company that you want to
+                      update and the amount of new fund. Then, click on the{" "}
+                      <strong>ADD/UPDATE</strong> button.
+                    </p>
+                  </>
+                </MDBTypography>
+                <MDBTypography blockquote bqColor="danger">
+                  <>
+                    <MDBBox tag="p" mb={0} className="bq-title">
+                      <>To delete/remove an investment from the list</>
+                    </MDBBox>
+                    <p>
+                      Look through the list of investment on the right side.
+                      Choose the brand/company that you want to remove from your
+                      list. Then, click <strong>DELETE</strong> button
+                    </p>
+                  </>
+                </MDBTypography>
+              </>
+            </MDBCollapse>
+          </>
         </MDBContainer>
       </MDBJumbotron>
       <div className="row">
