@@ -227,7 +227,7 @@ export default function Porfolio() {
       const new_stocks = sort_dsc_by_value(stocks);
       setstocks(new_stocks);
 
-      console.log(stocks);
+      // console.log(stocks);
       ref.set(new_stocks).catch((err) => console.error(err));
     } else {
       const newStock = {};
