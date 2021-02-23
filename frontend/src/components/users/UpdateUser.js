@@ -53,10 +53,6 @@ export default function UpdateUser() {
 
   return (
     <>
-      <div className="container justify-content-center" align="center">
-        <DeerParticles />
-        <h3>Update your email below</h3>
-      </div>
       <Container
         className="d-flex align-items-center justify-content-center"
         style={{ minHeight: "80vh" }}
@@ -106,6 +102,11 @@ export default function UpdateUser() {
           </MDBCard>
         </div>
       </Container>
+      <div className="container justify-content-center" align="center">
+        <div className="d-none d-md-block">
+          <DeerParticles />
+        </div>
+      </div>
       {isTokenExpired && <TokenExpired />}
     </>
   );

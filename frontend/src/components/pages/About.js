@@ -1,12 +1,13 @@
 import React from "react";
 import Particles from "react-particles-js";
-import { Editor } from "@tinymce/tinymce-react";
-import { MDBView, MDBMask, MDBCol, MDBRow, MDBContainer } from "mdbreact";
+// import { Editor } from "@tinymce/tinymce-react";
+// import { MDBView, MDBMask, MDBCol, MDBRow, MDBContainer } from "mdbreact";
+import { MDBCol, MDBRow, MDBContainer } from "mdbreact";
 
 export default function About() {
-  const onChange = (e) => {
-    console.log("Content was updated:", e.target.getContent());
-  };
+  // const onChange = (e) => {
+  //   console.log("Content was updated:", e.target.getContent());
+  // };
   return (
     <>
       <div id="about-page-header">
@@ -27,20 +28,17 @@ export default function About() {
         <MDBContainer>
           <MDBRow className="about">
             <MDBCol md="6">
-              <h1>What You Can Do On Our Website</h1>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et
-                praesentium molestias ratione eaque tempore incidunt in, ea nemo
-                odit explicabo. Aliquam quia accusamus sed fugit quod tenetur
-                inventore! Laboriosam, commodi?
+              <h1 className="p-5">About My App</h1>
+              <p className="lead">
+                Welcome to BVA, this is my capstone project for master's degree
+                at CSUF <br />
+                The purpose of this application is to provide investors key
+                insights and estimate value of the brands for investment
+                decisions. It keeps track of pricing data for competitive
+                advantages and helps businesses develop their investment
+                strategies.
               </p>
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Similique unde placeat optio veritatis, maxime accusantium
-                repellendus. Ipsam, magni minus consequatur accusamus,
-                exercitationem pariatur unde nemo inventore, libero laborum nisi
-                tenetur!
-              </p>
+              <p className="text-secondary">Version 1.0.0</p>
             </MDBCol>
             <MDBCol md="6" className="mb-3 text-center">
               <img
@@ -62,7 +60,7 @@ export default function About() {
           paddingBottom: "10rem",
         }}
       >
-        <h1 className="display-4">ABout My App</h1>
+        {/* <h1 className="display-4">ABout My App</h1>
         <p className="lead">
           Welcome to BVA, this is my capstone project for master's degree at
           CSUF <br />
@@ -70,8 +68,8 @@ export default function About() {
           and estimate value of the brands for investment decisions. It keeps
           track of pricing data for competitive advantages and helps businesses
           develop their investment strategies.
-        </p>
-        <form>
+        </p> */}
+        {/* <form>
           <h2>Get Feedback</h2>
           <Editor
             apiKey="jlmgdmuom8f3vxnots0qgipbgupc4jdgbfjud7ysr0vbtilm"
@@ -90,8 +88,8 @@ export default function About() {
             }}
             onChange={onChange}
           />
-        </form>
-        <p className="text-secondary">Version 1.0.0</p>
+        </form> */}
+        {/* <p className="text-secondary">Version 1.0.0</p> */}
         <Particles
           params={{
             particles: {
