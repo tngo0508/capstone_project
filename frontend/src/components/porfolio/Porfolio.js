@@ -60,10 +60,11 @@ export default function Porfolio() {
           breakpoint: 480,
           options: {
             chart: {
-              width: 200,
+              width: 270,
             },
             legend: {
-              show: true,
+              show: false,
+              // position: "bottom",
             },
           },
         },
@@ -128,7 +129,7 @@ export default function Porfolio() {
     ],
     options: {
       chart: {
-        height: 350,
+        height: 320,
         type: "radar",
       },
 
@@ -264,8 +265,8 @@ export default function Porfolio() {
     <div className="m-5">
       <MDBJumbotron fluid>
         <MDBContainer>
-          <h1 className="display-5">Welcome, {currentUser.email}.</h1>
-          <p className="lead">
+          <p className="lead">Welcome, {currentUser.email}</p>
+          <p className="text-muted lead">
             Please use the <strong>Investment Management</strong> box to manage
             and plan your investment strategy. Click on{" "}
             <strong>INSTRUCTION</strong> button to learn about different
@@ -323,7 +324,7 @@ export default function Porfolio() {
         </MDBContainer>
       </MDBJumbotron>
       <div className="row">
-        <div className="col-md-6">
+        <div className="col-md-6 col-sm-12 mb-5">
           <div className="card">
             <div className="card-header">
               Investment Management <MDBIcon icon="edit" />
@@ -358,7 +359,7 @@ export default function Porfolio() {
             </div>
           </div>
         </div>
-        <div className="col-md-6">
+        <div className="col-md-6 col-sm-12">
           <div className="card">
             <div className="card-header">
               Investment List <MDBIcon icon="th-list" />{" "}
@@ -375,22 +376,16 @@ export default function Porfolio() {
               ) : (
                 Object.keys(stocks).map((key, idx) => (
                   <React.Fragment key={idx}>
-                    <div className="row">
-                      <div className="d-flex col-sm-8 align-items-center">
-                        <span className="col-md-1">{idx + 1}</span>
-                        <span className="col-md-5">{key} </span>
-                        <span className="col-md-5">$ {stocks[key]}</span>
-                      </div>
-                      <div className="d-flex ]ol-sm-4">
-                        <div className="btn-group float-right">
-                          <button
-                            onClick={() => deleteStock(key)}
-                            className="btn btn-sm btn-danger"
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      </div>
+                    <div className="d-flex align-self-center justify-content-between">
+                      <span className="">{idx + 1}</span>
+                      <span className="">{key} </span>
+                      <span className="">$ {stocks[key]}</span>
+                      <button
+                        onClick={() => deleteStock(key)}
+                        className="btn btn-sm btn-danger"
+                      >
+                        X
+                      </button>
                     </div>
                   </React.Fragment>
                 ))
@@ -406,8 +401,8 @@ export default function Porfolio() {
         </div>
       </div>
       {donut && (
-        <div className="row mt-5">
-          <div className="col-sm-6">
+        <div className="row my-5">
+          <div className="col-md-6 col-sm-12 mb-5">
             <div className="chart-wrap">
               <div className="card">
                 <div className="card-header">
@@ -426,7 +421,7 @@ export default function Porfolio() {
               </div>
             </div>
           </div>
-          <div className="col-sm-6">
+          <div className="col-md-6 col-sm-12">
             <div className="card">
               <div className="card-header">
                 Investment Radar <MDBIcon icon="satellite-dish" />
@@ -462,7 +457,9 @@ export default function Porfolio() {
           </div>
         </div>
       )}
-      <DeerParticles />
+      <div className="d-none d-md-block">
+        <DeerParticles />
+      </div>
     </div>
   );
 }

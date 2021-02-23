@@ -1,3 +1,7 @@
+body {
+  overflow-x: hidden;
+}
+
 #home-section {
   position: relative;
   background: url(../src/img/stockmarket.jpg);
@@ -26,4 +30,60 @@
   text-align: center;
   color: #fff;
   background-size: cover;
+}
+
+#about-page-header {
+  height: 400px;
+  background: url("../src/img/about_header_large.jpg");
+  background-position: 0 -40px;
+  background-attachment: fixed;
+  color: #fff;
+  border-bottom: 1px #eee solid;
+  padding-top: 100px;
+  /* background-repeat: no-repeat;
+  background-size: cover; */
+  font-family: "Leckerli One", cursive;
+}
+
+.about-img {
+  margin-top: -50px;
+}
+
+.spinner {
+  margin-top: -335px;
+}
+
+@media only screen and (max-width: 576px) {
+  #about-page-header {
+    /* height: 275px;
+    background: url("../src/img/about_header.jpg");
+    background-position: 0 56px;
+    background-attachment: fixed;
+    color: #fff;
+    border-bottom: 1px #eee solid;
+    padding-top: 50px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    font-family: "Leckerli One", cursive; */
+
+    height: 167px;
+    background: url("../src/img/about_header.jpg");
+    background-position: 0 -50px;
+    background-attachment: fixed;
+    color: #fff;
+    border-bottom: 1px #eee solid;
+    padding-top: 11px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    font-family: "Leckerli One", cursive;
+  }
+
+  .spinner {
+    width: 90%;
+    margin-top: -210px;
+  }
+
+  .w-50 {
+    width: 100% !important;
+  }
 }

@@ -309,7 +309,9 @@ class Sector extends Component {
               </MDBCard>
             </MDBTabPane>
           </MDBTabContent>
-          <DeerParticles />
+          <div className="d-none d-md-block">
+            <DeerParticles />
+          </div>
         </MDBContainer>
       </>
     );

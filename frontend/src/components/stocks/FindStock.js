@@ -80,7 +80,7 @@ class FindStock extends Component {
             style={{
               height: "100%",
               width: "100%",
-              paddingTop: "10rem",
+              paddingTop: "5rem",
               paddingBottom: "10rem",
             }}
             className="d-flex justify-content-center align-items-center"
@@ -130,7 +130,7 @@ class FindStock extends Component {
                 </MDBAnimation>
               </MDBCol>
 
-              <MDBCol md="6" xl="5" className="mt-xl-5">
+              <MDBCol md="6" xl="5" className="mt-xl-5 d-none d-md-block">
                 <MDBAnimation type="fadeInRight" delay=".3s">
                   <img src={images} alt="tech" className="img-fluid" />
                 </MDBAnimation>

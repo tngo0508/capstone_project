@@ -109,7 +109,7 @@ class Reports extends Component {
         style={{
           height: "100%",
           width: "100%",
-          paddingTop: "10rem",
+          paddingTop: "5rem",
           paddingBottom: "10rem",
         }}
       >

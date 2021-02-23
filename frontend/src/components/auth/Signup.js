@@ -133,7 +133,7 @@ export default function Signup() {
         className="d-flex align-items-center justify-content-center"
         style={{ minHeight: "100vh" }}
       >
-        <MDBAnimation type="fadeInUp" delay=".3s">
+        <MDBAnimation type="fadeInUp" delay=".3s" className="d-none d-md-block">
           <div className="container">
             <Particles params={options} />
             <h3>Analyze your favorite brand and more</h3>

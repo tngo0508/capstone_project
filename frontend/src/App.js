@@ -41,7 +41,6 @@ class App extends Component {
               <Route exact path="/" component={HomePage} />
               <>
                 <div className="container">
-                  <Route exact path="/about" component={About} />
                   <Route exact path="/signup" component={Signup} />
                   <Route exact path="/login" component={Login} />
                   <PrivateRoute exact path="/findstock" component={FindStock} />
@@ -78,6 +77,7 @@ class App extends Component {
                   />
                   <Route exact path="/test" component={Test} />
                 </div>
+                <Route exact path="/about" component={About} />
               </>
               <Route component={NotFound} />
             </Switch>
