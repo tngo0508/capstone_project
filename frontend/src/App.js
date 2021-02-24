@@ -39,46 +39,32 @@ class App extends Component {
 
             <Switch>
               <Route exact path="/" component={HomePage} />
-              <>
-                <div className="container">
-                  <Route exact path="/signup" component={Signup} />
-                  <Route exact path="/login" component={Login} />
-                  <PrivateRoute exact path="/findstock" component={FindStock} />
-                  <PrivateRoute exact path="/reports" component={Reports} />
-                  <PrivateRoute exact path="/sectors" component={Sector} />
-                  <PrivateRoute exact path="/porfolio" component={Porfolio} />
-                  <PrivateRoute
-                    exact
-                    path="/predict"
-                    component={PredictValue}
-                  />
-                  <PrivateRoute exact path="/user" component={User} />
-                  <PrivateRoute
-                    exact
-                    path="/update-user"
-                    component={UpdateUser}
-                  />
-                  <PrivateRoute
-                    exact
-                    path="/update-password"
-                    component={UpdatePassword}
-                  />
-                  <Route
-                    exact
-                    path="/forgot-password"
-                    component={ForgotPassword}
-                  />
-                  <Route exact path="/privacy" component={PrivacyPolicy} />
-                  <Route exact path="/term" component={TermsOfUse} />
-                  <PrivateRoute
-                    exact
-                    path="/token-expired"
-                    component={TokenExpired}
-                  />
-                  <Route exact path="/test" component={Test} />
-                </div>
-                <Route exact path="/about" component={About} />
-              </>
+              <Route exact path="/signup" component={Signup} />
+              <Route exact path="/login" component={Login} />
+              <PrivateRoute exact path="/findstock" component={FindStock} />
+              <PrivateRoute exact path="/reports" component={Reports} />
+              <PrivateRoute exact path="/sectors" component={Sector} />
+              <PrivateRoute exact path="/porfolio" component={Porfolio} />
+              <PrivateRoute exact path="/predict" component={PredictValue} />
+              <PrivateRoute exact path="/user" component={User} />
+              <PrivateRoute exact path="/update-user" component={UpdateUser} />
+              <PrivateRoute
+                exact
+                path="/update-password"
+                component={UpdatePassword}
+              />
+              <Route exact path="/forgot-password" component={ForgotPassword} />
+              <Route exact path="/privacy" component={PrivacyPolicy} />
+              <Route exact path="/term" component={TermsOfUse} />
+              <PrivateRoute
+                exact
+                path="/token-expired"
+                component={TokenExpired}
+              />
+              <Route exact path="/test" component={Test} />
+
+              <Route exact path="/about" component={About} />
+
               <Route component={NotFound} />
             </Switch>
           </AuthProvider>

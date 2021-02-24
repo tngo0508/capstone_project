@@ -46,11 +46,21 @@ body {
 }
 
 .about-img {
-  margin-top: -50px;
+  margin-top: -67px;
+}
+
+.project-img {
+  margin-top: -100px;
 }
 
 .spinner {
   margin-top: -335px;
+}
+
+.features-available {
+  width: 50%;
+  margin: auto;
+  border-bottom: 1px #ddd solid;
 }
 
 @media only screen and (max-width: 576px) {

@@ -262,7 +262,7 @@ export default function Porfolio() {
   };
 
   return (
-    <div className="m-5">
+    <div className="container mt-5">
       <MDBJumbotron fluid>
         <MDBContainer>
           <p className="lead">Welcome, {currentUser.email}</p>

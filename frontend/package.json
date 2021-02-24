@@ -16,6 +16,7 @@
     "https": "^1.0.0",
     "lodash": "^4.17.20",
     "mdbreact": "^5.0.1",
+    "particles-bg": "^2.5.0",
     "prop-types": "^15.7.2",
     "randomcolor": "^0.6.2",
     "react": "^17.0.1",

@@ -127,7 +127,7 @@ class Reports extends Component {
                     value={symbol}
                     onChange={this.onChange}
                     error={errors.symbol}
-                    maxLength="4"
+                    maxLength="5"
                   />
                   <input
                     disabled={loading}
