@@ -314,7 +314,11 @@ export default function Porfolio() {
                     <p>
                       Look through the list of investment on the right side.
                       Choose the brand/company that you want to remove from your
-                      list. Then, click <strong>DELETE</strong> button
+                      list. Then, click{" "}
+                      <strong>
+                        <i className="fas fa-trash"></i>
+                      </strong>{" "}
+                      button
                     </p>
                   </>
                 </MDBTypography>
@@ -384,7 +388,7 @@ export default function Porfolio() {
                         onClick={() => deleteStock(key)}
                         className="btn btn-sm btn-danger"
                       >
-                        X
+                        <i className="fas fa-trash"></i>
                       </button>
                     </div>
                   </React.Fragment>
