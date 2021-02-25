@@ -63,6 +63,40 @@ body {
   border-bottom: 1px #ddd solid;
 }
 
+.creator-header {
+  width: 50%;
+  margin: auto;
+  border-bottom: 1px #fff solid;
+}
+
+#creator img {
+  margin-top: -50px;
+}
+
+.fa-linkedin-square {
+  color: #0e76a8;
+}
+
+.fa-linkedin-square:hover {
+  color: #0799e7;
+}
+
+.fa-github-square {
+  color: #040204;
+}
+
+.fa-github-square:hover {
+  color: darkgrey;
+}
+
+.fa-envelope-square {
+  color: #27c7bf;
+}
+
+.fa-envelope-square:hover {
+  color: #074441;
+}
+
 @media only screen and (max-width: 576px) {
   #about-page-header {
     /* height: 275px;
