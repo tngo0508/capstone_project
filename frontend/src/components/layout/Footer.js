@@ -22,10 +22,21 @@ class Footer extends Component {
                   <p className="font-weight-bold text-uppercase my-3">
                     Stay connected
                   </p>
-                  <i className="fab fa-twitter fa-2x"></i>
-                  <i className="fab fa-facebook fa-2x mx-3"></i>
-                  <i className="fab fa-linkedin-in fa-2x mx-3"></i>
-                  <i className="fab fa-youtube fa-2x mx-3"></i>
+                  <a href="https://twitter.com/">
+                    <i className="fab fa-twitter fa-2x"></i>
+                  </a>
+                  <a href="https://www.facebook.com/">
+                    <i className="fab fa-facebook fa-2x mx-3"></i>
+                  </a>
+                  <a href="https://www.linkedin.com/in/thomas-ngo-4a6984138/">
+                    <i className="fab fa-linkedin-in fa-2x mx-3"></i>
+                  </a>
+                  <a href="https://www.youtube.com/">
+                    <i className="fab fa-youtube fa-2x mx-3"></i>
+                  </a>
+                  <a href="https://github.com/tngo0508">
+                    <i className="fab fa-github fa-2x mx-3"></i>
+                  </a>
                 </MDBCol>
                 <MDBCol md="4" className="text-md-right">
                   <h5 className="title">Quick Links</h5>

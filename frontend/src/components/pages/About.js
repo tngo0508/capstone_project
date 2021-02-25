@@ -19,6 +19,7 @@ export default function About() {
   // const onChange = (e) => {
   //   console.log("Content was updated:", e.target.getContent());
   // };
+
   return (
     <>
       <div id="about-page-header">
@@ -170,7 +171,7 @@ export default function About() {
                     <img
                       src={LookupImg}
                       className="card-img-top"
-                      alt="stock_ticker"
+                      alt="LookupImg"
                     />
                     <div className="card-body">
                       <h5 className="card-title">Stock Ticker Symbol Lookup</h5>
@@ -190,7 +191,7 @@ export default function About() {
                     <img
                       src={RelatedNewsImg}
                       className="card-img-top"
-                      alt="related_news"
+                      alt="RelatedNewsImg"
                     />
                     <div className="card-body">
                       <h5 className="card-title">Related News Generator</h5>
@@ -270,7 +271,11 @@ export default function About() {
               <div className="col p-3">
                 <div className="card">
                   <MDBAnimation reveal type="zoomIn">
-                    <img src={ExpertImg} className="card-img-top" alt="..." />
+                    <img
+                      src={ExpertImg}
+                      className="card-img-top"
+                      alt="ExpertImg"
+                    />
                     <div className="card-body">
                       <h5 className="card-title">
                         Report and Performance Review
@@ -286,6 +291,38 @@ export default function About() {
                   </MDBAnimation>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="newsletter" className="text-center p-5 bg-dark text-white">
+        <div className="container">
+          <div className="row">
+            <div className="col">
+              <MDBAnimation reveal type="zoomIn">
+                <h1>Sign Up For Our Newsletter</h1>
+                <p>
+                  Join our mailing list to receive the email updates on our
+                  newest features, announcements and more. You'll be the first
+                  to know!
+                </p>
+                <form
+                  className="form-inline justify-content-center"
+                  action={process.env.REACT_APP_MAILCHIMP_URL}
+                  method="post"
+                >
+                  <input
+                    type="text"
+                    className="form-control mb-2 mr-2"
+                    placeholder="Enter Email"
+                    name="EMAIL"
+                  />
+                  <button type="submit" className="btn btn-danger mb-2">
+                    Subscribe
+                  </button>
+                </form>
+              </MDBAnimation>
             </div>
           </div>
         </div>
