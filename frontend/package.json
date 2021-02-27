@@ -11,6 +11,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
     "classnames": "^2.2.6",
+    "emailjs-com": "^2.6.4",
     "firebase": "^8.2.5",
     "he": "^1.2.0",
     "https": "^1.0.0",

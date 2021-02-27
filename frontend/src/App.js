@@ -8,7 +8,7 @@ import PredictValue from "./components/stocks/PredictValue";
 import NotFound from "./components/pages/NotFound";
 import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
-import Test from "./components/test/Test";
+// import Test from "./components/test/Test";
 import User from "./components/users/User";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -28,6 +28,7 @@ import TermsOfUse from "./components/pages/TermsOfUse";
 import Reports from "./components/insights/Reports";
 import Sector from "./components/sectors/Sector";
 import Porfolio from "./components/porfolio/Porfolio";
+import ContactPage from "./components/pages/ContactPage";
 
 class App extends Component {
   render() {
@@ -61,9 +62,10 @@ class App extends Component {
                 path="/token-expired"
                 component={TokenExpired}
               />
-              <Route exact path="/test" component={Test} />
+              {/* <Route exact path="/test" component={Test} /> */}
 
               <Route exact path="/about" component={About} />
+              <Route exact path="/contact" component={ContactPage} />
 
               <Route component={NotFound} />
             </Switch>

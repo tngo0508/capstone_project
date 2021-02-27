@@ -97,6 +97,27 @@ body {
   color: #074441;
 }
 
+a {
+  color: inherit;
+}
+
+.btn-circle {
+  font-size: 13px;
+  color: rgba(24, 26, 24, 0.75);
+  letter-spacing: 1px;
+  line-height: 15px;
+  border: 2px solid rgba(24, 26, 24, 0.75);
+  border-radius: 40px;
+  background: transparent;
+  transition: all 0.3s ease 0s;
+}
+
+.btn-circle:hover {
+  color: #fff;
+  background: rgba(24, 26, 24, 0.75);
+  border: 2px solid rgba(24, 26, 24, 0.75);
+}
+
 @media only screen and (max-width: 576px) {
   #about-page-header {
     /* height: 275px;

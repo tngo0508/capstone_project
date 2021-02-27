@@ -118,7 +118,12 @@ export default function Header(props) {
               </MDBNavItem>
               <MDBNavItem>
                 <MDBNavLink to="/about">
-                  <MDBIcon icon="question" /> About
+                  <MDBIcon icon="question-circle" /> About
+                </MDBNavLink>
+              </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink to="/contact">
+                  <MDBIcon icon="headset" /> Contact Us
                 </MDBNavLink>
               </MDBNavItem>
             </>
