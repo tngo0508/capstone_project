@@ -11,6 +11,7 @@ export default function ContactPage() {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [isSent, setIsSent] = useState(false);
+  const [isSentError, setIsSentError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [sentError, setSentError] = useState("");
 
@@ -28,6 +29,7 @@ export default function ContactPage() {
       // console.log("This will run after 1 second!");
       // clear the alert message
       setIsSent(false);
+      setIsSentError(false);
     }, 3000);
     return () => clearTimeout(timer);
   }, [isSent]);
@@ -85,11 +87,13 @@ export default function ContactPage() {
         (result) => {
           // console.log(result.text);
           setIsSent(true);
+          setIsSentError(false);
         },
         (error) => {
           // console.log(error.text);
           setIsSent(false);
           setSentError(error.text);
+          setIsSentError(true);
         }
       );
 
@@ -110,7 +114,7 @@ export default function ContactPage() {
           <div className="row">
             <div className="col-md-6 col-sm-3">
               <div className="contact-header mb-5">
-                <div className="card bg-primary text-white">
+                <div className="card bg-secondary text-white">
                   <div className="card-body">
                     <h3 className="pb-3">Our Vision</h3>
                     <p>
@@ -127,7 +131,7 @@ export default function ContactPage() {
             </div>
             <div className="col-md-6 col-sm-9">
               <div className="card">
-                <div className="card-body bg-secondary text-white">
+                <div className="card-body bg-primary text-white">
                   <h3 className="pb-3">Our Mission</h3>
                   <p className="mb-3">
                     <i className="fas fa-check p-2"></i> Help you reach higher
@@ -216,11 +220,12 @@ export default function ContactPage() {
                       </button>
                     </div>
                   </form>
-                  {isSent ? (
+                  {isSent && (
                     <div className="alert alert-success" role="alert">
                       Thank you! Your message has been sent!
                     </div>
-                  ) : (
+                  )}
+                  {isSentError && (
                     <div className="alert alert-danger" role="alert">
                       Sorry. Your message is not sent. Error: {sentError}
                     </div>
@@ -260,6 +265,18 @@ export default function ContactPage() {
                       </a>
                     </div>
                   </div>
+                  <h5 className="pb-5">Visit us at the following address</h5>
+                  <iframe
+                    title="google-map"
+                    width="100%"
+                    height="400"
+                    loading="lazy"
+                    allowFullScreen
+                    src={
+                      "https://www.google.com/maps/embed/v1/place?q=place_id:ChIJr53QoxAp3YARICsoJw3Hdz4&key=" +
+                      process.env.REACT_APP_GOOGLE_MAP_API_KEY
+                    }
+                  ></iframe>
                 </div>
               </div>
             </div>
