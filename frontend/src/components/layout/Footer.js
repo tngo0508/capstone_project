@@ -50,11 +50,17 @@ class Footer extends Component {
                     <li className="list-unstyled">
                       <Link to="/login">Log In</Link>
                     </li>
+                    <li className="list-unstyled">
+                      <Link to="/about">About</Link>
+                    </li>
                   </ul>
                 </MDBCol>
                 <MDBCol md="4" className="text-md-right">
                   <h5 className="title">Useful Links</h5>
                   <ul>
+                    <li className="list-unstyled">
+                      <Link to="/contact">Contact Us</Link>
+                    </li>
                     <li className="list-unstyled">
                       <Link to="/term">Terms of Use</Link>
                     </li>
