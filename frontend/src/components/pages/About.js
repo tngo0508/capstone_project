@@ -5,7 +5,7 @@ import React from "react";
 import { MDBCol, MDBRow, MDBContainer } from "mdbreact";
 import ProjectImg from "../../img/projects.gif";
 import RelatedNewsImg from "../../img/related_news.gif";
-import PorfolioImg from "../../img/porfolio.gif";
+import PortfolioImg from "../../img/portfolio.gif";
 import TradingMonitorImg from "../../img/trading_monitor.gif";
 import LookupImg from "../../img/lookup.gif";
 import BrainImg from "../../img/brain.gif";
@@ -234,12 +234,12 @@ export default function About() {
                 <div className="card">
                   <MDBAnimation reveal type="zoomIn">
                     <img
-                      src={PorfolioImg}
+                      src={PortfolioImg}
                       className="card-img-top"
-                      alt="PorfolioImg"
+                      alt="PortfolioImg"
                     />
                     <div className="card-body">
-                      <h5 className="card-title">Porfolio Creator</h5>
+                      <h5 className="card-title">Portfolio Creator</h5>
                       <p className="card-text">
                         The users can create their own porfolio and manage their
                         investment. This feature helps users to plan and execute
