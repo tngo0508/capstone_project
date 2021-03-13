@@ -18,7 +18,8 @@ from fake_useragent import UserAgent
 from sys import platform
 
 
-logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
+logging.basicConfig(
+    filename='stockscraper.log', format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
 # driver = webdriver.Chrome()
 options = webdriver.ChromeOptions()
 options.headless = True
@@ -51,11 +52,11 @@ try:
         chrome_exec_file = 'chromedriver'
         chrome_dir = "mac"
         exec_path = os.path.join(curr_dir, chrome_dir, chrome_exec_file)
-    logging.info(exec_path)
+    # logging.info(exec_path)
 except Exception as e:
     logging.raiseExceptions(e)
 
-driver = webdriver.Chrome(executable_path=exec_path, chrome_options=options)
+driver = webdriver.Chrome(executable_path=exec_path, options=options)
 
 
 def get_user_input():
@@ -95,7 +96,7 @@ def scrape_stock_info(stock, mode='single'):
         return None
     if stock.find('.'):
         stock = stock.replace('.', '-')
-    logging.info(stock)
+    logging.info('Scraping stock symbol - %s', stock)
     # while True:
     #     try:
     re = defaultdict()
@@ -197,6 +198,8 @@ def scrape_stock_info(stock, mode='single'):
         logging.error(e)
         re['target'] = 'N/A'
 
+    # logging.info(re)
+
     driver.close()
     # pprint.pprint(re)
 
@@ -249,7 +252,7 @@ def scrape_stock_list(file):
     # print(stock_df)
     curr_dir = os.path.dirname(os.path.realpath(__file__))
     log_time = time.strftime('%y_%m_%d-%H%M%S')
-    file_name = 'dataset' + log_time + '.csv'
+    file_name = file + log_time + '.csv'
     path = os.path.join(curr_dir, file_name)
     stock_df.to_csv(path, index=False)
 
