@@ -14,13 +14,14 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
 from fake_useragent import UserAgent
 from sys import platform
 
 
 logging.basicConfig(
     filename='stockscraper.log', format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
-# driver = webdriver.Chrome()
+
 options = webdriver.ChromeOptions()
 options.headless = True
 options.add_argument('--incognito')
@@ -56,7 +57,9 @@ try:
 except Exception as e:
     logging.raiseExceptions(e)
 
-driver = webdriver.Chrome(executable_path=exec_path, options=options)
+# driver = webdriver.Chrome(executable_path=exec_path, options=options)
+driver = webdriver.Chrome(
+    executable_path=ChromeDriverManager().install(), options=options)
 
 
 def get_user_input():
