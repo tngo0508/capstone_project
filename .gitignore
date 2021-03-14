@@ -2,7 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
-*capstone
+
 # C extensions
 *.so
 
@@ -157,3 +157,7 @@ spritesmith.scss
 
 # templated email
 tmp_email/
+
+# custom
+*capstone
+*.log*
