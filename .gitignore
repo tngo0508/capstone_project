@@ -158,6 +158,9 @@ spritesmith.scss
 # templated email
 tmp_email/
 
+backend/index.html
+backend/nohup.out
+
 # custom
 *capstone
 *.log*
