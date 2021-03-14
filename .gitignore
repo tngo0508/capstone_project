@@ -160,3 +160,8 @@ tmp_email/
 
 backend/index.html
 backend/nohup.out
+
+# custom
+*capstone
+*.log*
+/stockscrape_log

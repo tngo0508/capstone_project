@@ -2,6 +2,7 @@ import requests
 import pandas as pd
 import time
 import logging
+import logging.handlers as handlers
 import pprint
 import os
 import random
@@ -14,12 +15,17 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
 from fake_useragent import UserAgent
 from sys import platform
+from .stockscrape_logger import Logger
 
+Log = Logger(__name__)
+logger = Log.get()
 
-logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
-# driver = webdriver.Chrome()
+# logging.basicConfig(
+#     filename='stockscraper.log', format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
+
 options = webdriver.ChromeOptions()
 options.headless = True
 options.add_argument('--incognito')
@@ -36,9 +42,17 @@ options.add_argument("--disable-dev-shm-usage")
 options.add_argument('--log-level=3')
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
+curr_dir = os.path.dirname(os.path.realpath(__file__))
+dataset_dir = os.path.join(curr_dir, 'dataset')
+
+try:
+    os.makedirs(dataset_dir)
+except FileExistsError:
+    pass
+
 exec_path = ''
 try:
-    curr_dir = os.path.dirname(os.path.realpath(__file__))
+    # curr_dir = os.path.dirname(os.path.realpath(__file__))
     if platform == 'win32':
         chrome_exec_file = 'chromedriver.exe'
         chrome_dir = "win32"
@@ -51,39 +65,39 @@ try:
         chrome_exec_file = 'chromedriver'
         chrome_dir = "mac"
         exec_path = os.path.join(curr_dir, chrome_dir, chrome_exec_file)
-    logging.info(exec_path)
+    # logging.info(exec_path)
 except Exception as e:
-    logging.raiseExceptions(e)
+    logger.raiseExceptions(e)
 
-driver = webdriver.Chrome(executable_path=exec_path, chrome_options=options)
+# driver = webdriver.Chrome(executable_path=exec_path, options=options)
+driver = webdriver.Chrome(
+    executable_path=ChromeDriverManager().install(), options=options)
 
 
 def get_user_input():
     return input("Enter Stock: ")
 
 
-def create_stock_symbol_table(mode='sp500'):
-    # try:
-    #     file = 'constituents-financials_csv.csv'
-    #     df = pd.read_csv(file)
-    #     df['Symbol'].to_csv(r'stock_symbol.csv', index=False)
-    # except FileNotFoundError as e:
-    #     print(e)
+def make_path_to_dataset(file_name):
+    return os.path.join(dataset_dir, file_name)
 
+
+def create_stock_symbol_table(mode='sp500'):
     if mode == 'sp500':
         table = pd.read_html(
             'https://en.wikipedia.org/wiki/List_of_S%26P_500_companies')
         df = table[0]
-        # print(df)
-        df.to_csv('S&P500-Info.csv')
-        df.to_csv("S&P500-Symbols.csv", columns=['Symbol'])
+        df.to_csv(make_path_to_dataset('S&P500-Info.csv'))
+        df.to_csv(make_path_to_dataset(
+            'S&P500-Symbols.csv'), columns=['Symbol'])
     elif mode == 'nasdaq100':
         table = pd.read_html(
             'https://en.wikipedia.org/wiki/NASDAQ-100#Components')
         df = table[3]
         df = df.rename(columns={'Ticker': 'Symbol'})
-        df.to_csv('NASDAQ100-Info.csv')
-        df.to_csv("NASDAQ100-Symbols.csv", columns=['Symbol'])
+        df.to_csv(make_path_to_dataset('NASDAQ100-Info.csv'))
+        df.to_csv(make_path_to_dataset(
+            'NASDAQ100-Symbols.csv'), columns=['Symbol'])
 
 
 def scrape_stock_info(stock, mode='single'):
@@ -95,7 +109,7 @@ def scrape_stock_info(stock, mode='single'):
         return None
     if stock.find('.'):
         stock = stock.replace('.', '-')
-    logging.info(stock)
+    logger.info('Scraping stock symbol - %s', stock)
     # while True:
     #     try:
     re = defaultdict()
@@ -114,11 +128,11 @@ def scrape_stock_info(stock, mode='single'):
         target_elem = WebDriverWait(driver, 3).until(
             EC.presence_of_element_located((By.ID, 'fr-val-mod')))
     except TimeoutException:
-        logging.debug("Timed out waiting for page to load")
+        logger.debug("Timed out waiting for page to load")
         driver.get(url)
         time.sleep(random.randint(10, 30))
     finally:
-        logging.info('page is ready!')
+        logger.info('page is ready!')
 
     # time.sleep(3)
     # headers = ({'User-Agent':
@@ -127,14 +141,14 @@ def scrape_stock_info(stock, mode='single'):
     # r = requests.get(url, headers=headers)
     # soup = BeautifulSoup(r.text, 'lxml')
     soup = BeautifulSoup(driver.page_source, 'html.parser')
-    # logging.info('status code ' + str(r.status_code))
+    # logger.info('status code ' + str(r.status_code))
 
     try:
         re['open_price'] = soup.find(
             attrs={'data-test': 'OPEN-value'}).find_next('span').text
     except AttributeError as e:
-        logging.error('open')
-        logging.error(e)
+        logger.error('open')
+        logger.error(e)
         re['open_price'] = 'N/A'
 
     try:
@@ -144,58 +158,63 @@ def scrape_stock_info(stock, mode='single'):
         re['fifty_two_wk_low'] = fifty_two_wk_low
         re['fifty_two_wk_hi'] = fifty_two_wk_hi
     except AttributeError as e:
-        logging.error('52 week')
-        logging.error(e)
+        logger.error('52 week')
+        logger.error(e)
         re['fifty_two_wk_low'] = re['fifty_two_wk_hi'] = 'N/A'
 
     try:
         re['volume'] = soup.find(
             attrs={'data-test': 'TD_VOLUME-value'}).find_next('span').text
     except AttributeError as e:
-        logging.error('volume')
-        logging.error(e)
+        logger.error('volume')
+        logger.error(e)
         re['volume'] = 'N/A'
 
     try:
         re['avg_volume'] = soup.find(
             attrs={'data-test': 'AVERAGE_VOLUME_3MONTH-value'}).find_next('span').text
     except AttributeError as e:
-        logging.error(e)
-        logging.error('avg_volume')
+        logger.error(e)
+        logger.error('avg_volume')
         re['avg_volume'] = 'N/A'
 
     try:
         re['market_cap'] = soup.find(
             attrs={'data-test': 'MARKET_CAP-value'}).find_next('span').text
     except AttributeError as e:
-        logging.error('market_cap')
-        logging.error(e)
+        logger.error('market_cap')
+        logger.error(e)
         re['market_cap'] = 'N/A'
 
     try:
         re['PE_ratio'] = soup.find(
             attrs={'data-test': 'PE_RATIO-value'}).find_next('span').text
     except AttributeError as e:
-        logging.error('PE_ratio')
-        logging.error(e)
+        logger.error('PE_ratio')
+        logger.error(e)
         re['PE_ratio'] = 'N/A'
 
     try:
         re['EPS_ratio'] = soup.find(
             attrs={'data-test': 'EPS_RATIO-value'}).find_next('span').text
     except AttributeError as e:
-        logging.error('EPS_ratio')
-        logging.error(e)
+        logger.error('EPS_ratio')
+        logger.error(e)
         re['EPS_ratio'] = 'N/A'
 
     # time.sleep(1)
     try:
-        re['target'] = soup.find(
+        target = soup.find(
             'div', class_='Fw(b) Fl(end)--m Fz(s) C($primaryColor').text
+        if target == 'Near Fair Value':
+            target = 'Undervalued'
+        re['target'] = target
     except AttributeError as e:
-        logging.error('target')
-        logging.error(e)
+        logger.error('target')
+        logger.error(e)
         re['target'] = 'N/A'
+
+    # logger.info(re)
 
     driver.close()
     # pprint.pprint(re)
@@ -203,7 +222,7 @@ def scrape_stock_info(stock, mode='single'):
     return re
 
 # except AttributeError as e:
-#     logging.error(e)
+#     logger.error(e)
 #     continue
 # finally:
 #     time.sleep(3)
@@ -212,9 +231,17 @@ def scrape_stock_info(stock, mode='single'):
 
 
 def scrape_stock_list(file):
+    curr_dir = os.path.dirname(os.path.realpath(__file__))
+    dataset_dir = os.path.join(curr_dir, 'dataset')
+
+    try:
+        os.makedirs(dataset_dir)
+    except FileExistsError:
+        pass
     data = defaultdict(list)
     letter = {'T': 1000000000000, 'K': 1000, 'M': 1000000, 'B': 1000000000}
-    df = pd.read_csv(file)
+    f_path = os.path.join(dataset_dir, file)
+    df = pd.read_csv(f_path)
     for symbol in df['Symbol'].tolist():
         scraped_data = scrape_stock_info(symbol)
         # time.sleep(random.randint(5, 30))
@@ -247,10 +274,11 @@ def scrape_stock_list(file):
     #     'Symbol', 'open', '52_wk_low', '52_wk_hi', 'volume', 'avg_volume', 'market_cap', 'PE_ratio', 'EPS_ratio'])
 
     # print(stock_df)
-    curr_dir = os.path.dirname(os.path.realpath(__file__))
+
     log_time = time.strftime('%y_%m_%d-%H%M%S')
-    file_name = 'dataset' + log_time + '.csv'
-    path = os.path.join(curr_dir, file_name)
+    file_name = file[:-4] + log_time + '.csv'
+    # path = os.path.join(curr_dir, file_name)
+    path = os.path.join(dataset_dir, file_name)
     stock_df.to_csv(path, index=False)
 
 

@@ -7,7 +7,7 @@ function Spinner() {
       <img
         src={loading}
         alt="Gathering Info..."
-        className="rounded mx-auto d-block"
+        className="rounded mx-auto d-block spinner"
       />
     </div>
   );

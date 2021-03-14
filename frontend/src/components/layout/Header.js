@@ -17,6 +17,7 @@ import {
 } from "mdbreact";
 import { useHistory } from "react-router-dom";
 import { Alert } from "react-bootstrap";
+import favicon from "../../img/favicon-32x32.png";
 // import { auth } from "../auth/firebase";
 
 export default function Header(props) {
@@ -63,6 +64,7 @@ export default function Header(props) {
 
   return (
     <MDBNavbar color="unique-color-dark" dark expand="md">
+      <img src={favicon} alt="icon" />
       <MDBNavbarBrand>
         <strong className="white-text">{branding}</strong>
       </MDBNavbarBrand>
@@ -91,6 +93,16 @@ export default function Header(props) {
                   <MDBIcon icon="lightbulb" /> Insight
                 </MDBNavLink>
               </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink to="/sectors">
+                  <MDBIcon icon="chart-line" /> Performance
+                </MDBNavLink>
+              </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink to="/porfolio">
+                  <MDBIcon icon="folder-open" /> Porfolio
+                </MDBNavLink>
+              </MDBNavItem>
             </>
           ) : (
             <>
@@ -106,7 +118,12 @@ export default function Header(props) {
               </MDBNavItem>
               <MDBNavItem>
                 <MDBNavLink to="/about">
-                  <MDBIcon icon="question" /> About
+                  <MDBIcon icon="question-circle" /> About
+                </MDBNavLink>
+              </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink to="/contact">
+                  <MDBIcon icon="headset" /> Contact Us
                 </MDBNavLink>
               </MDBNavItem>
             </>

@@ -111,7 +111,7 @@ export default function Signup() {
       setConfirmedPasswordError("");
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
-      history.push("/");
+      history.push("/login");
     } catch {
       if (emailRef.current.value === "") {
         setEmailError("Please enter email");
@@ -133,7 +133,7 @@ export default function Signup() {
         className="d-flex align-items-center justify-content-center"
         style={{ minHeight: "100vh" }}
       >
-        <MDBAnimation type="fadeInUp" delay=".3s">
+        <MDBAnimation type="fadeInUp" delay=".3s" className="d-none d-md-block">
           <div className="container">
             <Particles params={options} />
             <h3>Analyze your favorite brand and more</h3>

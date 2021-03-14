@@ -11,6 +11,7 @@ import {
   MDBAnimation,
 } from "mdbreact";
 import images from "../../img/admin-new.png";
+import Spinner from "../layout/Spinners";
 
 class FindStock extends Component {
   constructor(props) {
@@ -42,14 +43,21 @@ class FindStock extends Component {
       // console.log(this.state.errors);
       return;
     }
-    this.setState({ symbol_stock: symbol, hasData: true, data: {} });
+    this.setState({ symbol_stock: symbol, data: {} });
 
     // console.log(symbol);
     // Send request to django endpoint
-    const res = await axios(`api/getstock/${symbol}/`);
-    const data = await JSON.parse(res.data);
-    // console.log(data);
-    this.setState({ data: data });
+    await axios(`https://brandvalueanalysis.net/api/getstock/${symbol}/`, {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then((res) => {
+        // console.log(res);
+        this.setState({ data: res.data, hasData: true });
+      })
+      .catch((err) => console.log(err));
 
     // clear state after submitting form
     this.setState({
@@ -64,9 +72,6 @@ class FindStock extends Component {
     // uncomment below for controlled component
     const { symbol, errors, data, symbol_stock, hasData, loading } = this.state;
 
-    // uncomment below for uncontrolled component
-    // const { symbol } = this.props;
-
     return (
       <div className="container">
         <MDBView>
@@ -75,7 +80,7 @@ class FindStock extends Component {
             style={{
               height: "100%",
               width: "100%",
-              paddingTop: "10rem",
+              paddingTop: "5rem",
               paddingBottom: "10rem",
             }}
             className="d-flex justify-content-center align-items-center"
@@ -110,7 +115,7 @@ class FindStock extends Component {
                             value={symbol}
                             onChange={this.onChange}
                             error={errors.symbol}
-                            maxLength="4"
+                            maxLength="5"
                           />
                         </div>
                         <input
@@ -125,7 +130,7 @@ class FindStock extends Component {
                 </MDBAnimation>
               </MDBCol>
 
-              <MDBCol md="6" xl="5" className="mt-xl-5">
+              <MDBCol md="6" xl="5" className="mt-xl-5 d-none d-md-block">
                 <MDBAnimation type="fadeInRight" delay=".3s">
                   <img src={images} alt="tech" className="img-fluid" />
                 </MDBAnimation>
@@ -133,6 +138,8 @@ class FindStock extends Component {
             </MDBRow>
           </MDBContainer>
         </MDBView>
+
+        {loading && <Spinner />}
 
         {hasData && (
           <Stock

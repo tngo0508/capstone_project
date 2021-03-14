@@ -49,12 +49,13 @@ export default function HomePage() {
                   </div>
                 </MDBAnimation>
               </div>
+
               <div className="col-lg-4" style={{ paddingTop: "150px" }}>
                 <MDBAnimation reveal type="fadeInRight" delay=".3s">
                   <img
                     src="https://source.unsplash.com/random/700x700?stockmarket"
                     alt=""
-                    className="img-fluid rounded-circle d-none d-md-block"
+                    className="img-fluid rounded-circle d-sm-block d-none"
                   />
                 </MDBAnimation>
               </div>

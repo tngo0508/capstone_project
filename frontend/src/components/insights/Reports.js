@@ -53,6 +53,7 @@ class Reports extends Component {
         //   })
         // );
         // console.log(response.data.finance.result.reports.publishedOn);
+        // console.log(response.data);
         this.setState({
           data: {
             columns: [
@@ -91,7 +92,7 @@ class Reports extends Component {
         console.error(error);
       });
 
-    console.log(this.state.data);
+    // console.log(this.state.data);
 
     this.setState({
       symbol: "",
@@ -108,7 +109,7 @@ class Reports extends Component {
         style={{
           height: "100%",
           width: "100%",
-          paddingTop: "10rem",
+          paddingTop: "5rem",
           paddingBottom: "10rem",
         }}
       >
@@ -126,7 +127,7 @@ class Reports extends Component {
                     value={symbol}
                     onChange={this.onChange}
                     error={errors.symbol}
-                    maxLength="4"
+                    maxLength="5"
                   />
                   <input
                     disabled={loading}

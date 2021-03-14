@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
 import { Link } from "react-router-dom";
+import favicon from "../../img/favicon-32x32-footer.png";
 
 class Footer extends Component {
   render() {
     return (
       <>
-        <MDBFooter color="stylish-color" className="font-small pt-4 mt-4">
+        <MDBFooter color="stylish-color" className="font-small pt-4">
           <MDBContainer>
             <MDBContainer fluid className="text-center text-md-left m-3">
               <MDBRow>
@@ -21,10 +22,21 @@ class Footer extends Component {
                   <p className="font-weight-bold text-uppercase my-3">
                     Stay connected
                   </p>
-                  <i className="fab fa-twitter fa-2x"></i>
-                  <i className="fab fa-facebook fa-2x mx-3"></i>
-                  <i className="fab fa-linkedin-in fa-2x mx-3"></i>
-                  <i className="fab fa-youtube fa-2x mx-3"></i>
+                  <a href="https://twitter.com/">
+                    <i className="fab fa-twitter fa-2x"></i>
+                  </a>
+                  <a href="https://www.facebook.com/">
+                    <i className="fab fa-facebook fa-2x mx-3"></i>
+                  </a>
+                  <a href="https://www.linkedin.com/in/thomas-ngo-4a6984138/">
+                    <i className="fab fa-linkedin-in fa-2x mx-3"></i>
+                  </a>
+                  <a href="https://www.youtube.com/">
+                    <i className="fab fa-youtube fa-2x mx-3"></i>
+                  </a>
+                  <a href="https://github.com/tngo0508">
+                    <i className="fab fa-github fa-2x mx-3"></i>
+                  </a>
                 </MDBCol>
                 <MDBCol md="4" className="text-md-right">
                   <h5 className="title">Quick Links</h5>
@@ -38,11 +50,17 @@ class Footer extends Component {
                     <li className="list-unstyled">
                       <Link to="/login">Log In</Link>
                     </li>
+                    <li className="list-unstyled">
+                      <Link to="/about">About</Link>
+                    </li>
                   </ul>
                 </MDBCol>
                 <MDBCol md="4" className="text-md-right">
                   <h5 className="title">Useful Links</h5>
                   <ul>
+                    <li className="list-unstyled">
+                      <Link to="/contact">Contact Us</Link>
+                    </li>
                     <li className="list-unstyled">
                       <Link to="/term">Terms of Use</Link>
                     </li>
@@ -56,8 +74,13 @@ class Footer extends Component {
           </MDBContainer>
           <div className="footer-copyright text-center py-3">
             <MDBContainer fluid>
-              &copy; {new Date().getFullYear()}
-              <Link to="/"> BrandValueAnalysis </Link>
+              <i>&copy; {new Date().getFullYear()} Copyright</i>
+              <Link to="/">
+                {" "}
+                <img src={favicon} alt="icon" />
+                randValueAnalysis.info{" "}
+              </Link>
+              <i>All rights reserved.</i>
             </MDBContainer>
           </div>
         </MDBFooter>

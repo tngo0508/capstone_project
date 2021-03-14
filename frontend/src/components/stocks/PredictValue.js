@@ -163,9 +163,9 @@ class PredictValue extends Component {
       eps_ratio,
     });
 
-    const res = await axios({
+    await axios({
       method: "post",
-      url: "/api/predict/",
+      url: "https://brandvalueanalysis.net/api/predict/",
       data: {
         open,
         fifty_two_lo,
@@ -176,17 +176,15 @@ class PredictValue extends Component {
         pe_ratio,
         eps_ratio,
       },
-    }).catch((err) => {
-      console.log(err);
-      this.setState({ server_error: "backend server has issues" });
-    });
-
-    if (res) {
-      const data = await JSON.parse(res.data);
-      this.setState({ fair_value: data });
-      this.setState({ server_error: "" });
-      // console.log(this.state.fair_value);
-    }
+    })
+      .then((res) => {
+        this.setState({ fair_value: res.data });
+        this.setState({ server_error: "" });
+      })
+      .catch((err) => {
+        console.log(err);
+        this.setState({ server_error: "backend server has issues" });
+      });
 
     // clear state after submitting form
     this.setState({
