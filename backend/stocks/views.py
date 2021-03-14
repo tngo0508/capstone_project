@@ -1,3 +1,8 @@
+import json
+import joblib
+import numpy as np
+import os
+
 from collections import defaultdict
 from django.shortcuts import render
 from django.http import JsonResponse
@@ -7,10 +12,6 @@ from rest_framework.response import Response
 from .serializers import StockSerializer, SymbolSerializer
 from .models import Stock
 from .webscraper.stockscraper import scrape_stock_info
-import json
-import joblib
-import numpy as np
-import os
 
 
 class StockView(viewsets.ModelViewSet):
@@ -52,7 +53,7 @@ def predict_stock(request):
     try:
         curr_dir = os.path.dirname(os.path.realpath(__file__))
         model_file_path = os.path.join(
-            curr_dir, 'webscraper', 'stock_prediction_model_knn.pkl')
+            curr_dir, 'webscraper', 'trained_ML_model', 'stock_prediction_model_svm.pkl')
         model = joblib.load(model_file_path)
 
         # print(request.data)

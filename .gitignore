@@ -161,3 +161,4 @@ tmp_email/
 # custom
 *capstone
 *.log*
+/stockscrape_log

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[114]:
 
 
 import sys
@@ -13,6 +13,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pickle
 import joblib
+import glob
+import os
 
 from sklearn.metrics import roc_auc_score
 from sklearn.preprocessing import LabelEncoder
@@ -38,15 +40,41 @@ from keras.wrappers.scikit_learn import KerasClassifier
 print(sys.version)
 
 
-# In[ ]:
+# In[115]:
 
 
-df_train = pd.read_csv('dataset_train_NASDAQ100.csv')
-df_test = pd.read_csv('dataset_test_sp500.csv')
+# train original data
+# curr_dir = os.path.dirname(os.path.realpath(__file__))
+# df_train = pd.read_csv(os.path.join(curr_dir, 'backup_orignal_data', 'dataset_train_NASDAQ100.csv'))
+# df_test = pd.read_csv(os.path.join(curr_dir, 'backup_orignal_data', 'dataset_test_sp500.csv'))
+# df_train
+
+
+# In[116]:
+
+
+# train with the latest data
+__file__ = 'build_ML_model.ipynb'
+curr_dir = os.path.dirname(os.path.realpath(__file__))
+list_of_training_set_files = glob.glob(os.path.join(curr_dir, 'dataset', 'NASDAQ100-Symbols*.csv'))
+latest_data_train_file = max(list_of_training_set_files, key=os.path.getctime)
+print(f'TRAINING SET FILE: {latest_data_train_file}')
+list_of_test_set_files = glob.glob(os.path.join(curr_dir, 'dataset', 'S&P500-Symbols*.csv'))
+latest_data_test_file = max(list_of_test_set_files, key=os.path.getctime)
+print(f'TEST SET FILE: {latest_data_test_file}')
+
+df_train = pd.read_csv(latest_data_train_file)
+df_test = pd.read_csv(latest_data_test_file)
 df_train
 
 
-# In[3]:
+# In[117]:
+
+
+df_test
+
+
+# In[118]:
 
 
 # perform preprocessing data before they can be used
@@ -67,11 +95,16 @@ df_test_drop_na = pd.merge(df_test_drop_na, df_train_drop_na, how='outer', indic
 p_df_train = df_train_drop_na.drop(['Symbol', 'target'], axis=1)
 p_df_test = df_test_drop_na.drop(['Symbol', 'target'], axis=1)
 
-# p_df_train
+p_df_train
+
+
+# In[119]:
+
+
 p_df_test
 
 
-# In[4]:
+# In[120]:
 
 
 # standardize features
@@ -80,7 +113,13 @@ sdd_df_test = ((p_df_test) - p_df_test.mean()) / p_df_test.std()
 sdd_df_train
 
 
-# In[5]:
+# In[121]:
+
+
+sdd_df_test
+
+
+# In[122]:
 
 
 # dump scaler for later use in backend API
@@ -92,7 +131,7 @@ train_scaler_file_name = 'train_scaler.pkl'
 joblib.dump(scaler, train_scaler_file_name)
 
 
-# In[6]:
+# In[123]:
 
 
 # balance dataset after standardization
@@ -101,21 +140,21 @@ X_train_ros, y_train_ros = ros.fit_resample(sdd_df_train, df_train_drop_na['targ
 X_test_ros, y_test_ros = ros.fit_resample(sdd_df_test, df_test_drop_na['target'])
 
 
-# In[7]:
+# In[124]:
 
 
 print('df_train_drop_na: ', len(df_train_drop_na['target']))
 print('df_test_drop_na: ', len(df_test_drop_na['target']))
 
 
-# In[8]:
+# In[125]:
 
 
 print('X_train_ros: ', len(X_train_ros))
 print('y_ros: ', len(y_test_ros))
 
 
-# In[9]:
+# In[126]:
 
 
 # perform analysis on unbalanced dataset
@@ -139,7 +178,7 @@ svm_score = svm.score(sdd_df_test, df_test_drop_na['target'])
 print("SVM classifer score (accuracy) = ", svm_score)
 
 
-# In[10]:
+# In[127]:
 
 
 # perform analysis on balanced dataset
@@ -163,7 +202,7 @@ svm_ros_score = svm_ros.score(X_train_ros, y_train_ros)
 print("SVM_ros classifer score (accuracy) = ", svm_ros_score)
 
 
-# In[11]:
+# In[128]:
 
 
 gnb_ros_y_pred = gnb_ros.predict(X_test_ros)
@@ -178,7 +217,7 @@ ax.xaxis.set_ticklabels(['Overvalued', 'Undervalued'])
 ax.yaxis.set_ticklabels(['Overvalued', 'Undervalued'])
 
 
-# In[12]:
+# In[129]:
 
 
 plt.clf() # clear figure
@@ -194,7 +233,7 @@ ax.xaxis.set_ticklabels(['Overvalued', 'Undervalued'])
 ax.yaxis.set_ticklabels(['Overvalued', 'Undervalued'])
 
 
-# In[13]:
+# In[130]:
 
 
 plt.clf() # clear figure
@@ -210,7 +249,7 @@ ax.xaxis.set_ticklabels(['Overvalued', 'Undervalued'])
 ax.yaxis.set_ticklabels(['Overvalued', 'Undervalued'])
 
 
-# In[14]:
+# In[131]:
 
 
 # use Area Under Curve (AUC) to determine which classifier is the best
@@ -235,7 +274,7 @@ print('roc_auc_score of KNN =', roc_auc_score_knn)
 print('roc_auc_score of SVM =', roc_auc_score_svm)
 
 
-# In[15]:
+# In[132]:
 
 
 print('df_train_drop_na', df_train_drop_na['target'].shape)
@@ -244,7 +283,7 @@ print('df_test_drop_na', df_test_drop_na['target'].shape)
 print('p_df_test', sdd_df_test.shape)
 
 
-# In[16]:
+# In[133]:
 
 
 X_train, X_test, y_train, y_test = train_test_split(X_test_ros, y_test_ros,test_size=0.1, random_state=42, shuffle=True)
@@ -298,14 +337,14 @@ print('results_test:', results_test)
 # X_train
 
 
-# In[17]:
+# In[134]:
 
 
 history_dict = history.history
 history_dict.keys()
 
 
-# In[18]:
+# In[135]:
 
 
 loss = history.history['loss']
@@ -320,7 +359,7 @@ plt.legend()
 plt.show()
 
 
-# In[19]:
+# In[136]:
 
 
 plt.clf()
@@ -335,7 +374,7 @@ plt.legend()
 plt.show()
 
 
-# In[20]:
+# In[137]:
 
 
 # define neural network model
@@ -351,11 +390,11 @@ def baseline_model():
     return model
 
 
-# In[21]:
+# In[138]:
 
 
 # evaluate model with k-fold cross validation
-estimator = KerasClassifier(build_fn=baseline_model, epochs=4, batch_size=8, verbose=0)
+estimator = KerasClassifier(build_fn=baseline_model, epochs=4, batch_size=20, verbose=0)
 kfold = KFold(n_splits=10, shuffle=True)
 
 label_encoder = LabelEncoder()
@@ -366,7 +405,7 @@ r = cross_val_score(estimator, X_test_ros, y_test_ros, cv=kfold)
 print("Baseline: %.2f%% (%.2f%%)" % (r.mean()*100, r.std()*100))
 
 
-# In[22]:
+# In[139]:
 
 
 # make prediction using model
@@ -375,7 +414,7 @@ y_pred = (y_pred > 0.55) # increase the threshold for overvalued because I want 
 # y_pred
 
 
-# In[23]:
+# In[140]:
 
 
 con_mat = confusion_matrix(y_test, y_pred)
@@ -389,14 +428,27 @@ ax.xaxis.set_ticklabels(['Overvalued', 'Undervalued'])
 ax.yaxis.set_ticklabels(['Overvalued', 'Undervalued'])
 
 
-# In[24]:
+# In[141]:
 
 
 # export model for backend API
-file_name = 'stock_prediction_model_knn.pkl'
-joblib.dump(knn_ros, file_name)
-# file_name = 'stock_prediction_model_ANN.pkl'
-# joblib.dump(model, file_name)
+model_dir = os.path.join(curr_dir, 'trained_ML_model')
+
+try:
+    os.makedirs(model_dir)
+except FileExistsError:
+    pass
+
+model_name = 'stock_prediction_model_svm.pkl'
+# model_name = 'stock_prediction_model_knn.pkl'
+# model_name = 'stock_prediction_model_ANN.pkl'
+
+
+model_path = os.path.join(curr_dir, 'trained_ML_model', model_name)
+
+joblib.dump(svm_ros, model_path)
+# joblib.dump(knn_ros, model_path)
+# joblib.dump(model, model_path)
 
 
 # In[ ]:

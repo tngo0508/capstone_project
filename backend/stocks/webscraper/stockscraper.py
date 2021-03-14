@@ -18,8 +18,7 @@ from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 from fake_useragent import UserAgent
 from sys import platform
-from stockscrape_logger import Logger
-
+from .stockscrape_logger import Logger
 
 Log = Logger(__name__)
 logger = Log.get()
@@ -43,9 +42,17 @@ options.add_argument("--disable-dev-shm-usage")
 options.add_argument('--log-level=3')
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
+curr_dir = os.path.dirname(os.path.realpath(__file__))
+dataset_dir = os.path.join(curr_dir, 'dataset')
+
+try:
+    os.makedirs(dataset_dir)
+except FileExistsError:
+    pass
+
 exec_path = ''
 try:
-    curr_dir = os.path.dirname(os.path.realpath(__file__))
+    # curr_dir = os.path.dirname(os.path.realpath(__file__))
     if platform == 'win32':
         chrome_exec_file = 'chromedriver.exe'
         chrome_dir = "win32"
@@ -71,28 +78,26 @@ def get_user_input():
     return input("Enter Stock: ")
 
 
-def create_stock_symbol_table(mode='sp500'):
-    # try:
-    #     file = 'constituents-financials_csv.csv'
-    #     df = pd.read_csv(file)
-    #     df['Symbol'].to_csv(r'stock_symbol.csv', index=False)
-    # except FileNotFoundError as e:
-    #     print(e)
+def make_path_to_dataset(file_name):
+    return os.path.join(dataset_dir, file_name)
 
+
+def create_stock_symbol_table(mode='sp500'):
     if mode == 'sp500':
         table = pd.read_html(
             'https://en.wikipedia.org/wiki/List_of_S%26P_500_companies')
         df = table[0]
-        # print(df)
-        df.to_csv('S&P500-Info.csv')
-        df.to_csv("S&P500-Symbols.csv", columns=['Symbol'])
+        df.to_csv(make_path_to_dataset('S&P500-Info.csv'))
+        df.to_csv(make_path_to_dataset(
+            'S&P500-Symbols.csv'), columns=['Symbol'])
     elif mode == 'nasdaq100':
         table = pd.read_html(
             'https://en.wikipedia.org/wiki/NASDAQ-100#Components')
         df = table[3]
         df = df.rename(columns={'Ticker': 'Symbol'})
-        df.to_csv('NASDAQ100-Info.csv')
-        df.to_csv("NASDAQ100-Symbols.csv", columns=['Symbol'])
+        df.to_csv(make_path_to_dataset('NASDAQ100-Info.csv'))
+        df.to_csv(make_path_to_dataset(
+            'NASDAQ100-Symbols.csv'), columns=['Symbol'])
 
 
 def scrape_stock_info(stock, mode='single'):
@@ -199,8 +204,11 @@ def scrape_stock_info(stock, mode='single'):
 
     # time.sleep(1)
     try:
-        re['target'] = soup.find(
+        target = soup.find(
             'div', class_='Fw(b) Fl(end)--m Fz(s) C($primaryColor').text
+        if target == 'Near Fair Value':
+            target = 'Undervalued'
+        re['target'] = target
     except AttributeError as e:
         logger.error('target')
         logger.error(e)
@@ -223,9 +231,17 @@ def scrape_stock_info(stock, mode='single'):
 
 
 def scrape_stock_list(file):
+    curr_dir = os.path.dirname(os.path.realpath(__file__))
+    dataset_dir = os.path.join(curr_dir, 'dataset')
+
+    try:
+        os.makedirs(dataset_dir)
+    except FileExistsError:
+        pass
     data = defaultdict(list)
     letter = {'T': 1000000000000, 'K': 1000, 'M': 1000000, 'B': 1000000000}
-    df = pd.read_csv(file)
+    f_path = os.path.join(dataset_dir, file)
+    df = pd.read_csv(f_path)
     for symbol in df['Symbol'].tolist():
         scraped_data = scrape_stock_info(symbol)
         # time.sleep(random.randint(5, 30))
@@ -258,10 +274,11 @@ def scrape_stock_list(file):
     #     'Symbol', 'open', '52_wk_low', '52_wk_hi', 'volume', 'avg_volume', 'market_cap', 'PE_ratio', 'EPS_ratio'])
 
     # print(stock_df)
-    curr_dir = os.path.dirname(os.path.realpath(__file__))
+
     log_time = time.strftime('%y_%m_%d-%H%M%S')
-    file_name = file + log_time + '.csv'
-    path = os.path.join(curr_dir, file_name)
+    file_name = file[:-4] + log_time + '.csv'
+    # path = os.path.join(curr_dir, file_name)
+    path = os.path.join(dataset_dir, file_name)
     stock_df.to_csv(path, index=False)
 
 
@@ -273,6 +290,6 @@ if __name__ == "__main__":
     # scrape_stock_info('amzn')
     # scrape_stock_info('goog')
     # scrape_stock_info('bf.b')
-    # scrape_stock_list('S&P500-Symbols')
-    # scrape_stock_list('NASDAQ100-Symbols')
+    # scrape_stock_list('S&P500-Symbols.csv')
+    # scrape_stock_list('NASDAQ100-Symbols.csv')
     driver.quit()
