@@ -104,7 +104,7 @@ class Stock extends Component {
         </div>
       );
     } else {
-      return <Spinner />;
+      return null;
     }
   }
 }
