@@ -15,10 +15,10 @@ create_stock_symbol_table('nasdaq100')
 logger.info('Create S&P500-info TABLE')
 create_stock_symbol_table('sp500')
 
-logger.info('Create TRAINING SET using NASDAQ100')
+logger.info('Create TEST SET using NASDAQ100')
 scrape_stock_list('NASDAQ100-Symbols.csv')
 
-logger.info('Create TEST SET using S&P500')
+logger.info('Create TRAINING SET using S&P500')
 scrape_stock_list('S&P500-Symbols.csv')
 
 stop = timeit.default_timer()
