@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Spinner from "../layout/Spinners";
 import DailyStocks from "../stocks/DailyStocks";
 import StockProfile from "./StockProfile";
 import NewsFeeds from "./NewsFeeds";
