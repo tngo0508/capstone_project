@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[113]:
 
 
 import sys
@@ -40,7 +40,7 @@ from keras.wrappers.scikit_learn import KerasClassifier
 print(sys.version)
 
 
-# In[2]:
+# In[114]:
 
 
 # train original data
@@ -50,17 +50,17 @@ print(sys.version)
 # df_train
 
 
-# In[3]:
+# In[115]:
 
 
 # train with the latest data
 __file__ = 'build_ML_model.ipynb'
 curr_dir = os.path.dirname(os.path.realpath(__file__))
-list_of_training_set_files = glob.glob(os.path.join(curr_dir, 'dataset', 'NASDAQ100-Symbols[0-9]*.csv'))
+list_of_training_set_files = glob.glob(os.path.join(curr_dir, 'dataset', 'S&P500-Symbols[0-9]*.csv'))
 latest_data_train_file = max(list_of_training_set_files, key=os.path.getctime)
 print(f'TRAINING SET FILE: {latest_data_train_file}')
 
-list_of_test_set_files = glob.glob(os.path.join(curr_dir, 'dataset', 'S&P500-Symbols[0-9]*.csv'))
+list_of_test_set_files = glob.glob(os.path.join(curr_dir, 'dataset', 'NASDAQ100-Symbols[0-9]*.csv'))
 latest_data_test_file = max(list_of_test_set_files, key=os.path.getctime)
 print(f'TEST SET FILE: {latest_data_test_file}')
 
@@ -70,13 +70,13 @@ df_test = pd.read_csv(latest_data_test_file)
 df_train
 
 
-# In[4]:
+# In[116]:
 
 
 df_test
 
 
-# In[5]:
+# In[117]:
 
 
 # perform preprocessing data before they can be used
@@ -100,13 +100,13 @@ p_df_test = df_test_drop_na.drop(['Symbol', 'target'], axis=1)
 p_df_train
 
 
-# In[6]:
+# In[118]:
 
 
 p_df_test
 
 
-# In[7]:
+# In[119]:
 
 
 # standardize features
@@ -115,13 +115,13 @@ sdd_df_test = ((p_df_test) - p_df_test.mean()) / p_df_test.std()
 sdd_df_train
 
 
-# In[8]:
+# In[120]:
 
 
 sdd_df_test
 
 
-# In[9]:
+# In[121]:
 
 
 # dump scaler for later use in backend API
@@ -133,7 +133,7 @@ train_scaler_file_name = 'train_scaler.pkl'
 joblib.dump(scaler, train_scaler_file_name)
 
 
-# In[10]:
+# In[122]:
 
 
 # balance dataset after standardization
@@ -142,21 +142,21 @@ X_train_ros, y_train_ros = ros.fit_resample(sdd_df_train, df_train_drop_na['targ
 X_test_ros, y_test_ros = ros.fit_resample(sdd_df_test, df_test_drop_na['target'])
 
 
-# In[57]:
+# In[123]:
 
 
 print('df_train_drop_na: ', len(df_train_drop_na['target']))
 print('df_test_drop_na: ', len(df_test_drop_na['target']))
 
 
-# In[58]:
+# In[124]:
 
 
 print('X_train_ros: ', len(X_train_ros))
 print('y_ros: ', len(y_test_ros))
 
 
-# In[59]:
+# In[125]:
 
 
 # perform analysis on unbalanced dataset
@@ -180,7 +180,7 @@ svm_score = svm.score(sdd_df_test, df_test_drop_na['target'])
 print("SVM classifer score (accuracy) = ", svm_score)
 
 
-# In[60]:
+# In[126]:
 
 
 # perform analysis on balanced dataset
@@ -204,7 +204,7 @@ svm_ros_score = svm_ros.score(X_train_ros, y_train_ros)
 print("SVM_ros classifer score (accuracy) = ", svm_ros_score)
 
 
-# In[61]:
+# In[127]:
 
 
 gnb_ros_y_pred = gnb_ros.predict(X_test_ros)
@@ -219,7 +219,7 @@ ax.xaxis.set_ticklabels(['Overvalued', 'Undervalued'])
 ax.yaxis.set_ticklabels(['Overvalued', 'Undervalued'])
 
 
-# In[62]:
+# In[128]:
 
 
 plt.clf() # clear figure
@@ -235,7 +235,7 @@ ax.xaxis.set_ticklabels(['Overvalued', 'Undervalued'])
 ax.yaxis.set_ticklabels(['Overvalued', 'Undervalued'])
 
 
-# In[63]:
+# In[129]:
 
 
 plt.clf() # clear figure
@@ -251,7 +251,7 @@ ax.xaxis.set_ticklabels(['Overvalued', 'Undervalued'])
 ax.yaxis.set_ticklabels(['Overvalued', 'Undervalued'])
 
 
-# In[64]:
+# In[130]:
 
 
 # use Area Under Curve (AUC) to determine which classifier is the best
@@ -276,7 +276,7 @@ print('roc_auc_score of KNN =', roc_auc_score_knn)
 print('roc_auc_score of SVM =', roc_auc_score_svm)
 
 
-# In[65]:
+# In[131]:
 
 
 print('df_train_drop_na', df_train_drop_na['target'].shape)
@@ -285,7 +285,7 @@ print('df_test_drop_na', df_test_drop_na['target'].shape)
 print('p_df_test', sdd_df_test.shape)
 
 
-# In[66]:
+# In[132]:
 
 
 X_train, X_test, y_train, y_test = train_test_split(X_test_ros, y_test_ros,test_size=0.1, random_state=42, shuffle=True)
@@ -339,14 +339,14 @@ print('results_test:', results_test)
 # X_train
 
 
-# In[67]:
+# In[133]:
 
 
 history_dict = history.history
 history_dict.keys()
 
 
-# In[68]:
+# In[134]:
 
 
 loss = history.history['loss']
@@ -361,7 +361,7 @@ plt.legend()
 plt.show()
 
 
-# In[69]:
+# In[135]:
 
 
 plt.clf()
@@ -376,7 +376,7 @@ plt.legend()
 plt.show()
 
 
-# In[70]:
+# In[136]:
 
 
 # define neural network model
@@ -392,7 +392,7 @@ def baseline_model():
     return model
 
 
-# In[71]:
+# In[137]:
 
 
 # evaluate model with k-fold cross validation
@@ -407,7 +407,7 @@ r = cross_val_score(estimator, X_test_ros, y_test_ros, cv=kfold)
 print("Baseline: %.2f%% (%.2f%%)" % (r.mean()*100, r.std()*100))
 
 
-# In[72]:
+# In[138]:
 
 
 # make prediction using model
@@ -416,7 +416,7 @@ y_pred = (y_pred > 0.55) # increase the threshold for overvalued because I want 
 # y_pred
 
 
-# In[73]:
+# In[139]:
 
 
 con_mat = confusion_matrix(y_test, y_pred)
@@ -430,7 +430,7 @@ ax.xaxis.set_ticklabels(['Overvalued', 'Undervalued'])
 ax.yaxis.set_ticklabels(['Overvalued', 'Undervalued'])
 
 
-# In[74]:
+# In[140]:
 
 
 # export model for backend API
