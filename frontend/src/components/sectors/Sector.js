@@ -12,6 +12,8 @@ import {
   MDBTableHead,
   MDBCard,
   MDBBadge,
+  MDBTooltip,
+  MDBAlert,
 } from "mdbreact";
 import DeerParticles from "../layout/DeerParticles";
 
@@ -71,11 +73,40 @@ class Sector extends Component {
   };
 
   create_table_row = (arr) => {
+    let sector_description = {};
+    sector_description["Consumer Discretionary"] =
+      "Companies in the Consumer Discretionary sector manufacture goods or provide services that people want but, don't necessarily need, such as high-definition televisions, new cars, and family vacations.";
+    sector_description["Real Estate"] =
+      "The Real Estate sector is primarily made up of companies that own commercial real estate properties. A large portion of the companies are structured as Real Estate Investment Trusts (REITs).";
+    sector_description["Consumer Staples"] =
+      "The Consumer Staples sector consists of companies that provide goods and services that people use on a daily basis, like food, clothing, or other personal products.";
+    sector_description["Financials"] =
+      "Companies in the Financials sector are engaged in businesses such as banking and brokerage, mortgage finance, and insurance.";
+    sector_description["Industrials"] =
+      "The Industrials sector includes companies that manufacture and distribute capital goods in support of industries such as aerospace and defense, construction and engineering, and electrical equipment and heavy machinery.";
+    sector_description["Materials"] =
+      "The Materials sector consists of companies that are engaged in the manufacturing or processing of materials such as chemicals and plastics or paper and packaging, or the extraction of metals and minerals.";
+    sector_description["Utilities"] =
+      "The Utilities sector includes companies that engage in the production and delivery of electric power, natural gas, water, and other utility services, such as steam and cooled air.";
+    sector_description["Health Care"] =
+      "The Health Care sector includes companies engaged in the production and delivery of medicine and health care–related goods and services.";
+    sector_description["Information Technology"] =
+      " The Information Technology sector is comprised of companies that offer goods and services, including hardware, software, semiconductors, and consulting services.";
+    sector_description["Communication Services"] =
+      "Companies in the Communication Services sector facilitate communication or provide access to entertainment content and other information through various types of media.";
+    sector_description["Energy"] =
+      "The Energy sector consists of companies involved in the exploration, production, or management of energy resources such as oil and gas, as well as companies that service these industries.";
+
     return arr.map((sector, i) => (
       <React.Fragment key={sector}>
         <tr>
           <td>{i + 1}.</td>
-          <td>{sector[0]}</td>
+          <td>
+            <MDBTooltip domElement tag="span" placement="bottom">
+              <span className="dark-text">{sector[0]}</span>
+              <span>{sector_description[sector[0]]}</span>
+            </MDBTooltip>
+          </td>
           <td>
             {sector[1] > 0 ? (
               <h5>
@@ -107,24 +138,7 @@ class Sector extends Component {
     } else {
       this.getSectors();
     }
-    // const data = isSaveLocal
-    //   ? JSON.parse(sessionStorage.getItem("data"))
-    //   : this.getSectors().then((res) => {
-    //       data = res;
-    //     });
-    // console.log("break1");
-    // console.log(data);
-
     const ranking_today = this.sort_arr_dsc(data["Rank B: 1 Day Performance"]);
-
-    // let sortable = [];
-    // for (let sector in ranking_today) {
-    //   sortable.push([sector, parseFloat(ranking_today[sector])]);
-    // }
-
-    // const sorted_ranking_today = sortable.sort((a, b) => {
-    //   return b[1] - a[1];
-    // });
 
     this.setState({ ranking_today });
   }
@@ -154,8 +168,11 @@ class Sector extends Component {
     }
     return (
       <>
-        <MDBContainer>
+        <MDBContainer className="py-5">
           <h1 className="mt-5">Stock Market Performance</h1>
+          <MDBAlert color="info">
+            Note: Please hover or tap on each sector to read the description{" "}
+          </MDBAlert>
           <MDBNav className="nav-tabs mt-5">
             <MDBNavItem>
               <MDBNavLink
