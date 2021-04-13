@@ -224,7 +224,7 @@ export default function Porfolio() {
     }
 
     if (stocks) {
-      stocks[symbolName] = Number(parseFloat(fund, 10).toFixed(2));
+      stocks[symbolName.trim()] = Number(parseFloat(fund, 10).toFixed(2));
       const new_stocks = sort_dsc_by_value(stocks);
       setstocks(new_stocks);
 
@@ -232,7 +232,7 @@ export default function Porfolio() {
       ref.set(new_stocks).catch((err) => console.error(err));
     } else {
       const newStock = {};
-      newStock[symbolName] = fund;
+      newStock[symbolName.trim()] = fund;
       ref.set(newStock).catch((err) => console.error(err));
     }
 

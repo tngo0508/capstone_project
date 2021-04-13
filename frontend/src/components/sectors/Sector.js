@@ -171,7 +171,7 @@ class Sector extends Component {
         <MDBContainer className="py-5">
           <h1 className="mt-5">Stock Market Performance</h1>
           <MDBAlert color="info">
-            Note: Please hover or tap on each sector to read the description{" "}
+            Note: Please hover or tap on each sector to read the description.{" "}
           </MDBAlert>
           <MDBNav className="nav-tabs mt-5">
             <MDBNavItem>

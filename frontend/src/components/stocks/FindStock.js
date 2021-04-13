@@ -43,16 +43,19 @@ class FindStock extends Component {
       // console.log(this.state.errors);
       return;
     }
-    this.setState({ symbol_stock: symbol, data: {} });
+    this.setState({ symbol_stock: symbol.trim(), data: {} });
 
     // console.log(symbol);
     // Send request to django endpoint
-    await axios(`https://brandvalueanalysis.net/api/getstock/${symbol}/`, {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
+    await axios(
+      `https://brandvalueanalysis.net/api/getstock/${symbol.trim()}/`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    )
       .then((res) => {
         // console.log(res);
         this.setState({ data: res.data, hasData: true });
