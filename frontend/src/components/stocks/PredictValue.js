@@ -2,7 +2,13 @@ import axios from "axios";
 import React, { Component } from "react";
 import TextFairValue from "../layout/TextFairValue";
 import TextInputGroup from "../layout/TextInputGroup";
-import { Accordion, Card, Button, Container } from "react-bootstrap";
+import {
+  Accordion,
+  Card,
+  Button,
+  Container,
+  ProgressBar,
+} from "react-bootstrap";
 import {
   MDBContainer,
   MDBRow,
@@ -20,6 +26,7 @@ import BackgroundImg from "../../img/shattered-island.gif";
 import SampleDataImg from "../../img/sample_data_set.png";
 import BackendDesignImg from "../../img/backend_design.png";
 import AccImg from "../../img/accuracy_sample.png";
+import _ from "lodash";
 
 class PredictValue extends Component {
   constructor(props) {
@@ -38,9 +45,185 @@ class PredictValue extends Component {
     fair_value: "",
     errors: {},
     server_error: "",
+    progress_bar_val: 0,
+    is_open_filled: false,
+    is_fifty_two_lo_filled: false,
+    is_fifty_two_hi_filled: false,
+    is_volume_filled: false,
+    is_avg_volume_filled: false,
+    is_market_cap_filled: false,
+    is_pe_ratio_filled: false,
+    is_eps_ratio_filled: false,
   };
 
-  onChange = (e) => this.setState({ [e.target.name]: e.target.value });
+  onChange = (e) => {
+    const {
+      progress_bar_val,
+      is_open_filled,
+      is_fifty_two_lo_filled,
+      is_fifty_two_hi_filled,
+      is_volume_filled,
+      is_avg_volume_filled,
+      is_market_cap_filled,
+      is_pe_ratio_filled,
+      is_eps_ratio_filled,
+    } = this.state;
+
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+
+    if (
+      !_.isEmpty(e.target.value) &&
+      !is_open_filled &&
+      e.target.name === "open" &&
+      progress_bar_val < 8
+    ) {
+      this.setState({
+        progress_bar_val: progress_bar_val + 1,
+        is_open_filled: true,
+      });
+    } else if (
+      _.isEmpty(e.target.value) &&
+      e.target.name === "open" &&
+      progress_bar_val > 0
+    ) {
+      this.setState({ progress_bar_val: progress_bar_val - 1, is_open: false });
+    } else if (
+      !_.isEmpty(e.target.value) &&
+      !is_fifty_two_lo_filled &&
+      e.target.name === "fifty_two_lo" &&
+      progress_bar_val < 8
+    ) {
+      this.setState({
+        progress_bar_val: progress_bar_val + 1,
+        is_fifty_two_lo_filled: true,
+      });
+    } else if (
+      _.isEmpty(e.target.value) &&
+      e.target.name === "fifty_two_lo" &&
+      progress_bar_val > 0
+    ) {
+      this.setState({
+        progress_bar_val: progress_bar_val - 1,
+        is_fifty_two_lo_filled: false,
+      });
+    } else if (
+      !_.isEmpty(e.target.value) &&
+      !is_fifty_two_hi_filled &&
+      e.target.name === "fifty_two_hi" &&
+      progress_bar_val < 8
+    ) {
+      this.setState({
+        progress_bar_val: progress_bar_val + 1,
+        is_fifty_two_hi_filled: true,
+      });
+    } else if (
+      _.isEmpty(e.target.value) &&
+      e.target.name === "fifty_two_hi" &&
+      progress_bar_val > 0
+    ) {
+      this.setState({
+        progress_bar_val: progress_bar_val - 1,
+        is_fifty_two_hi_filled: false,
+      });
+    } else if (
+      !_.isEmpty(e.target.value) &&
+      !is_volume_filled &&
+      e.target.name === "volume" &&
+      progress_bar_val < 8
+    ) {
+      this.setState({
+        progress_bar_val: progress_bar_val + 1,
+        is_volume_filled: true,
+      });
+    } else if (
+      _.isEmpty(e.target.value) &&
+      e.target.name === "volume" &&
+      progress_bar_val > 0
+    ) {
+      this.setState({
+        progress_bar_val: progress_bar_val - 1,
+        is_volume_filled: false,
+      });
+    } else if (
+      !_.isEmpty(e.target.value) &&
+      !is_avg_volume_filled &&
+      e.target.name === "avg_volume" &&
+      progress_bar_val < 8
+    ) {
+      this.setState({
+        progress_bar_val: progress_bar_val + 1,
+        is_avg_volume_filled: true,
+      });
+    } else if (
+      _.isEmpty(e.target.value) &&
+      e.target.name === "avg_volume" &&
+      progress_bar_val > 0
+    ) {
+      this.setState({
+        progress_bar_val: progress_bar_val - 1,
+        is_avg_volume_filled: false,
+      });
+    } else if (
+      !_.isEmpty(e.target.value) &&
+      !is_market_cap_filled &&
+      e.target.name === "market_cap" &&
+      progress_bar_val < 8
+    ) {
+      this.setState({
+        progress_bar_val: progress_bar_val + 1,
+        is_market_cap_filled: true,
+      });
+    } else if (
+      _.isEmpty(e.target.value) &&
+      e.target.name === "market_cap" &&
+      progress_bar_val > 0
+    ) {
+      this.setState({
+        progress_bar_val: progress_bar_val - 1,
+        is_market_cap_filled: false,
+      });
+    } else if (
+      !_.isEmpty(e.target.value) &&
+      !is_pe_ratio_filled &&
+      e.target.name === "pe_ratio" &&
+      progress_bar_val < 8
+    ) {
+      this.setState({
+        progress_bar_val: progress_bar_val + 1,
+        is_pe_ratio_filled: true,
+      });
+    } else if (
+      _.isEmpty(e.target.value) &&
+      e.target.name === "pe_ratio" &&
+      progress_bar_val > 0
+    ) {
+      this.setState({
+        progress_bar_val: progress_bar_val - 1,
+        is_pe_ratio_filled: false,
+      });
+    } else if (
+      !_.isEmpty(e.target.value) &&
+      !is_eps_ratio_filled &&
+      e.target.name === "eps_ratio" &&
+      progress_bar_val < 8
+    ) {
+      this.setState({
+        progress_bar_val: progress_bar_val + 1,
+        is_eps_ratio_filled: true,
+      });
+    } else if (
+      _.isEmpty(e.target.value) &&
+      e.target.name === "eps_ratio" &&
+      progress_bar_val > 0
+    ) {
+      this.setState({
+        progress_bar_val: progress_bar_val - 1,
+        is_eps_ratio_filled: false,
+      });
+    }
+  };
 
   onSubmit = async (e) => {
     // console.log("submit");
@@ -215,6 +398,15 @@ class PredictValue extends Component {
       pe_ratio: "",
       eps_ratio: "",
       errors: {},
+      progress_bar_val: 0,
+      is_open_filled: false,
+      is_fifty_two_lo_filled: false,
+      is_fifty_two_hi_filled: false,
+      is_volume_filled: false,
+      is_avg_volume_filled: false,
+      is_market_cap_filled: false,
+      is_pe_ratio_filled: false,
+      is_eps_ratio_filled: false,
     });
   };
 
@@ -231,7 +423,22 @@ class PredictValue extends Component {
       fair_value,
       errors,
       server_error,
+      progress_bar_val,
     } = this.state;
+
+    const progress_bar_percent = (progress_bar_val / 8) * 100;
+    let progress_bar_variant = "danger";
+    if (progress_bar_percent <= 20) {
+      progress_bar_variant = "danger";
+    } else if (progress_bar_percent <= 40) {
+      progress_bar_variant = "info";
+    } else if (progress_bar_percent <= 60) {
+      progress_bar_variant = "primary";
+    } else if (progress_bar_percent <= 80) {
+      progress_bar_variant = "warning";
+    } else {
+      progress_bar_variant = "success";
+    }
 
     return (
       <>
@@ -359,6 +566,12 @@ class PredictValue extends Component {
                     </div>
                   </div>
                 </div>
+                <ProgressBar
+                  variant={progress_bar_variant}
+                  now={progress_bar_percent}
+                  label={`${progress_bar_percent}%`}
+                  className="my-3"
+                />
               </form>
             </div>
             {fair_value && <TextFairValue val={fair_value.fair_value} />}
@@ -650,8 +863,8 @@ class PredictValue extends Component {
                   </div>
                   <MDBAlert color="warning">
                     WARNING: The model is not entirely accurate. The accuracy
-                    usually vary every 3 hours. Besides, the model may prone to
-                    overfitting or underfitting.
+                    usually vary every 3 hours. Besides, the model might be
+                    prone to overfitting or underfitting.
                   </MDBAlert>
                 </Card.Body>
               </Accordion.Collapse>
