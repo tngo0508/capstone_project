@@ -386,63 +386,6 @@ export default function About() {
           </div>
         </div>
       </section>
-      {/* <form>
-          <h2>Get Feedback</h2>
-          <Editor
-            apiKey="jlmgdmuom8f3vxnots0qgipbgupc4jdgbfjud7ysr0vbtilm"
-            initialValue="<p>Welcome to BVA</p>"
-            init={{
-              height: 300,
-              menubar: true,
-              plugins: [
-                "advlist autolink lists link image",
-                "charmap print preview anchor help",
-                "searchreplace visualblocks code",
-                "insertdatetime media table paste wordcount",
-              ],
-              toolbar:
-                "undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | help",
-            }}
-            onChange={onChange}
-          />
-        </form> */}
-      {/* <p className="text-secondary">Version 1.0.0</p> */}
-      {/* <Particles
-        params={{
-          particles: {
-            color: {
-              value: "#000",
-            },
-            number: {
-              value: 100,
-              density: {
-                enable: true,
-                value_area: 1000,
-              },
-            },
-            line_linked: {
-              color: {
-                value: "#000",
-              },
-            },
-            size: {
-              value: 4,
-            },
-          },
-          interactivity: {
-            events: {
-              onhover: {
-                enable: true,
-                mode: "grab",
-              },
-            },
-            onclick: {
-              enable: true,
-              mode: "push",
-            },
-          },
-        }}
-      /> */}
     </>
   );
 }
