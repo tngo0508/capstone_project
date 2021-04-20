@@ -557,6 +557,111 @@ class PredictValue extends Component {
                   </div>
 
                   <div className="container">
+                    <h5>
+                      <MDBIcon icon="shield-alt" size="1x" /> Label Information
+                    </h5>
+                    <ul>
+                      <li>
+                        The price of the first trade for any listed stock is its
+                        daily{" "}
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href="https://www.investopedia.com/terms/o/openingprice.asp#:~:text=What%20Is%20Opening%20Price%3F,is%20its%20daily%20opening%20price."
+                        >
+                          <b>
+                            <em>opening price</em>
+                          </b>
+                        </a>
+                        .
+                      </li>
+                      <li>
+                        The{" "}
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href="https://www.financestrategists.com/finance-terms/52-week-high-low/#:~:text=The%2052%2Dweek%20high%2Flow,help%20predict%20its%20future%20movements."
+                        >
+                          <b>
+                            <em>52-week high/low</em>
+                          </b>
+                        </a>{" "}
+                        is the highest and lowest price has traded over the
+                        prior 52-week period.
+                      </li>
+                      <li>
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href="https://www.investopedia.com/articles/technical/02/010702.asp#:~:text=Volume%20measures%20the%20number%20of,viewed%20as%20strong%20and%20healthy."
+                        >
+                          <b>
+                            <em>Volume</em>
+                          </b>
+                        </a>{" "}
+                        can be an indicator of market strength, as rising
+                        markets on increasing volume are typically viewed as
+                        strong and healthy.
+                      </li>
+                      <li>
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href="https://www.investopedia.com/terms/a/averagedailytradingvolume.asp#:~:text=Average%20daily%20trading%20volume%20(ADTV)%20is%20the%20average%20number%20of,find%20the%20average%20daily%20volume."
+                        >
+                          <b>
+                            <em>Average daily trading volume (ADTV)</em>
+                          </b>
+                        </a>{" "}
+                        is the average number of shares traded within a day in a
+                        given stock.
+                      </li>
+                      <li>
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href="https://www.fidelity.com/learning-center/trading-investing/fundamental-analysis/understanding-market-capitalization#:~:text=%22market%20caps.%22-,Market%20cap%E2%80%94or%20market%20capitalization%E2%80%94refers%20to%20the%20total%20value,market%20cap%20of%20%241%20billion."
+                        >
+                          <b>
+                            <em>Market cap</em>
+                          </b>
+                        </a>
+                        —or market capitalization—refers to the total value of
+                        all a company's shares of stock. It is calculated by
+                        multiplying the price of a stock by its total number of
+                        outstanding shares.
+                      </li>
+                      <li>
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href="https://www.investopedia.com/terms/t/ttm.asp#:~:text=The%20price%2Fearnings%20ratio%20is,earnings%20per%20share%20(EPS).&text=This%20marked%20improvement%20provides%20a%20clear%20snapshot%20of%20the%20company's%20growth%20trajectory."
+                        >
+                          <b>
+                            <em>The price/earnings ratio</em>
+                          </b>
+                        </a>{" "}
+                        is often referred to as P/E (TTM) and is calculated as
+                        the stock's current price, divided by a company's
+                        trailing 12-month earnings per share (EPS).
+                      </li>
+                      <li>
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href="https://www.bankrate.com/glossary/e/earnings-per-share/#:~:text=Earnings%20per%20share%20(EPS)%20is,its%20shares%20of%20stock%20outstanding."
+                        >
+                          <b>
+                            <em>Earnings per share (EPS)</em>
+                          </b>
+                        </a>{" "}
+                        is a figure describing a public company’s profit per
+                        outstanding share of stock, calculated on a quarterly or
+                        annual basis. EPS is arrived at by taking a company’s
+                        quarterly or annual net income and dividing by the
+                        number of its shares of stock outstanding.
+                      </li>
+                    </ul>
                     <div className="text-right">
                       <input
                         type="submit"
@@ -617,7 +722,7 @@ class PredictValue extends Component {
             <Card>
               <Card.Header>
                 <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                  How does this featue estimate the brand or stock value?{" "}
+                  How does this feature estimate the brand or stock value?{" "}
                   <MDBIcon icon="caret-down" />
                 </Accordion.Toggle>
               </Card.Header>
@@ -669,14 +774,14 @@ class PredictValue extends Component {
             <Card>
               <Card.Header>
                 <Accordion.Toggle as={Button} variant="link" eventKey="3">
-                  What is the training set? <MDBIcon icon="caret-down" />
+                  What is the test set? <MDBIcon icon="caret-down" />
                 </Accordion.Toggle>
               </Card.Header>
               <Accordion.Collapse eventKey="3">
                 <Card.Body>
-                  The training set is the list of NASDAQ100. The NASDAQ 100
-                  covers most of the largest technology companies in the United
-                  States and a number from the rest of the world.
+                  The test set is the list of NASDAQ100. The NASDAQ 100 covers
+                  most of the largest technology companies in the United States
+                  and a number from the rest of the world.
                   <br />
                   <a
                     target="_blank"
@@ -691,7 +796,7 @@ class PredictValue extends Component {
             <Card>
               <Card.Header>
                 <Accordion.Toggle as={Button} variant="link" eventKey="4">
-                  What is the test set? <MDBIcon icon="caret-down" />
+                  What is the training set? <MDBIcon icon="caret-down" />
                 </Accordion.Toggle>
               </Card.Header>
               <Accordion.Collapse eventKey="4">
