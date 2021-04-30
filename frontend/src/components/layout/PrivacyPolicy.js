@@ -459,22 +459,6 @@ export default function PrivacyPolicy() {
         require Your parent's consent before We collect and use that
         information.
       </p>
-      <h1>Children's Privacy</h1>
-      <p>
-        Our Service does not address anyone under the age of 13. We do not
-        knowingly collect personally identifiable information from anyone under
-        the age of 13. If You are a parent or guardian and You are aware that
-        Your child has provided Us with Personal Data, please contact Us. If We
-        become aware that We have collected Personal Data from anyone under the
-        age of 13 without verification of parental consent, We take steps to
-        remove that information from Our servers.
-      </p>
-      <p>
-        If We need to rely on consent as a legal basis for processing Your
-        information and Your country requires consent from a parent, We may
-        require Your parent's consent before We collect and use that
-        information.
-      </p>
       <h1>Links to Other Websites</h1>
       <p>
         Our Service may contain links to other websites that are not operated by
