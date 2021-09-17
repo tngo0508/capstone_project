@@ -36,7 +36,7 @@ class Reports extends Component {
         "https://yahoo-finance-low-latency.p.rapidapi.com/ws/insights/v1/finance/insights",
       params: { symbol: symbol.toUpperCase() },
       headers: {
-        "x-rapidapi-key": "e573b7a224msh2cb10ff25358022p1b71f1jsn0e0ef0747e4b",
+        "x-rapidapi-key": "rapid_api_key",
         "x-rapidapi-host": "yahoo-finance-low-latency.p.rapidapi.com",
       },
     };
